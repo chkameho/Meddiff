@@ -2,7 +2,7 @@ import requests
 
 BIN_API_URL = r'https://api.jsonbin.io/v3/b'
 
-def load_data(api_key, bin_id):
+def load_data_(api_key, bin_id):
     """
     Load entire bin
     """
@@ -12,7 +12,7 @@ def load_data(api_key, bin_id):
     return res['record']
 
 
-def save_data(api_key, bin_id, data):
+def save_data_(api_key, bin_id, data):
     """
     Save entire bin
     """
