@@ -3,12 +3,15 @@ import pandas as pd
 import datetime
 from jsonbin import save_data, load_data
 ################################################################################################################################################################
+#secrets
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
 bin_id_1 = jsonbin_secrets_1["bin_id"]
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
+
+##################################################################################################################################################################
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
@@ -18,12 +21,12 @@ def load_data():
 def save_data(data):
     save_data(api_key_1,bin_id_1,data)
         
-def del_erste_Zählung():
-    url = BIN_API_URL + '/' + bin_id_1
-    headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
-    data = []
-    res = requests.put(url, headers=headers, json=data).json()
-    return res
+#def del_erste_Zählung():
+ #   url = BIN_API_URL + '/' + bin_id_1
+  #  headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
+   # data = []
+    #res = requests.put(url, headers=headers, json=data).json()
+    #return res
 
 def load_data_1():
     load_data(api_key_2,bin_id_2)
