@@ -25,9 +25,6 @@ def save_data(data):
     save_data(api_key_1,bin_id_1,data)
         
 def del_erste_Zählung():
-    """
-    Clear the content of a bin
-    """
     url = BIN_API_URL + '/' + bin_id_1
     headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
     data = []
@@ -196,8 +193,8 @@ def clear_all():
                 del globals()[key]
     if "zähler" not in st.session_state:
         st.session_state.zähler = 0
-    with open(DATA_FILE, "w") as file:
-        json.dump([],file)
+    #with open(DATA_FILE, "w") as file:
+     #   json.dump([],file)
     
     
 ###################################################################################
