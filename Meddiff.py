@@ -370,3 +370,9 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
+my_bytes = b"some bytes with non-UTF-8 characters"
+try:
+    my_string = my_bytes.decode('utf-8')
+except UnicodeDecodeError:
+    print("Error: byte string contains non-UTF-8 characters")
+            
