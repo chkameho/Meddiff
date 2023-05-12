@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
-from jsonbin import save_data, load_data
+from jsonbin import save_data_, load_data_
 ################################################################################################################################################################
 #secrets
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
@@ -15,11 +15,11 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    load_data(api_key_1,bin_id_1)
+    load_data_(api_key_1,bin_id_1)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
-    save_data(api_key_1,bin_id_1,data)
+    save_data_(api_key_1,bin_id_1,data)
         
 def del_erste_Zählung():
     url = BIN_API_URL + '/' + bin_id_1
