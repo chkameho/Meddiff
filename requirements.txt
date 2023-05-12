@@ -1,4 +1,4 @@
-streamlit==0.91.2
-pandas==1.2.4
-json==2.0.9
-datetime==4.3
+streamlit
+pandas
+json
+datetime
