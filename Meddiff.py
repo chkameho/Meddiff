@@ -16,7 +16,7 @@ DATA_FILE = "Resultaten.json"
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    with open(DATA_FILE, "r"encoding='utf-8') as file:
+    with open(DATA_FILE, "r", encoding='utf-8') as file:
         data = json.load(file)
     return data
 
