@@ -6,37 +6,40 @@ Created on Sat Apr 29 12:39:43 2023
 """
 import streamlit as st
 import pandas as pd
-import json
 import datetime
-###################################################################################
-#Json-Files
-DATA_FILE_1 = "Zwischenspeicherung.json"
-DATA_FILE = "Resultaten.json"
-##################################################################################
+from jsonbin import save_data, load_data
+################################################################################################################################################################
+jsonbin_secrets_1 = st.secrets["jsonbin_1"]
+api_key_1 = jsonbin_secrets_1["api_key"]
+bin_id_1 = jsonbin_secrets_1["bin_id"]
+jsonbin_secrets_2 = st.secrets["jsonbin_2"]
+api_key_2 = jsonbin_secrets_2["api_key"]
+bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    with open(DATA_FILE, "r") as file:
-        data = json.load(file)
-    return data
+    load_data(api_key_1,bin_id_1)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
-    with open(DATA_FILE, "w") as file:
-        json.dump(data, file,indent=2,ensure_ascii=False)
+    save_data(api_key_1,bin_id_1,data)
+        
 def del_erste_Zählung():
-    with open(DATA_FILE, "w") as file:
-        json.dump([],file)
+    """
+    Clear the content of a bin
+    """
+    url = BIN_API_URL + '/' + bin_id_1
+    headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
+    data = []
+    res = requests.put(url, headers=headers, json=data).json()
+    return res
 
 def load_data_1():
-    with open(DATA_FILE_1, "r") as file:
-        data = json.load(file)
-    return data
+    load_data(api_key_2,bin_id_2)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    with open(DATA_FILE_1, "w") as file:
-        json.dump(data, file,indent=2,ensure_ascii=False)
+    save_data(api_key_2,bin_id_2,data)
 
 
 def Tastatur_Blutbild_Differenzierung(): 
