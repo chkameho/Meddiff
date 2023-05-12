@@ -21,7 +21,7 @@ def load_data():
 def save_data(data):
     save_data(api_key_1,bin_id_1,data)
         
-#def del_erste_Zählung():
+def del_erste_Zählung():
     url = BIN_API_URL + '/' + bin_id_1
     headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
     data = []
