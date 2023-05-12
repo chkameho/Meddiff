@@ -16,26 +16,26 @@ DATA_FILE = "Resultaten.json"
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    with open(DATA_FILE, "r") as file:
+    with open(DATA_FILE, "r"encoding='utf-8') as file:
         data = json.load(file)
     return data
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
-    with open(DATA_FILE, "w") as file:
+    with open(DATA_FILE, "w",encoding='utf-8') as file:
         json.dump(data, file,indent=2,ensure_ascii=False)
 def del_erste_Zählung():
-    with open(DATA_FILE, "w") as file:
+    with open(DATA_FILE, "w",encoding='utf-8') as file:
         json.dump([],file)
 
 def load_data_1():
-    with open(DATA_FILE_1, "r") as file:
+    with open(DATA_FILE_1, "r",encoding='utf-8') as file:
         data = json.load(file)
     return data
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    with open(DATA_FILE_1, "w") as file:
+    with open(DATA_FILE_1, "w", encoding='utf-8') as file:
         json.dump(data, file,indent=2,ensure_ascii=False)
 
 
