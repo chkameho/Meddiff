@@ -22,11 +22,11 @@ def save_data(data):
     save_data(api_key_1,bin_id_1,data)
         
 #def del_erste_Zählung():
- #   url = BIN_API_URL + '/' + bin_id_1
-  #  headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
-   # data = []
-    #res = requests.put(url, headers=headers, json=data).json()
-    #return res
+    url = BIN_API_URL + '/' + bin_id_1
+    headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
+    data = []
+    res = requests.put(url, headers=headers, json=data).json()
+    return res
 
 def load_data_1():
     load_data(api_key_2,bin_id_2)
@@ -198,6 +198,25 @@ def clear_all():
 st.title("manuelle Differenzierung (Blutbilder)")
 
 tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
+import requests
+
+api_key = 'your_api_key'
+bin_id = 'your_bin_id'
+
+# Daten im Bin durch leeres JSON-Objekt ersetzen
+data = {}
+
+# API-Anfrage senden, um das Bin zu aktualisieren
+url = f'https://api.jsonbin.io/v3/b/{bin_id}'
+headers = {'X-Master-Key': api_key, 'Content-Type': 'application/json'}
+response = requests.put(url, headers=headers, json=data)
+
+# Antwort prüfen
+if response.status_code == 200:
+    print('Bin wurde erfolgreich geleert.')
+else:
+    print('Fehler beim Leeren des Bins. Fehlercode:', response.status_code)
+
 ###################################################################################
 #TAB1
 
