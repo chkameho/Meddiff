@@ -29,11 +29,11 @@ def del_erste_Zählung():
     return res
 
 def load_data_1():
-    load_data(api_key_2,bin_id_2)
+    load_data_(api_key_2,bin_id_2)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    save_data(api_key_2,bin_id_2,data)
+    save_data_(api_key_2,bin_id_2,data)
 
 
 def Tastatur_Blutbild_Differenzierung(): 
