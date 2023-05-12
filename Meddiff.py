@@ -16,26 +16,26 @@ DATA_FILE = "Resultaten.json"
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    with open(DATA_FILE, "r", encoding='utf-8') as file:
+    with open(DATA_FILE, "r") as file:
         data = json.load(file)
     return data
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
-    with open(DATA_FILE, "w",encoding='utf-8') as file:
+    with open(DATA_FILE, "w") as file:
         json.dump(data, file,indent=2,ensure_ascii=False)
 def del_erste_Zählung():
-    with open(DATA_FILE, "w",encoding='utf-8') as file:
+    with open(DATA_FILE, "w") as file:
         json.dump([],file)
 
 def load_data_1():
-    with open(DATA_FILE_1, "r",encoding='utf-8') as file:
+    with open(DATA_FILE_1, "r") as file:
         data = json.load(file)
     return data
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    with open(DATA_FILE_1, "w", encoding='utf-8') as file:
+    with open(DATA_FILE_1, "w") as file:
         json.dump(data, file,indent=2,ensure_ascii=False)
 
 
@@ -370,9 +370,5 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-my_bytes = b"some bytes with non-UTF-8 characters"
-try:
-    my_string = my_bytes.decode('utf-8')
-except UnicodeDecodeError:
-    print("Error: byte string contains non-UTF-8 characters")
+
             
