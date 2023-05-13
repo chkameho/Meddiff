@@ -221,8 +221,8 @@ with tab1:
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
     #Damit die Tastatur gut dargestellt werden kann.
-
-    zaehler = sum([float(value) for key, value in st.session_state.items() if key != "Gast"])
+    
+    zaehler=sum(st.session_state[key] for key in st.session_state if key != 'username')
 
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
