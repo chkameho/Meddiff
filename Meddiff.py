@@ -221,11 +221,22 @@ with tab1:
     st.write(st.session_state)
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
+    #############################################################################################################
+    #Neu
+    # Laden des aktuellen Session State
+    current_session_state = st.session_state
+
+    # Kopieren des aktuellen Session State in einen neuen Session State mit einem neuen Namen
+    logged_in_session_state = current_session_state
+
+    # Ändern des Session State-Namens
+    logged_in_session_state["Einloggen"] = "logged_in_session_state"
+    
+    
+    ###########################################################################################################
+
+    zaehler = sum(st.session_state.values())
     #Damit die Tastatur gut dargestellt werden kann.
-    zaehler = sum(value for key, value in st.session_state.items() if key != 'username' and not isinstance(value, dict))
-
-
-
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
