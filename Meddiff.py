@@ -64,9 +64,6 @@ def Tastatur_Blutbild_Differenzierung():
     if 'Promyelozyten' not in st.session_state:
         st.session_state.Promyelozyten=0
 
-    if 'B' not in st.session_state:
-        st.session_state.B=0
-
     if 'Normoblast' not in st.session_state:
         st.session_state.Normoblast=0
 
@@ -75,9 +72,6 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'Myelozyten' not in st.session_state:
         st.session_state.Myelozyten=0
-
-    if 'C' not in st.session_state:
-        st.session_state.C=0
 
 
     if 'Plasmazellen' not in st.session_state:
@@ -88,9 +82,6 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'Metamyelozyten' not in st.session_state:
         st.session_state.Metamyelozyten=0
-
-    if 'D' not in st.session_state:
-       st.session_state.D=0
 
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
     zaehler= sum(st.session_state.values())
@@ -126,10 +117,6 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.Promyelozyten += 1
 
 
-           if st.button('B') != 0:
-               st.session_state.B += 1
-
-
 
        with col3:
            if st.button('Normoblast') != 0:
@@ -143,8 +130,6 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.Myelozyten += 1
 
 
-           if st.button('C') != 0:
-               st.session_state.C += 1
 
  
        with col4:
