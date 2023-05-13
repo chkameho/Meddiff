@@ -28,7 +28,9 @@ def load_data_1():
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
     return save_data_(api_key_2,bin_id_2,data)
+
 def del_erste_Zählung():
+    del_erste_Zählung_(api_key_1, bin_id_1)
     
 
 
