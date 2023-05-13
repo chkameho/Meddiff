@@ -16,6 +16,7 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer JSON-Datei
+@st.cache_data()
 def load_data():
     load_1 = load_data_(api_key_1,bin_id_1)
     if load_1 ==[{}]:
@@ -37,7 +38,7 @@ def save_data_1(data):
 
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1)  
-@st.cache_data(experimental_allow_widgets=True)
+
 def Tastatur_Blutbild_Differenzierung():  
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
