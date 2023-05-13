@@ -93,6 +93,8 @@ def Tastatur_Blutbild_Differenzierung():
        st.session_state.D=0
 
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
+    if zaeler is None:
+        zähler = 0
  
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
