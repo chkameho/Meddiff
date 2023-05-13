@@ -180,9 +180,7 @@ def clear_session_state():
             del globals()[key]
 
 def clear_all():
-    #
-    if 'zaehler' in st.session_state:
-        for key in st.session_state.keys():
+    for key in st.session_state.keys():
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
