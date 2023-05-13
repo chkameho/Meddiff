@@ -27,6 +27,7 @@ def load_data():
 
 
 # Funktion zum Speichern in einer JSON-Datei
+@st.cache_data()
 def save_data(data):
     return save_data_(api_key_1,bin_id_1,data)
 
