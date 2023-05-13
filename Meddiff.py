@@ -47,7 +47,7 @@ current_session_state = st.session_state
 logged_in_session_state = current_session_state
 
 # Ändern des Session State-Namens
-logged_in_session_state["Einloggen"] = "logged_in_session_state"
+logged_in_session_state["Alt"] = "logged_in_session_state"
     
     
     ###########################################################################################################
