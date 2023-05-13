@@ -67,54 +67,30 @@ def Tastatur_Blutbild_Differenzierung():
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
        
-    if 'Basophilen' not in st.session_state:
-        st.session_state.Basophilen=0
+    # ein neues Dictionary erstellen, um die Variablen zu gruppieren
+    my_group = {
+        'Basophilen': 0,
+        'Monozyten': 0,
+        'Blasten': 0,
+        'A': 0,
+        'Eosinophilen': 0,
+        'Lymphozyten': 0,
+        'Promyelozyten': 0,
+        'B': 0,
+        'Normoblast': 0,
+        'Segmentierten': 0,
+        'Myelozyten': 0,
+        'C': 0,
+        'Plasmazellen': 0,
+        'Stabkernigen': 0,
+        'Metamyelozyten': 0,
+        'D': 0
+    }
 
-    if 'Monozyten' not in st.session_state:
-        st.session_state.Monozyten=0
+    # neue Gruppe im session_state erstellen und ihr das Dictionary zuweisen
+    if 'meine_gruppe' not in st.session_state:
+         st.session_state.meine_gruppe = my_group
 
-    if 'Blasten' not in st.session_state:
-        st.session_state.Blasten=0
-
-    if 'A' not in st.session_state:
-        st.session_state.A=0
-
-    if 'Eosinophilen' not in st.session_state:
-        st.session_state.Eosinophilen=0
-
-    if 'Lymphozyten' not in st.session_state:
-        st.session_state.Lymphozyten=0
-
-    if 'Promyelozyten' not in st.session_state:
-        st.session_state.Promyelozyten=0
-
-    if 'B' not in st.session_state:
-        st.session_state.B=0
-
-    if 'Normoblast' not in st.session_state:
-        st.session_state.Normoblast=0
-
-    if 'Segmentierten' not in st.session_state:
-        st.session_state.Segmentierten=0
-
-    if 'Myelozyten' not in st.session_state:
-        st.session_state.Myelozyten=0
-
-    if 'C' not in st.session_state:
-        st.session_state.C=0
-
-
-    if 'Plasmazellen' not in st.session_state:
-        st.session_state.Plasmazellen=0
-
-    if 'Stabkernigen' not in st.session_state:
-        st.session_state.Stabkernigen=0
-
-    if 'Metamyelozyten' not in st.session_state:
-        st.session_state.Metamyelozyten=0
-
-    if 'D' not in st.session_state:
-       st.session_state.D=0
 
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
     col1, col2, col3, col4 = st.columns(4)
