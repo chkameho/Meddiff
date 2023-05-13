@@ -45,6 +45,9 @@ def Tastatur_Blutbild_Differenzierung():
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
     
+    if 'zaehler' not in st.session_state:
+        st.session_state.zaehler=0
+    
     if 'Basophilen' not in st.session_state:
         st.session_state.Basophilen=0
 
@@ -93,8 +96,7 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'D' not in st.session_state:
        st.session_state.D=0
-    if 'zaehler' not in st.session_state:
-        st.session_state.zaehler=0
+
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
  
     col1, col2, col3, col4 = st.columns(4)
