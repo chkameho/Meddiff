@@ -164,8 +164,7 @@ def Tastatur_Blutbild_Differenzierung():
 
     elif st.session_state.zaehler == 100:
         return st.session_state
-    if "zaehler" not in st.session_state:
-        st.session_state.zaehler = 0
+
     return st.write(st.session_state.zaehler ,"/100 Zellen")    
 
 def Zählung_Dictionary():
