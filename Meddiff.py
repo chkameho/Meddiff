@@ -211,7 +211,7 @@ with tab1:
     Identifikation=st.text_input("Identifikationsnummer")
     #Damit die Tastatur gut dargestellt werden kann.
     zaehler= sum(st.session_state.values())
-    st.write("st.session_state")
+    st.write("---")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
     if zaehler == 100 and len(Speicherplatz)==0:
