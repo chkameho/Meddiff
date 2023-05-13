@@ -15,7 +15,7 @@ api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 ##################################################################################################################################################################
- @st.cache
+@st.cache
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
     load_1 = load_data_(api_key_1,bin_id_1)
