@@ -16,7 +16,7 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer JSON-Datei
-@st.cache_data()
+
 def load_data():
     load_1 = load_data_(api_key_1,bin_id_1)
     if load_1[0] == {}:
@@ -27,7 +27,7 @@ def load_data():
 
 
 # Funktion zum Speichern in einer JSON-Datei
-@st.cache_data()
+
 def save_data(data):
     return save_data_(api_key_1,bin_id_1,data)
 
