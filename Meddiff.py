@@ -218,6 +218,7 @@ tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
 
 with tab1:   
     st.header("Tastatur")
+    st.write(st.session_state)
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
     #Damit die Tastatur gut dargestellt werden kann.
