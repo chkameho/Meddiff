@@ -161,7 +161,7 @@ def Tastatur_Blutbild_Differenzierung():
     zaehler= 0
     for key in st.session_state:
         zaehler = zaehler + st.session_state[key]
-    return zaeler
+    return zaehler
     return st.write( zähler ,"/100 Zellen")    
 
 def Zählung_Dictionary():
