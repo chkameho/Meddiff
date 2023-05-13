@@ -94,7 +94,7 @@ def Tastatur_Blutbild_Differenzierung():
        st.session_state.D=0
 
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
-    zaehler= sum(st.session_state.values())
+    RecursionError: maximum recursion depth exceeded
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
        with col1:
@@ -160,9 +160,6 @@ def Tastatur_Blutbild_Differenzierung():
 
     elif zaehler == 100:
         return st.session_state
-    zaehler= 0
-    for key in st.session_state:
-        zaehler = zaehler + st.session_state[key]
     
     return st.write( zaehler ,"/100 Zellen")       
 
