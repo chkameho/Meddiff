@@ -15,7 +15,7 @@ api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 ##################################################################################################################################################################
-
+@st.cache
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
     load_1 = load_data_(api_key_1,bin_id_1)
@@ -42,7 +42,6 @@ def del_erste_Zählung():
 def Tastatur_Blutbild_Differenzierung(): 
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
-    @st.cache
        
     if 'Basophilen' not in st.session_state:
         st.session_state.Basophilen=0
