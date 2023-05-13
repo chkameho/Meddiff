@@ -221,9 +221,8 @@ with tab1:
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
     #Damit die Tastatur gut dargestellt werden kann.
-    if st.session_state[key] for key in st.session_state if key != 'username' and st.session_state[key] is not None:
-        zaehler = sum(st.session_state[key] for key in st.session_state if key != 'username' and st.session_state[key] is not None)
-    else:
+    zaehler = sum(st.session_state[key] for key in st.session_state if key != 'username' and st.session_state[key] is not None)
+    if zaehler == 0:
         zaehler = 0
 
 
