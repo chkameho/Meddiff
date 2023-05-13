@@ -191,10 +191,22 @@ tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
 
 ###################################################################################
 #TAB1
+import streamlit as st
+
+if "meine_gruppe" not in st.session_state:
+    st.session_state.meine_gruppe = {
+        "var1": 0,
+        "var2": 0,
+        "var3": 0
+    }
+
+# Zugriff auf die Werte in der Gruppe
+var1_value = st.session_state.meine_gruppe["var1"]
+var2_value = st.session_state.meine_gruppe["var2"]
+var3_value = st.session_state.meine_gruppe["var3"]
 
 with tab1:   
     st.header("Tastatur")
-    st.write(st.session_state)
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
     #############################################################################################################
@@ -210,7 +222,7 @@ with tab1:
     
     
     ###########################################################################################################
-
+    
     summe = sum(st.session_state.meine_gruppe.values())
 
     #Damit die Tastatur gut dargestellt werden kann.
