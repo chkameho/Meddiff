@@ -38,9 +38,21 @@ elif authentication_status == None:
     st.warning('Please enter your username and password')
     st.stop()
 
+#############################################################################################################
+#Neu
+# Laden des aktuellen Session State
+current_session_state = st.session_state
 
+# Kopieren des aktuellen Session State in einen neuen Session State mit einem neuen Namen
+logged_in_session_state = current_session_state
+
+# Ändern des Session State-Namens
+logged_in_session_state["Einloggen"] = "logged_in_session_state"
+    
+    
+    ###########################################################################################################
 ##################################################################################################################################################################
-# Funktion zum Laden aus einer JSON-Datei
+# Funktion zum Laden aus einer Jsonbin-Datei
 
 def load_data():
     load_key(api_key_1, bin_id_1, username)
@@ -197,19 +209,7 @@ with tab1:
     st.header("Tastatur")
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
-    #############################################################################################################
-    #Neu
-    # Laden des aktuellen Session State
-    current_session_state = st.session_state
 
-    # Kopieren des aktuellen Session State in einen neuen Session State mit einem neuen Namen
-    logged_in_session_state = current_session_state
-
-    # Ändern des Session State-Namens
-    logged_in_session_state["Einloggen"] = "logged_in_session_state"
-    
-    
-    ###########################################################################################################
     
     zaehler = sum(st.session_state.meine_gruppe.values())
 
