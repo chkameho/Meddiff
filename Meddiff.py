@@ -229,6 +229,8 @@ with tab1:
     with col1:
         if st.button('Auf 200 Zählen'):
             #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
+            if Speicherplatz==[{}]:
+                Speicherplatz= []
             if len(Speicherplatz) != 0:
                 #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                 st.error("Kann nur auf 200 gezählt werden.")
