@@ -43,11 +43,8 @@ elif authentication_status == None:
 # Funktion zum Laden aus einer JSON-Datei
 
 def load_data():
-    load_1 = load_key(api_key_1, bin_id_1, username)
-    if load_1==0:
-        return []
-    else:
-        return load_1
+    load_key(api_key_1, bin_id_1, username)
+
 
 
 
