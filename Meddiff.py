@@ -15,7 +15,7 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    return load_=load_data_(api_key_1,bin_id_1)
+    return load_data_(api_key_1,bin_id_1)
 
 
 # Funktion zum Speichern in einer JSON-Datei
