@@ -44,7 +44,7 @@ def del_erste_Zählung():
 def Tastatur_Blutbild_Differenzierung(): 
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
-    def Tastatur_Blutbild_Differenzierung():
+
     # Initialisiere Variablen oder hole sie aus dem Session State
     zaehler = st.session_state.get('zaehler', 0)
     Basophilen = st.session_state.get('Basophilen', 0)
