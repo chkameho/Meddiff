@@ -54,6 +54,6 @@ def save_key(api_key, bin_id, key, data):
 def del_erste_Zählung_(api_key, bin_id):
     url = BIN_API_URL + '/' + bin_id_1
     headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
-    data = []
+    data = [{}]
     res = requests.put(url, headers=headers, json=data).json()
     return res
