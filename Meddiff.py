@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
+import yaml
+from yaml.loader import SafeLoader
 import datetime
-from jsonbin import save_data_, load_data_, del_erste_Zählung_
+from jsonbin import save_key, load_key, del_erste_Zählung_
+import streamlit_authenticator as stauth
 ################################################################################################################################################################
 #secrets
 #Jsonbin_1
@@ -13,12 +16,35 @@ bin_id_1 = jsonbin_secrets_1["bin_id"]
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
+# -------- user login --------
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
+
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+)
+
+fullname, authentication_status, username = authenticator.login('Login', 'main')
+
+if authentication_status == True:   # login successful
+    authenticator.logout('Logout', 'main')   # show logout button
+elif authentication_status == False:
+    st.error('Username/password is incorrect')
+    st.stop()
+elif authentication_status == None:
+    st.warning('Please enter your username and password')
+    st.stop()
+
+# --------- sidebar ---------
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer JSON-Datei
 
 def load_data():
-    load_1 = load_data_(api_key_1,bin_id_1)
+    load_1 = load_key(api_key_1, bin_id_1, username)
     if load_1[0] == {}:
         return []
     else:
@@ -29,14 +55,14 @@ def load_data():
 # Funktion zum Speichern in einer JSON-Datei
 
 def save_data(data):
-    return save_data_(api_key_1,bin_id_1,data)
+    return save_key(api_key_1, bin_id_1, username, address_list)
 
 def load_data_1():
-    return load_data_(api_key_2,bin_id_2)
+    return load_key(api_key_2,bin_id_2, username)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    return save_data_(api_key_2,bin_id_2,data)
+    return save_key(api_key_2, bin_id_2, username, address_list)
 
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1)  
