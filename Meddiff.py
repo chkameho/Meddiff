@@ -19,7 +19,7 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 @st.cache_data()
 def load_data():
     load_1 = load_data_(api_key_1,bin_id_1)
-    if load_1 ==[{}]:
+    if load_1 ==[{}].all():
         return []
     else:
         return load_1
