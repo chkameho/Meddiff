@@ -185,7 +185,7 @@ def clear_all():
         for key in st.session_state.keys():
             del st.session_state[key]
             if key in globals():
-                return del globals()[key]
+                del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1)
     
     
