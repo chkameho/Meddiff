@@ -211,7 +211,8 @@ with tab1:
     
     ###########################################################################################################
 
-    zaehler = sum(st.session_state.values())
+    summe = sum(st.session_state.meine_gruppe.values())
+
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
