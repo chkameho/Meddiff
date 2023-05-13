@@ -284,8 +284,6 @@ with tab3:
     st.subheader(Identifikation)
     Speicherplatz = load_data()
     st.subheader("Zählung")
-    if Speicherplatz==[{}]:
-        Speicherplatz= 0
     if len(Speicherplatz) == 0 and st.session_state.zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zählung vorhanden.")
