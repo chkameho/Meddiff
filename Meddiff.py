@@ -163,7 +163,7 @@ def Tastatur_Blutbild_Differenzierung():
            if st.button('D') != 0:
                st.session_state.D += 1
 
-    elif st.session_state.zaehler == 100:
+    elif zaehler == 100:
         return st.session_state
     zaehler= 0
     for key in st.session_state:
@@ -180,13 +180,11 @@ def Zählung_Dictionary():
 
 def clear_session_state():
     #löscht den session_state
-    if 'zaehler' in st.session_state:
-        for key in st.session_state.keys():
-            del st.session_state[key]
-            if key in globals():
-                del globals()[key]
-    if "zaehler" not in st.session_state:
-        st.session_state.zaehler = 0
+    for key in st.session_state.keys():
+        del st.session_state[key]
+        if key in globals():
+            del globals()[key]
+
 def clear_all():
     #
     if 'zaehler' in st.session_state:
@@ -194,8 +192,6 @@ def clear_all():
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
-    if "zaehler" not in st.session_state:
-        st.session_state.zaehler = 0
     #with open(DATA_FILE, "w") as file:
      #   json.dump([],file)
     
@@ -217,9 +213,9 @@ with tab1:
     st.write("-----")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
-    if st.session_state.zaehler == 100 and len(Speicherplatz)==0:
+    if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
-    elif st.session_state.zaehler == 100 and len(Speicherplatz)!=0:
+    elif zaehler == 100 and len(Speicherplatz)!=0:
         st.success("Sie haben 200 Zellen gezählt")
         if len(Speicherplatz) > 1:
             if st.button("Zählung neu anfangen") != 0:
@@ -236,7 +232,7 @@ with tab1:
             if len(Speicherplatz) != 0:
                 #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                 st.error("Kann nur auf 200 gezählt werden.")
-            elif st.session_state.zaehler != 100:
+            elif zaehler != 100:
                 #Ein Error sollte angezeigt werden, wenn kein 100 Zellen gezählt wurde.
                 st.error("Noch nicht auf 100 gezählt.")
             else:
@@ -248,10 +244,10 @@ with tab1:
                 clear_session_state()
     with col2:
         if st.button("Zählung beenden") != 0:
-            if Speicherplatz != 0 and st.session_state.zaehler == 100:
+            if Speicherplatz != 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
-            elif Speicherplatz == 0 and st.session_state.zaehler == 100:
+            elif Speicherplatz == 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
@@ -290,10 +286,10 @@ with tab3:
     Speicherplatz = load_data()
     st.subheader("Zählung")
 
-    if len(Speicherplatz) == 0 and st.session_state.zaehler != 100:
+    if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zählung vorhanden.")
-    elif len(Speicherplatz) != 0 and st.session_state.zaehler == 100:
+    elif len(Speicherplatz) != 0 and zaehler == 100:
         #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
         if len(Speicherplatz) == 1:
             #Wenn die Differenzierung mit 200 Zellen duchgeführt wurde. 
@@ -362,9 +358,9 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-        elif st.session_state.zaehler != 100 and len(Speicherplatz) == 0:
+        elif st.zaehler != 100 and len(Speicherplatz) == 0:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
-        elif st.session_state.zaehler == 100 and len(Speicherplatz)== 0:
+        elif st.zaehler == 100 and len(Speicherplatz)== 0:
             neue_Patient=Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             neue_Patient["Specherzeit"]= Jetzt
