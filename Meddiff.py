@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import datetime
-from jsonbin import save_data_, load_data_
+from jsonbin import save_data_, load_data_, del_erste_Zählung
 ################################################################################################################################################################
 #secrets
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
