@@ -97,54 +97,54 @@ def Tastatur_Blutbild_Differenzierung():
     if zaehler <= 99:
        with col1:
            if st.button('Basophile')!= 0:
-               st.session_state.Basophilen += 1
+               st.session_state.meine_gruppe.Basophilen += 1
 
 
            if st.button('Monozyt') != 0:
-               st.session_state.Monozyten += 1
+               st.session_state.meine_gruppe.Monozyten += 1
 
 
            if  st.button('Blast')!= 0:
-               st.session_state.Blasten += 1
+               st.session_state.meine_gruppe.Blasten += 1
 
 
            if st.button('A'):
-               st.session_state.A += 1
+               st.session_state.meine_gruppe.A += 1
 
 
        with col2:
            if st.button('Eosinophil') != 0:
-               st.session_state.Eosinophilen += 1
+               st.session_state.meine_gruppe.Eosinophilen += 1
 
 
            if st.button('Lymphozyt') != 0:
-               st.session_state.Lymphozyten += 1
+               st.session_state.meine_gruppe.Lymphozyten += 1
 
 
            if st.button('Promyelozyt') != 0:
-               st.session_state.Promyelozyten += 1
+               st.session_state.meine_gruppe.Promyelozyten += 1
            if st.button('B'):
-               st.session_state.B += 1
+               st.session_state.meine_gruppe.B += 1
 
 
 
        with col3:
            if st.button('Normoblast') != 0:
-               st.session_state.Normoblast += 1
+               st.session_state.meine_gruppe.Normoblast += 1
 
            if st.button('Segmentiert') != 0:
-               st.session_state.Segmentierten += 1
+               st.session_state.meine_gruppe.Segmentierten += 1
 
 
            if st.button('Myelozyt') != 0:
-               st.session_state.Myelozyten += 1
+               st.session_state.meine_gruppe.Myelozyten += 1
            if st.button('C'):
-               st.session_state.C += 1
+               st.session_state.meine_gruppe.C += 1
 
  
        with col4:
            if st.button('Plasmazelle') != 0:
-               st.session_state.Plasmazellen += 1
+               st.session_state.meine_gruppe.Plasmazellen += 1
 
 
            if st.button('Stabkernige') != 0:
@@ -157,7 +157,7 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.D += 1
 
     elif zaehler == 100:
-        return st.session_state
+        return st.session_state.meine_gruppe
     
     return st.write( zaehler ,"/100 Zellen")       
 
@@ -165,19 +165,19 @@ def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
     Dictionary = {}
     for key in st.session_state.keys():
-        Dictionary[key]=st.session_state[key]
+        Dictionary[key]=st.st.session_state.meine_gruppe[key]
     return Dictionary
 
 def clear_session_state():
     #löscht den session_state
-    for key in st.session_state.keys():
-        del st.session_state[key]
+    for key in st.st.session_state.meine_gruppe.keys():
+        del st.st.session_state.meine_gruppe[key]
         if key in globals():
             del globals()[key]
 
 def clear_all():
-    for key in st.session_state.keys():
-            del st.session_state[key]
+    for key in st.session_state.meine_gruppe.keys():
+            del st.session_state.meine_gruppe[key]
             if key in globals():
                 del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1)
@@ -289,7 +289,7 @@ with tab3:
     st.subheader(Identifikation)
     Speicherplatz = load_data()
     st.subheader("Zählung")
-    zaehler= sum(st.session_state.values())
+    zaehler= sum(st.session_state.meine_gruppe.values())
 
     if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
