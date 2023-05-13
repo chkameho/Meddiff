@@ -127,7 +127,7 @@ def Tastatur_Blutbild_Differenzierung():
     col1, col2, col3, col4 = st.columns(4)
     if st.session_state.zaehler <= 99:
        with col1:
-           if st.button('Baso')!= 0:
+           if st.button('Baso'):
                st.session_state.Basophilen += 1
                increment_counter()
 
