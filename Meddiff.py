@@ -96,11 +96,11 @@ def Tastatur_Blutbild_Differenzierung():
     col1, col2, col3, col4 = st.columns(4)
     if st.session_state.zaehler <= 99:
        with col1:
-           if st.button('Basophile')!= 0:
+           if st.button('Baso')!= 0:
                st.session_state.Basophilen += 1
                st.session_state.zaehler += 1
 
-           if st.button('Monozyt') != 0:
+           if st.button('Mono') != 0:
                st.session_state.Monozyten += 1
                st.session_state.zaehler += 1
 
@@ -113,15 +113,15 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.zaehler += 1
 
        with col2:
-           if st.button('Eosinophil') != 0:
+           if st.button('Eos') != 0:
                st.session_state.Eosinophilen += 1
                st.session_state.zaehler += 1
 
-           if st.button('Lymphozyt') != 0:
+           if st.button('Lym') != 0:
                st.session_state.Lymphozyten += 1
                st.session_state.zaehler += 1
 
-           if st.button('Promyelozyt') != 0:
+           if st.button('Promy') != 0:
                st.session_state.Promyelozyten += 1
                st.session_state.zaehler += 1
 
@@ -131,14 +131,14 @@ def Tastatur_Blutbild_Differenzierung():
 
 
        with col3:
-           if st.button('Normoblast') != 0:
+           if st.button('Normo') != 0:
                st.session_state.Normoblast += 1
 
-           if st.button('Segmentiert') != 0:
+           if st.button('Seg') != 0:
                st.session_state.Segmentierten += 1
                st.session_state.zaehler += 1
 
-           if st.button('Myelozyt') != 0:
+           if st.button('Myelo') != 0:
                st.session_state.Myelozyten += 1
                st.session_state.zaehler += 1
 
@@ -147,15 +147,15 @@ def Tastatur_Blutbild_Differenzierung():
 
  
        with col4:
-           if st.button('Plasmazelle') != 0:
+           if st.button('Plasma') != 0:
                st.session_state.Plasmazellen += 1
                st.session_state.zaehler += 1
 
-           if st.button('Stabkernige') != 0:
+           if st.button('Stab') != 0:
                st.session_state.Stabkernigen += 1
                st.session_state.zaehler += 1
 
-           if st.button('Metamyelozyt') != 0:
+           if st.button('Meta') != 0:
                st.session_state.Metamyelozyten += 1
                st.session_state.zaehler += 1
 
