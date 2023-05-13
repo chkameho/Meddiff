@@ -144,10 +144,6 @@ def Tastatur_Blutbild_Differenzierung():
            if st.button('Metamyelozyt') != 0:
                st.session_state.Metamyelozyten += 1
 
-
-           if st.button('D') != 0:
-               st.session_state.D += 1
-
     elif zaehler == 100:
         return st.session_state
     zaehler= 0
