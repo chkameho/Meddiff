@@ -89,45 +89,45 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'D' not in st.session_state:
        st.session_state.D=0
-    if 'zähler' not in st.session_state:
-        st.session_state.zähler=0
+    if 'zaehler' not in st.session_state:
+        st.session_state.zaehler=0
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
  
     col1, col2, col3, col4 = st.columns(4)
-    if st.session_state.zähler <= 99:
+    if st.session_state.zaehler <= 99:
        with col1:
            if st.button('Basophile')!= 0:
                st.session_state.Basophilen += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Monozyt') != 0:
                st.session_state.Monozyten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if  st.button('Blast')!= 0:
                st.session_state.Blasten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('A'):
                st.session_state.A += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
        with col2:
            if st.button('Eosinophil') != 0:
                st.session_state.Eosinophilen += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Lymphozyt') != 0:
                st.session_state.Lymphozyten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Promyelozyt') != 0:
                st.session_state.Promyelozyten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('B') != 0:
                st.session_state.B += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
 
        with col3:
@@ -136,11 +136,11 @@ def Tastatur_Blutbild_Differenzierung():
 
            if st.button('Segmentiert') != 0:
                st.session_state.Segmentierten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Myelozyt') != 0:
                st.session_state.Myelozyten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('C') != 0:
                st.session_state.C += 1
@@ -149,22 +149,22 @@ def Tastatur_Blutbild_Differenzierung():
        with col4:
            if st.button('Plasmazelle') != 0:
                st.session_state.Plasmazellen += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Stabkernige') != 0:
                st.session_state.Stabkernigen += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('Metamyelozyt') != 0:
                st.session_state.Metamyelozyten += 1
-               st.session_state.zähler += 1
+               st.session_state.zaehler += 1
 
            if st.button('D') != 0:
                st.session_state.D += 1
 
-    elif st.session_state.zähler == 100:
+    elif st.session_state.zaehler == 100:
         return st.session_state
-    return st.write(st.session_state.zähler ,"/100 Zellen")    
+    return st.write(st.session_state.zaehler ,"/100 Zellen")    
 
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
@@ -175,22 +175,22 @@ def Zählung_Dictionary():
 
 def clear_session_state():
     #löscht den session_state
-    if 'zähler' in st.session_state:
+    if 'zaehler' in st.session_state:
         for key in st.session_state.keys():
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
-    if "zähler" not in st.session_state:
-        st.session_state.zähler = 0
+    if "zaehler" not in st.session_state:
+        st.session_state.zaehler = 0
 def clear_all():
     #
-    if 'zähler' in st.session_state:
+    if 'zaehler' in st.session_state:
         for key in st.session_state.keys():
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
-    if "zähler" not in st.session_state:
-        st.session_state.zähler = 0
+    if "zaehler" not in st.session_state:
+        st.session_state.zaehler = 0
     #with open(DATA_FILE, "w") as file:
      #   json.dump([],file)
     
@@ -212,9 +212,9 @@ with tab1:
     st.write("-----")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
-    if st.session_state.zähler == 100 and len(Speicherplatz)==0:
+    if st.session_state.zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
-    elif st.session_state.zähler == 100 and len(Speicherplatz)!=0:
+    elif st.session_state.zaehler == 100 and len(Speicherplatz)!=0:
         st.success("Sie haben 200 Zellen gezählt")
         if len(Speicherplatz) > 1:
             if st.button("Zählung neu anfangen") != 0:
@@ -231,7 +231,7 @@ with tab1:
             if len(Speicherplatz) != 0:
                 #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                 st.error("Kann nur auf 200 gezählt werden.")
-            elif st.session_state.zähler != 100:
+            elif st.session_state.zaehler != 100:
                 #Ein Error sollte angezeigt werden, wenn kein 100 Zellen gezählt wurde.
                 st.error("Noch nicht auf 100 gezählt.")
             else:
@@ -243,10 +243,10 @@ with tab1:
                 clear_session_state()
     with col2:
         if st.button("Zählung beenden") != 0:
-            if Speicherplatz != 0 and st.session_state.zähler == 100:
+            if Speicherplatz != 0 and st.session_state.zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
-            elif Speicherplatz == 0 and st.session_state.zähler == 100:
+            elif Speicherplatz == 0 and st.session_state.zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
@@ -284,10 +284,10 @@ with tab3:
     st.subheader(Identifikation)
     Speicherplatz = load_data()
     st.subheader("Zählung")
-    if len(Speicherplatz) == 0 and st.session_state.zähler != 100:
+    if len(Speicherplatz) == 0 and st.session_state.zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zählung vorhanden.")
-    elif len(Speicherplatz) != 0 and st.session_state.zähler == 100:
+    elif len(Speicherplatz) != 0 and st.session_state.zaehler == 100:
         #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
         if len(Speicherplatz) == 1:
             #Wenn die Differenzierung mit 200 Zellen duchgeführt wurde. 
@@ -356,9 +356,9 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-        elif st.session_state.zähler != 100 and len(Speicherplatz) == 0:
+        elif st.session_state.zaehler != 100 and len(Speicherplatz) == 0:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
-        elif st.session_state.zähler == 100 and len(Speicherplatz)== 0:
+        elif st.session_state.zaehler == 100 and len(Speicherplatz)== 0:
             neue_Patient=Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             neue_Patient["Specherzeit"]= Jetzt
