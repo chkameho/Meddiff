@@ -165,13 +165,13 @@ def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
     Dictionary = {}
     for key in st.session_state.keys():
-        Dictionary[key]=st.st.session_state.meine_gruppe[key]
+        Dictionary[key]=st.session_state.meine_gruppe[key]
     return Dictionary
 
 def clear_session_state():
     #löscht den session_state
-    for key in st.st.session_state.meine_gruppe.keys():
-        del st.st.session_state.meine_gruppe[key]
+    for key in st.session_state.meine_gruppe.keys():
+        del st.session_state.meine_gruppe[key]
         if key in globals():
             del globals()[key]
 
