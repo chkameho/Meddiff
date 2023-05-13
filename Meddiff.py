@@ -285,6 +285,7 @@ with tab3:
     st.subheader(Identifikation)
     Speicherplatz = load_data()
     st.subheader("Zählung")
+    zaehler= sum(st.session_state.values())
 
     if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
@@ -358,9 +359,9 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-        elif st.zaehler != 100 and len(Speicherplatz) == 0:
+        elif zaehler != 100 and len(Speicherplatz) == 0:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
-        elif st.zaehler == 100 and len(Speicherplatz)== 0:
+        elif zaehler == 100 and len(Speicherplatz)== 0:
             neue_Patient=Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             neue_Patient["Specherzeit"]= Jetzt
