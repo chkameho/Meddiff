@@ -15,18 +15,19 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    load_data_(api_key_1,bin_id_1)
+    return load_=load_data_(api_key_1,bin_id_1)
+
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
-    save_data_(api_key_1,bin_id_1,data)
+    return save_data_(api_key_1,bin_id_1,data)
 
 def load_data_1():
-    load_data_(api_key_2,bin_id_2)
+    return load_data_(api_key_2,bin_id_2)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    save_data_(api_key_2,bin_id_2,data)
+    return save_data_(api_key_2,bin_id_2,data)
 
 
 def Tastatur_Blutbild_Differenzierung(): 
