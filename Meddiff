@@ -18,7 +18,11 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 
 # Funktion zum Laden aus einer JSON-Datei
 def load_data():
-    return load_data_(api_key_1,bin_id_1)
+    load_1 = load_data_(api_key_1,bin_id_1)
+    if load_1 ==[{}]:
+        return []
+    else:
+        return load_1
 
 
 # Funktion zum Speichern in einer JSON-Datei
@@ -229,8 +233,6 @@ with tab1:
     with col1:
         if st.button('Auf 200 Zählen'):
             #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
-            if Speicherplatz==[{}]:
-                Speicherplatz= []
             if len(Speicherplatz) != 0:
                 #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                 st.error("Kann nur auf 200 gezählt werden.")
@@ -287,8 +289,7 @@ with tab3:
     st.subheader(Identifikation)
     Speicherplatz = load_data()
     st.subheader("Zählung")
-    if Speicherplatz==[{}]:
-        Speicherplatz= []
+
     if len(Speicherplatz) == 0 and st.session_state.zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zählung vorhanden.")
