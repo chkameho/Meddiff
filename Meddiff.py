@@ -224,7 +224,7 @@ with tab1:
     if st.session_state.values() is not None:
         zaehler = sum(st.session_state.values())
     else:
-        st.session_state.values() = 0
+        zaehler = 0
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
