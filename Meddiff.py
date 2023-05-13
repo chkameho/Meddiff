@@ -131,11 +131,11 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.Basophilen += 1
                increment_counter()
 
-           if st.button('Mono') != 0:
+           if st.button('Mono'):
                st.session_state.Monozyten += 1
                increment_counter()
 
-           if  st.button('Blast')!= 0:
+           if  st.button('Blast'):
                st.session_state.Blasten += 1
                increment_counter()
 
@@ -144,53 +144,53 @@ def Tastatur_Blutbild_Differenzierung():
                increment_counter()
 
        with col2:
-           if st.button('Eos') != 0:
+           if st.button('Eos'):
                st.session_state.Eosinophilen += 1
                increment_counter()
 
-           if st.button('Lym') != 0:
+           if st.button('Lym'):
                st.session_state.Lymphozyten += 1
                increment_counter()
 
-           if st.button('Promy') != 0:
+           if st.button('Promy'):
                st.session_state.Promyelozyten += 1
                increment_counter()
 
-           if st.button('B') != 0:
+           if st.button('B'):
                st.session_state.B += 1
                increment_counter()
 
 
        with col3:
-           if st.button('Normo') != 0:
+           if st.button('Normo'):
                st.session_state.Normoblast += 1
 
-           if st.button('Seg') != 0:
+           if st.button('Seg'):
                st.session_state.Segmentierten += 1
                increment_counter()
 
-           if st.button('Myelo') != 0:
+           if st.button('Myelo'):
                st.session_state.Myelozyten += 1
                increment_counter()
 
-           if st.button('C') != 0:
+           if st.button('C'):
                st.session_state.C += 1
 
  
        with col4:
-           if st.button('Plasma') != 0:
+           if st.button('Plasma'):
                st.session_state.Plasmazellen += 1
                increment_counter()
 
-           if st.button('Stab') != 0:
+           if st.button('Stab'):
                st.session_state.Stabkernigen += 1
                increment_counter()
 
-           if st.button('Meta') != 0:
+           if st.button('Meta'):
                st.session_state.Metamyelozyten += 1
                increment_counter()
 
-           if st.button('D') != 0:
+           if st.button('D'):
                st.session_state.D += 1
 
     elif st.session_state.zaehler == 100:
