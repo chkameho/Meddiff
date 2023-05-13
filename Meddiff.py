@@ -45,30 +45,6 @@ def Tastatur_Blutbild_Differenzierung():
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
 
-    # Initialisiere Variablen oder hole sie aus dem Session State
-    zaehler = st.session_state.get('zaehler', 0)
-    Basophilen = st.session_state.get('Basophilen', 0)
-    Monozyten = st.session_state.get('Monozyten', 0)
-    Blasten = st.session_state.get('Blasten', 0)
-    A = st.session_state.get('A', 0)
-    Eosinophilen = st.session_state.get('Eosinophilen', 0)
-    Lymphozyten = st.session_state.get('Lymphozyten', 0)
-    Promyelozyten = st.session_state.get('Promyelozyten', 0)
-    B = st.session_state.get('B', 0)
-    Normoblast = st.session_state.get('Normoblast', 0)
-    Segmentierten = st.session_state.get('Segmentierten', 0)
-    Myelozyten = st.session_state.get('Myelozyten', 0)
-    C = st.session_state.get('C', 0)
-    Plasmazellen = st.session_state.get('Plasmazellen', 0)
-    Stabkernigen = st.session_state.get('Stabkernigen', 0)
-    Metamyelozyten = st.session_state.get('Metamyelozyten', 0)
-    D = st.session_state.get('D', 0)
-
-    # Funktion zum Inkrementieren des Zählers
-    def increment_counter():
-        nonlocal zaehler
-        zaehler += 1
-        st.session_state.update({'zaehler': zaehler})
     
     if 'zaehler' not in st.session_state:
         st.session_state.zaehler=0
@@ -129,36 +105,28 @@ def Tastatur_Blutbild_Differenzierung():
        with col1:
            if st.button('Baso'):
                st.session_state.Basophilen += 1
-               increment_counter()
 
            if st.button('Mono'):
                st.session_state.Monozyten += 1
-               increment_counter()
 
            if  st.button('Blast'):
                st.session_state.Blasten += 1
-               increment_counter()
 
            if st.button('A'):
                st.session_state.A += 1
-               increment_counter()
 
        with col2:
            if st.button('Eos'):
                st.session_state.Eosinophilen += 1
-               increment_counter()
 
            if st.button('Lym'):
                st.session_state.Lymphozyten += 1
-               increment_counter()
 
            if st.button('Promy'):
                st.session_state.Promyelozyten += 1
-               increment_counter()
 
            if st.button('B'):
                st.session_state.B += 1
-               increment_counter()
 
 
        with col3:
@@ -167,11 +135,9 @@ def Tastatur_Blutbild_Differenzierung():
 
            if st.button('Seg'):
                st.session_state.Segmentierten += 1
-               increment_counter()
 
            if st.button('Myelo'):
                st.session_state.Myelozyten += 1
-               increment_counter()
 
            if st.button('C'):
                st.session_state.C += 1
@@ -180,23 +146,23 @@ def Tastatur_Blutbild_Differenzierung():
        with col4:
            if st.button('Plasma'):
                st.session_state.Plasmazellen += 1
-               increment_counter()
 
            if st.button('Stab'):
                st.session_state.Stabkernigen += 1
-               increment_counter()
 
            if st.button('Meta'):
                st.session_state.Metamyelozyten += 1
-               increment_counter()
 
            if st.button('D'):
                st.session_state.D += 1
 
     elif st.session_state.zaehler == 100:
         return st.session_state
-
-    return st.write(st.session_state.zaehler ,"/100 Zellen")    
+    zaehler= 0
+    for key in st.session_state:
+        zaehler = zaehler + st.session_state[key]
+    return zaeler
+    return st.write( zähler ,"/100 Zellen")    
 
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
