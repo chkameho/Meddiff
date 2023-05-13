@@ -204,6 +204,7 @@ if "meine_gruppe" not in st.session_state:
 var1_value = st.session_state.meine_gruppe["var1"]
 var2_value = st.session_state.meine_gruppe["var2"]
 var3_value = st.session_state.meine_gruppe["var3"]
+st.write(st.session_state.meine_gruppe)
 
 with tab1:   
     st.header("Tastatur")
@@ -223,7 +224,7 @@ with tab1:
     
     ###########################################################################################################
     
-    summe = sum(st.session_state.meine_gruppe.values())
+    zaehler = sum(st.session_state.meine_gruppe.values())
 
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
