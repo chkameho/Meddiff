@@ -39,15 +39,10 @@ def save_data_1(data):
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1)
     
-
-
 def Tastatur_Blutbild_Differenzierung(): 
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
-
     
-    if 'zaehler' not in st.session_state:
-        st.session_state.zaehler=0
     
     if 'Basophilen' not in st.session_state:
         st.session_state.Basophilen=0
@@ -101,68 +96,81 @@ def Tastatur_Blutbild_Differenzierung():
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
  
     col1, col2, col3, col4 = st.columns(4)
-    if st.session_state.zaehler <= 99:
+    if st.session_state.zähler <= 99:
        with col1:
-           if st.button('Baso'):
+           if st.button('Basophile')!= 0:
                st.session_state.Basophilen += 1
 
-           if st.button('Mono'):
+
+           if st.button('Monozyt') != 0:
                st.session_state.Monozyten += 1
 
-           if  st.button('Blast'):
+
+           if  st.button('Blast')!= 0:
                st.session_state.Blasten += 1
+
 
            if st.button('A'):
                st.session_state.A += 1
 
+
        with col2:
-           if st.button('Eos'):
+           if st.button('Eosinophil') != 0:
                st.session_state.Eosinophilen += 1
 
-           if st.button('Lym'):
+
+           if st.button('Lymphozyt') != 0:
                st.session_state.Lymphozyten += 1
 
-           if st.button('Promy'):
+
+           if st.button('Promyelozyt') != 0:
                st.session_state.Promyelozyten += 1
 
-           if st.button('B'):
+
+           if st.button('B') != 0:
                st.session_state.B += 1
 
 
+
        with col3:
-           if st.button('Normo'):
+           if st.button('Normoblast') != 0:
                st.session_state.Normoblast += 1
 
-           if st.button('Seg'):
+           if st.button('Segmentiert') != 0:
                st.session_state.Segmentierten += 1
 
-           if st.button('Myelo'):
+
+           if st.button('Myelozyt') != 0:
                st.session_state.Myelozyten += 1
 
-           if st.button('C'):
+
+           if st.button('C') != 0:
                st.session_state.C += 1
 
  
        with col4:
-           if st.button('Plasma'):
+           if st.button('Plasmazelle') != 0:
                st.session_state.Plasmazellen += 1
 
-           if st.button('Stab'):
-               st.session_state.Stabkernigen += 1
 
-           if st.button('Meta'):
+           if st.button('Stabkernige') != 0:
+               st.session_state.Stabkernigen += 1
+   
+
+           if st.button('Metamyelozyt') != 0:
                st.session_state.Metamyelozyten += 1
 
-           if st.button('D'):
+
+           if st.button('D') != 0:
                st.session_state.D += 1
 
-    elif st.session_state.zaehler == 100:
+    elif st.session_state.zähler == 100:
         return st.session_state
-    zaehler= 0
+    zähler= 0
     for key in st.session_state:
-        zaehler = zaehler + st.session_state[key]
-    return zaehler
-    return st.write( zaehler ,"/100 Zellen")    
+        zähler = zähler + st.session_state[key]
+    
+    return st.write( zähler ,"/100 Zellen")       
 
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
