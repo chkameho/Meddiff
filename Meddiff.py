@@ -20,13 +20,6 @@ def load_data():
 # Funktion zum Speichern in einer JSON-Datei
 def save_data(data):
     save_data_(api_key_1,bin_id_1,data)
-        
-def del_erste_Zählung():
-    url = BIN_API_URL + '/' + bin_id_1
-    headers = {'X-Master-Key': api_key_1, 'Content-Type': 'application/json'}
-    data = []
-    res = requests.put(url, headers=headers, json=data).json()
-    return res
 
 def load_data_1():
     load_data_(api_key_2,bin_id_2)
