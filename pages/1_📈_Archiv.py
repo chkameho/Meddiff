@@ -54,7 +54,8 @@ if len(gewählte_Patienten_Daten)>1:
     gewählte_Patienten_Daten=DataFrame[DataFrame["Specherzeit"]== Nach_Speicherzeit_selektieren]
 Leukozyten_Wert = st.number_input("Leukozyten mit dem Einheit G/L")
 gewählte_Patienten_Daten_gedreht= gewählte_Patienten_Daten.T
-gewählte_Patienten_Daten_gedreht.columns = ["Einheit: %"]
+zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht.iloc[:16]
+zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
 st.write(zugeschnittene_Patienten_Daten)
