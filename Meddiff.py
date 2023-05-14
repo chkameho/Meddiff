@@ -41,11 +41,13 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
-#@st.cache_data()
+@st.cache_data()
+def load_data_cache():
+    return load_key(api_key_1, bin_id_1, username)
+
 def load_data():
     return load_key(api_key_1, bin_id_1, username)
         
-
 # Funktion zum Speichern in einer Jsonbin-Datei
 
 def save_data(data):
@@ -277,7 +279,7 @@ with tab1:
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
     session_state_initialisieren()
-    Speicherplatz=load_data()
+    Speicherplatz=load_data_cache()
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
     if zaehler == 100 and len(Speicherplatz)==0:
