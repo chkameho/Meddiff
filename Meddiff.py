@@ -192,7 +192,7 @@ def Zählung_Dictionary():
     Dictionary = {}
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
     for key in st.session_state.keys():
-        if key in zaehler:
+        if key == zaehler:
             Dictionary[key]=st.session_state[key]
     return Dictionary
 
@@ -200,7 +200,7 @@ def clear_session_state():
     #löscht den session_state
     for key in st.session_state.keys():
         zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
-        if key in zaehler:
+        if key == zaehler:
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
@@ -208,7 +208,7 @@ def clear_session_state():
 def clear_all():
     for key in st.session_state.keys():
         zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
-        if key in zaehler:
+        if key == zaehler:
             del st.session_state[key]
             if key in globals():
                 del globals()[key]
