@@ -56,7 +56,7 @@ Leukozyten_Wert = st.number_input("Leukozyten mit dem Einheit G/L")
 gewählte_Patienten_Daten_gedreht= gewählte_Patienten_Daten.T
 gewählte_Patienten_Daten_gedreht.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
-    gewählte_Patienten_Daten_gedreht["Einheit: G/L"]= (Leukozyten_Wert / 100.00) #* gewählte_Patienten_Daten_gedreht["Einheit: %"]
+    gewählte_Patienten_Daten_gedreht["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * gewählte_Patienten_Daten_gedreht["Einheit: %"]
 zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht[:16]
 st.write(zugeschnittene_Patienten_Daten)
 
