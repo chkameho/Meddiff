@@ -196,19 +196,17 @@ def Zählung_Dictionary():
     return Dictionary
 
 def clear_session_state():
-    #löscht den session_state
-    for key in st.session_state.keys():
-        #zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
-        #if key in zaehler:
+    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
+    for key in zaehler:
         del st.session_state[key]
         if key in globals():
             del globals()[key]
 
 def clear_all():
+    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
+    for key in zaehler:
     for key in st.session_state.keys():
-        zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
-        if key in zaehler:
-            del st.session_state[key]
+        del st.session_state[key]
             if key in globals():
                 del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1)
