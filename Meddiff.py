@@ -335,7 +335,7 @@ with tab1:
 
     with st.expander("Aktuelle Zählung"):
         st.dataframe(Zählung_Dictionary())
-    st.write(Speicherplatz)
+        
 ##################################################################################
 #TAB2
 
