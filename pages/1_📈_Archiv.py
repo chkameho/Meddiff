@@ -67,7 +67,7 @@ data = {
     'Wert': [25, 35, 20, 20]
 }
 df = pd.DataFrame(data)
-
+st.write(df)
 # Extrahiere den Namen
 name = df.columns[0]
 
