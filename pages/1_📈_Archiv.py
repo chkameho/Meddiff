@@ -70,3 +70,10 @@ fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, ti
 # Zeige das Pie-Chart in Streamlit
 st.plotly_chart(fig)
 
+st.download_button(
+    label="Download data as CSV",
+    data=zugeschnittene_Patienten_Daten,
+    file_name='large_df.csv',
+    mime='text/csv',
+)
+
