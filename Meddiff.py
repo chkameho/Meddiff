@@ -206,8 +206,8 @@ def clear_all():
     zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
         del st.session_state[key]
-            if key in globals():
-                del globals()[key]
+        if key in globals():
+            del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1)
     
     
