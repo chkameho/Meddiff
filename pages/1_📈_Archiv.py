@@ -7,15 +7,10 @@ import streamlit_authenticator as stauth
 
 
 #####################secrets#####################################################
-#Jsonbin_1
-jsonbin_secrets_1 = st.secrets["jsonbin_1"]
-api_key_1 = jsonbin_secrets_1["api_key"]
-bin_id_1 = jsonbin_secrets_1["bin_id"]
-
 #Jsonbin_2
-jsonbin_secrets_2 = st.secrets["jsonbin_2"]
-api_key_2 = jsonbin_secrets_2["api_key"]
-bin_id_2 = jsonbin_secrets_2["bin_id"]
+jsonbin_secrets = st.secrets["jsonbin_2"]
+api_key = jsonbin_secrets["api_key"]
+bin_id = jsonbin_secrets["bin_id"]
 #####user login#################################################################
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -41,7 +36,7 @@ elif authentication_status == None:
 #Funktionen 
 
 def load_data():
-    load =load_key(api_key_1, bin_id_1, username)
+    load =load_key(api_key, bin_id, username)
     if load == None:
         load=[]
     return load
