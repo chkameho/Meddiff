@@ -275,13 +275,17 @@ with tab1:
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
+    Speicherplatz = load_data()
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
-    Tastatur_Blutbild_Differenzierung()
+    if len(Speicherplatz)>1:
+        if st.button("Start"):
+            Tastatur_Blutbild_Differenzierung()
+    else:
+        Tastatur_Blutbild_Differenzierung()
     session_state_initialisieren()
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
-    Speicherplatz = load_data()
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
