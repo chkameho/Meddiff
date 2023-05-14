@@ -71,7 +71,7 @@ fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, ti
 st.plotly_chart(fig)
 
 # Add a download button
-csv = zugeschnittene_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
+csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
 b64 = base64.b64encode(csv.encode()).decode() # Encode to base64
 href = f'<a href="data:file/csv;base64,{b64}" download="my_file.csv">Download CSV file</a>'
 st.markdown(href, unsafe_allow_html=True)
