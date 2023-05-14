@@ -44,7 +44,7 @@ def load_data():
 st.title("Archiv")
 Datei = load_data()
 DataFrame= pd.DataFrame(Datei)
-#DataFrame[DataFrame["Identifikationsnummer"]=="Identifikationsnummer"]
 Identifikationsnummer=DataFrame["Identifikationsnummer"]
 Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
-st.write(DataFrame)
+gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
+st.write(gewählte_Patienten_Daten)
