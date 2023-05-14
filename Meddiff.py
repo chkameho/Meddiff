@@ -76,7 +76,7 @@ def Tastatur_Blutbild_Differenzierung():
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
     
- if 'Basophilen' not in st.session_state:
+    if 'Basophilen' not in st.session_state:
         st.session_state.Basophilen=0
 
     if 'Monozyten' not in st.session_state:
