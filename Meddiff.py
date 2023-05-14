@@ -44,9 +44,6 @@ elif authentication_status == None:
 
 def load_data():
     return load_key(api_key_1, bin_id_1, username)
-
-def load_data_not_cache():
-    return load_key(api_key_1, bin_id_1, username)
         
 # Funktion zum Speichern in einer Jsonbin-Datei
 
@@ -284,7 +281,7 @@ with tab1:
     zaehler = sum(zaehler)
     Speicherplatz = load_data()
     if zaehler == 100:
-        Speicherplatz=load_data_not_cache()
+        Speicherplatz=load_data()
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
@@ -358,7 +355,7 @@ with tab3:
     st.header('Resultate') 
     st.write("Hier können Sie nichts ändern. Sie können nur die Zählung vollständig löschen oder speichern.")
     st.subheader(Identifikation)
-    #Speicherplatz = load_data_not_cache()
+    #Speicherplatz = load_data()
     st.subheader("Zählung")
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
@@ -377,7 +374,7 @@ with tab3:
             #Session_State löschen.
             save_data(Speicherplatz)
             #erste und zweite Zählung speichern und somit vom session_state lösen.
-            Speicherplatz=load_data_not_cache()
+            Speicherplatz=load_data()
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"
