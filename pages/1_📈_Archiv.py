@@ -47,4 +47,9 @@ DataFrame= pd.DataFrame(Datei)
 Identifikationsnummer=DataFrame["Identifikationsnummer"]
 Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
 gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
+if len(gewählte_Patienten_Daten)>1:
+    #Speicherzeit später korregieren
+    Speicherzeit=gewählte_Patienten_Daten["Specherzeit"]
+    Nach_Speicherzeit_selektieren=st.selectbox("Selektiere die Identifikationsnummer",(Speicherzeit))
+    gewählte_Patienten_Daten=DataFrame[DataFrame["Specherzeit"]== Nach_Speicherzeit_selektieren]
 st.write(gewählte_Patienten_Daten)
