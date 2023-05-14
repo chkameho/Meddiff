@@ -43,7 +43,8 @@ elif authentication_status == None:
 # Funktion zum Laden aus einer Jsonbin-Datei
 
 def load_data():
-    load_key(api_key_1, bin_id_1, username)
+    return load_key(api_key_1, bin_id_1, username)
+        
 
 # Funktion zum Speichern in einer Jsonbin-Datei
 
