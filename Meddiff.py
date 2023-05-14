@@ -42,7 +42,10 @@ elif authentication_status == None:
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
 def load_data():
-    return load_key(api_key_1, bin_id_1, username)
+    load =load_key(api_key_1, bin_id_1, username)
+    if load == None:
+        load=[]
+    return load
         
 # Funktion zum Speichern in einer Jsonbin-Datei
 def save_data(data):
