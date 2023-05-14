@@ -450,7 +450,7 @@ with tab3:
         elif zaehler == 100 and len(Speicherplatz)== 0:
             neue_Patient=Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            neue_Patient["Specherzeit"]= Jetzt
+            neue_Patient["Speicherzeit"]= Jetzt
             neue_Patient["Identifikationsnummer"]=Identifikation
             neue_Patient["Erythrozyten Beurteilung"]=Erythrozyten_Beurteilung
             neue_Patient["Leukozyten Beurteilung"]=Leukozyten_Beurteilung
