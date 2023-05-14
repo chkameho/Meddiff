@@ -46,6 +46,6 @@ def load_data():
         load=[]
     return load
 
-st.title("Datein")
-Datei = load_key
+st.title("Archiv")
+Datei = load_data()
 st.write(Datei)
