@@ -44,4 +44,4 @@ def load_data():
 st.title("Archiv")
 Datei = load_data()
 DataFrame= pd.DataFrame(Datei)
-st.write(Datei)
+st.write(DataFrame)
