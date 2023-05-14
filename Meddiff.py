@@ -186,6 +186,7 @@ def Tastatur_Blutbild_Differenzierung():
 
     elif zaehler == 100:
         return st.session_state
+        return load_data_not_cache()
     
     return st.write( zaehler ,"/100 Zellen")       
 
