@@ -41,10 +41,10 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
-@st.cache_data()
+@st.cache(hash_funcs={pd.DataFrame: lambda _: None})
 def load_data_cache():
     return load_key(api_key_1, bin_id_1, username)
-
+@st.cache(hash_funcs={pd.DataFrame: lambda _: None})
 def load_data():
     return load_key(api_key_1, bin_id_1, username)
         
