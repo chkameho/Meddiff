@@ -59,15 +59,14 @@ zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht.iloc[:16]
 zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
-zugeschnittene_Patienten_Daten.rename(columns={zugeschnittene_Patienten_Daten.columns[0]: 'Parameter'}, inplace=True)
 st.write(zugeschnittene_Patienten_Daten)
 
-
+zurückgedrehte_Daten=zugeschnittene_Patienten_Daten.T
 # Extrahiere den Namen
-name = zugeschnittene_Patienten_Daten.index[]
+name = zurückgedrehte_Daten.columns[0]
 
 # Erstelle ein Pie-Chart
-fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, title=f"Leukozytenverteilung")
+fig = px.pie(zurückgedrehte_Daten, values='Einheit: %', names=name, title=f"Leukozytenverteilung")
 
 # Zeige das Pie-Chart in Streamlit
 st.plotly_chart(fig)
