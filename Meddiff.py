@@ -19,6 +19,10 @@ jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
+#huggning_face
+hugging_face=st.secrets["hugging_face"]
+token = hugging_face["token"]
+
 #####user login######
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -464,7 +468,7 @@ with tab3:
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
         # Set your authorization header with your token
-        headers = {"Authorization": "Bearer " + st.secrets["hugging_face_token"]}
+        headers = {"Authorization": "Bearer " + token}
 
         # Load the image
         image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
