@@ -190,7 +190,7 @@ def Tastatur_Blutbild_Differenzierung():
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
     Dictionary = {}
-    zaehler = [Basophilen, Monozyten, Blasten,A,Eosinophilen,Lymphozyten,Promyelozyten,B,Normoblast,Segmentierten,Myelozyten,C,Plasmazellen,Stabkernigen,Metamyelozyten,D] 
+    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
         #if key in zaehler:
         #Dictionary[key]=st.session_state[key]
