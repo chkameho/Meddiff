@@ -205,7 +205,6 @@ def clear_session_state():
 def clear_all():
     zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
-    for key in st.session_state.keys():
         del st.session_state[key]
             if key in globals():
                 del globals()[key]
