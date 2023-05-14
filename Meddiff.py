@@ -209,6 +209,56 @@ def clear_all():
         if key in globals():
             del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1)
+def session_state_initialisieren():
+    #Damit die session_state intialisiert wird
+    if 'Basophilen' not in st.session_state:
+        st.session_state.Basophilen=0
+
+    if 'Monozyten' not in st.session_state:
+        st.session_state.Monozyten=0
+
+    if 'Blasten' not in st.session_state:
+        st.session_state.Blasten=0
+
+    if 'A' not in st.session_state:
+        st.session_state.A=0
+
+    if 'Eosinophilen' not in st.session_state:
+        st.session_state.Eosinophilen=0
+
+    if 'Lymphozyten' not in st.session_state:
+        st.session_state.Lymphozyten=0
+
+    if 'Promyelozyten' not in st.session_state:
+        st.session_state.Promyelozyten=0
+
+    if 'B' not in st.session_state:
+        st.session_state.B=0
+
+    if 'Normoblast' not in st.session_state:
+        st.session_state.Normoblast=0
+
+    if 'Segmentierten' not in st.session_state:
+        st.session_state.Segmentierten=0
+
+    if 'Myelozyten' not in st.session_state:
+        st.session_state.Myelozyten=0
+
+    if 'C' not in st.session_state:
+        st.session_state.C=0
+
+
+    if 'Plasmazellen' not in st.session_state:
+        st.session_state.Plasmazellen=0
+
+    if 'Stabkernigen' not in st.session_state:
+        st.session_state.Stabkernigen=0
+
+    if 'Metamyelozyten' not in st.session_state:
+        st.session_state.Metamyelozyten=0
+
+    if 'D' not in st.session_state:
+       st.session_state.D=0
     
     
 ###################################################################################
@@ -225,6 +275,7 @@ with tab1:
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
+    session_state_initialisieren()
     Speicherplatz=load_data()
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
