@@ -60,7 +60,7 @@ zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
 st.table(zugeschnittene_Patienten_Daten)
-st.write("Legende",str(gewählte_Patienten_Daten["Legende"]))
+st.markdown("Legende",str(gewählte_Patienten_Daten["Legende"]))
 
 # Extrahiere den Namen
 name = zugeschnittene_Patienten_Daten.index
