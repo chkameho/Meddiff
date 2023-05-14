@@ -355,7 +355,7 @@ with tab3:
     st.header('Resultate') 
     st.write("Hier können Sie nichts ändern. Sie können nur die Zählung vollständig löschen oder speichern.")
     st.subheader(Identifikation)
-    #Speicherplatz = load_data()
+    Speicherplatz = load_data()
     st.subheader("Zählung")
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
