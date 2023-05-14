@@ -60,6 +60,8 @@ zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
 st.write(zugeschnittene_Patienten_Daten)
+zugeschnittene_Patienten_Daten.rename(columns={zugeschnittene_Patienten_Daten.columns[0]: 'Parameter'}, inplace=True)
+
 # Extrahiere den Namen
 name = zugeschnittene_Patienten_Daten.index[]
 
