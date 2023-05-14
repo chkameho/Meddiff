@@ -70,8 +70,11 @@ fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, ti
 # Zeige das Pie-Chart in Streamlit
 st.plotly_chart(fig)
 
+Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[16:]
+st.table(Bewertungen)
+
 # Add a download button
-csv = gewählte_Patienten_Daten_gedreht.to_csv(index=False) # Convert the DataFrame to CSV
+csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
 b64 = base64.b64encode(csv.encode()).decode() # Encode to base64
 href = f'<a href="data:file/csv;base64,{b64}" download="my_file.csv">Download CSV file</a>'
 st.markdown(href, unsafe_allow_html=True)
