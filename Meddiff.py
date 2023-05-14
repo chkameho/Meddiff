@@ -311,6 +311,7 @@ with tab1:
                 save_data(Speicherplatz)
                 #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
                 clear_session_state()
+                session_state_initialisieren()
     with col2:
         if st.button("Zählung beenden"):
             if Speicherplatz != 0 and zaehler == 100:
@@ -326,12 +327,13 @@ with tab1:
     with col3:
         if st.button("erste Zählung Löschen"):
             del_erste_Zählung()
+            session_state_initialisieren()
             
     with col4: 
         if st.button('Aktuelle Zählung Löschen'):
-            # Delete all the items in Session state
-            
+            # Delete all the items in Session state            
             clear_session_state()
+            session_state_initialisieren()
 
     with st.expander("Aktuelle Zählung"):
         st.dataframe(Zählung_Dictionary())
