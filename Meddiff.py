@@ -426,7 +426,6 @@ with tab3:
             neue_Patient["Leukozyten Beurteilung"]=Leukozyten_Beurteilung
             neue_Patient["Thrombozyten Beurteilung"]=Thrombozyten_Beurteilung
             neue_Patient["Legende"]=A_B_C_D
-            neue_Patient["Username"]=st.session_state.username
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
