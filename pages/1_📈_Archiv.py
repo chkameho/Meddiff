@@ -52,5 +52,6 @@ if len(gewählte_Patienten_Daten)>1:
     Speicherzeit=gewählte_Patienten_Daten["Specherzeit"]
     Nach_Speicherzeit_selektieren=st.selectbox("Selektiere die Identifikationsnummer",(Speicherzeit))
     gewählte_Patienten_Daten=DataFrame[DataFrame["Specherzeit"]== Nach_Speicherzeit_selektieren]
-zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten[:16]
+gewählte_Patienten_Daten_gedreht= gewählte_Patienten_Daten.T
+zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht[:16]
 st.write(zugeschnittene_Patienten_Daten)
