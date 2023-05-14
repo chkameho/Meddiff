@@ -282,7 +282,7 @@ with tab1:
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
-        st.error("Ops, du bist über 100. Klicke nicht so schnell.")
+        st.error("Ops, du bist über 100 Zellen. Klicke nicht so schnell. Lösche deine aktuelle Zählung und fange von Anfang an.")
     elif zaehler == 100 and len(Speicherplatz)!=0:
         st.success("Sie haben 200 Zellen gezählt")
         if len(Speicherplatz) > 1:
