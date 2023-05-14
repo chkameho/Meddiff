@@ -59,7 +59,7 @@ zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht.iloc[:16]
 zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
-st.write(zugeschnittene_Patienten_Daten)
+st.table(zugeschnittene_Patienten_Daten)
 #######################################################################
 # Beispiel-Daten
 data = {
