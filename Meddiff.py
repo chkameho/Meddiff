@@ -373,14 +373,14 @@ with tab3:
             #Session_State löschen.
             save_data(Speicherplatz)
             #erste und zweite Zählung speichern und somit vom session_state lösen.
-            Speicherplatz=load_data()
+            Speicherplatz=load_data_cache()
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"
             st.dataframe(Speicherplatz)
         else:
             #Wenn else nicht definiert wird, wird die Speicherung wiederholen oder nur die erste Zählung anzeigen.
-            Speicherplatz = load_data()
+            Speicherplatz = load_data_cache()
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"            
