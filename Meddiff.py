@@ -49,14 +49,14 @@ def load_data():
 # Funktion zum Speichern in einer Jsonbin-Datei
 
 def save_data(data):
-    return save_key(api_key_1, bin_id_1, username, address_list)
+    return save_key(api_key_1, bin_id_1, username, data)
 
 def load_data_1():
     return load_key(api_key_2,bin_id_2, username)
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    return save_key(api_key_2, bin_id_2, username, address_list)
+    return save_key(api_key_2, bin_id_2, username, data)
 
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1)  
