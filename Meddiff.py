@@ -57,9 +57,6 @@ logged_in_session_state["Alt"] = "logged_in_session_state"
 def load_data():
     load_key(api_key_1, bin_id_1, username)
 
-
-
-
 # Funktion zum Speichern in einer JSON-Datei
 
 def save_data(data):
@@ -78,30 +75,55 @@ def del_erste_Zählung():
 def Tastatur_Blutbild_Differenzierung():  
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
-       
-    # ein neues Dictionary erstellen, um die Variablen zu gruppieren
-    my_group = {
-        'Basophilen': 0,
-        'Monozyten': 0,
-        'Blasten': 0,
-        'A': 0,
-        'Eosinophilen': 0,
-        'Lymphozyten': 0,
-        'Promyelozyten': 0,
-        'B': 0,
-        'Normoblast': 0,
-        'Segmentierten': 0,
-        'Myelozyten': 0,
-        'C': 0,
-        'Plasmazellen': 0,
-        'Stabkernigen': 0,
-        'Metamyelozyten': 0,
-        'D': 0
-    }
+    
+ if 'Basophilen' not in st.session_state:
+        st.session_state.Basophilen=0
 
-    # neue Gruppe im session_state erstellen und ihr das Dictionary zuweisen
-    if 'meine_gruppe' not in st.session_state:
-         st.session_state.meine_gruppe = my_group
+    if 'Monozyten' not in st.session_state:
+        st.session_state.Monozyten=0
+
+    if 'Blasten' not in st.session_state:
+        st.session_state.Blasten=0
+
+    if 'A' not in st.session_state:
+        st.session_state.A=0
+
+    if 'Eosinophilen' not in st.session_state:
+        st.session_state.Eosinophilen=0
+
+    if 'Lymphozyten' not in st.session_state:
+        st.session_state.Lymphozyten=0
+
+    if 'Promyelozyten' not in st.session_state:
+        st.session_state.Promyelozyten=0
+
+    if 'B' not in st.session_state:
+        st.session_state.B=0
+
+    if 'Normoblast' not in st.session_state:
+        st.session_state.Normoblast=0
+
+    if 'Segmentierten' not in st.session_state:
+        st.session_state.Segmentierten=0
+
+    if 'Myelozyten' not in st.session_state:
+        st.session_state.Myelozyten=0
+
+    if 'C' not in st.session_state:
+        st.session_state.C=0
+
+
+    if 'Plasmazellen' not in st.session_state:
+        st.session_state.Plasmazellen=0
+
+    if 'Stabkernigen' not in st.session_state:
+        st.session_state.Stabkernigen=0
+
+    if 'Metamyelozyten' not in st.session_state:
+        st.session_state.Metamyelozyten=0
+
+    if 'D' not in st.session_state:
+       st.session_state.D=0
 
 
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
@@ -109,54 +131,54 @@ def Tastatur_Blutbild_Differenzierung():
     if zaehler <= 99:
        with col1:
            if st.button('Basophile')!= 0:
-               st.session_state.meine_gruppe.Basophilen += 1
+               st.session_state.Basophilen += 1
 
 
            if st.button('Monozyt') != 0:
-               st.session_state.meine_gruppe.Monozyten += 1
+               st.session_state.Monozyten += 1
 
 
            if  st.button('Blast')!= 0:
-               st.session_state.meine_gruppe.Blasten += 1
+               st.session_state.Blasten += 1
 
 
            if st.button('A'):
-               st.session_state.meine_gruppe.A += 1
+               st.session_state.A += 1
 
 
        with col2:
            if st.button('Eosinophil') != 0:
-               st.session_state.meine_gruppe.Eosinophilen += 1
+               st.session_state.Eosinophilen += 1
 
 
            if st.button('Lymphozyt') != 0:
-               st.session_state.meine_gruppe.Lymphozyten += 1
+               st.session_state.Lymphozyten += 1
 
 
            if st.button('Promyelozyt') != 0:
-               st.session_state.meine_gruppe.Promyelozyten += 1
+               st.session_state.Promyelozyten += 1
            if st.button('B'):
-               st.session_state.meine_gruppe.B += 1
+               st.session_state.B += 1
 
 
 
        with col3:
            if st.button('Normoblast') != 0:
-               st.session_state.meine_gruppe.Normoblast += 1
+               st.session_state.Normoblast += 1
 
            if st.button('Segmentiert') != 0:
-               st.session_state.meine_gruppe.Segmentierten += 1
+               st.session_state.Segmentierten += 1
 
 
            if st.button('Myelozyt') != 0:
-               st.session_state.meine_gruppe.Myelozyten += 1
+               st.session_state.Myelozyten += 1
            if st.button('C'):
-               st.session_state.meine_gruppe.C += 1
+               st.session_state.C += 1
 
  
        with col4:
            if st.button('Plasmazelle') != 0:
-               st.session_state.meine_gruppe.Plasmazellen += 1
+               st.session_state.Plasmazellen += 1
 
 
            if st.button('Stabkernige') != 0:
@@ -169,7 +191,7 @@ def Tastatur_Blutbild_Differenzierung():
                st.session_state.D += 1
 
     elif zaehler == 100:
-        return st.session_state.meine_gruppe
+        return st.session_state
     
     return st.write( zaehler ,"/100 Zellen")       
 
@@ -204,14 +226,14 @@ tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
 ###################################################################################
 #TAB1
 st.write(st.session_state)
-
+zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
 with tab1:   
     st.header("Tastatur")
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
 
     
-    zaehler = sum(st.session_state.meine_gruppe.values())
+    zaehler = sum(zaehler)
 
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
