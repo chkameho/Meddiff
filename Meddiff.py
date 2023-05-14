@@ -5,6 +5,8 @@ from yaml.loader import SafeLoader
 import datetime
 from jsonbin import save_key, load_key, del_erste_Zählung_
 import streamlit_authenticator as stauth
+import requests
+import json
 ################################################################################################################################################################
 #secrets
 #Jsonbin_1
@@ -266,7 +268,7 @@ def session_state_initialisieren():
 ###################################################################################
 st.title("manuelle Differenzierung (Blutbilder)")
 
-tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
+tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Hilfe beim Differenzieren"])
 
 ###################################################################################
 #TAB1
@@ -453,5 +455,30 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_data_1(Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
+####################################################################################################################
+#tab 4 
+    with tab4:
+        # Define the API endpoint
+        st.header("Hilfe beim Differenzieren")
+        st.write("Falls ihr eine Zelle nicht erkennt könnt ihr den untere Leukozytensubtypen-Erkennungssystem verwenden.")
+        API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
+        # Set your authorization header with your token
+        headers = {"Authorization": "Bearer " + st.secrets["hugging_face_token"]}
+
+        # Load the image
+        image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+        if image_file is not None:
+            image_bytes = image_file.read()
+
+            # Send a POST request to the API with the image data and headers
+            response = requests.post(API_URL, headers=headers, data=image_bytes)
+
+            # Get the predicted class from the response
+            result = json.loads(response.content.decode())
+            predicted_class = result[0]["label"]
+            st.image(image_file)
+
+            # Display the predicted class to the user
+            st.write("Predicted Class: ", predicted_class)
             
