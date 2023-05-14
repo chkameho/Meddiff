@@ -280,6 +280,7 @@ with tab1:
     st.write("---")
     if len(Speicherplatz)>1:
         if st.button("Start"):
+            del_erste_Zählung()
             Tastatur_Blutbild_Differenzierung()
     else:
         Tastatur_Blutbild_Differenzierung()
