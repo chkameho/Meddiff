@@ -16,7 +16,8 @@ bin_id_1 = jsonbin_secrets_1["bin_id"]
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
-# -------- user login --------
+
+#####user login######
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
@@ -37,27 +38,14 @@ elif authentication_status == False:
 elif authentication_status == None:
     st.warning('Please enter your username and password')
     st.stop()
-
-#############################################################################################################
-#Neu
-# Laden des aktuellen Session State
-current_session_state = st.session_state
-
-# Kopieren des aktuellen Session State in einen neuen Session State mit einem neuen Namen
-logged_in_session_state = current_session_state
-
-# Ändern des Session State-Namens
-logged_in_session_state["Alt"] = "logged_in_session_state"
     
-    
-    ###########################################################################################################
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
 
 def load_data():
     load_key(api_key_1, bin_id_1, username)
 
-# Funktion zum Speichern in einer JSON-Datei
+# Funktion zum Speichern in einer Jsonbin-Datei
 
 def save_data(data):
     return save_key(api_key_1, bin_id_1, username, address_list)
@@ -124,7 +112,9 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'D' not in st.session_state:
        st.session_state.D=0
+    #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    #zaehler ist der Counter
     zaehler = sum(zaehler)
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
     col1, col2, col3, col4 = st.columns(4)
@@ -157,10 +147,9 @@ def Tastatur_Blutbild_Differenzierung():
 
            if st.button('Promyelozyt') != 0:
                st.session_state.Promyelozyten += 1
+                
            if st.button('B'):
                st.session_state.B += 1
-
-
 
        with col3:
            if st.button('Normoblast') != 0:
@@ -172,6 +161,7 @@ def Tastatur_Blutbild_Differenzierung():
 
            if st.button('Myelozyt') != 0:
                st.session_state.Myelozyten += 1
+                
            if st.button('C'):
                st.session_state.C += 1
 
@@ -187,6 +177,7 @@ def Tastatur_Blutbild_Differenzierung():
 
            if st.button('Metamyelozyt') != 0:
                st.session_state.Metamyelozyten += 1
+            
            if st.button('D'):
                st.session_state.D += 1
 
@@ -198,7 +189,9 @@ def Tastatur_Blutbild_Differenzierung():
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
     Dictionary = {}
-    for key in st.session_state.keys():
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    for key in zaehler.keys(): 
+    #for key in st.session_state.keys():
         Dictionary[key]=st.session_state.meine_gruppe[key]
     return Dictionary
 
