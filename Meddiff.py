@@ -192,9 +192,7 @@ def Zählung_Dictionary():
     Dictionary = {}
     zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
-        #if key in zaehler:
-        #Dictionary[key]=st.session_state[key]
-        Dictionary[key]=key
+        Dictionary[key]=st.session_state[key]
     return Dictionary
 
 def clear_session_state():
