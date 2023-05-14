@@ -61,7 +61,7 @@ if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
 st.write(zugeschnittene_Patienten_Daten)
 # Extrahiere den Namen
-name = zugeschnittene_Patienten_Daten.columns[1]
+name = zugeschnittene_Patienten_Daten.index[]
 
 # Erstelle ein Pie-Chart
 fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, title=f"Leukozytenverteilung")
