@@ -189,15 +189,15 @@ def Tastatur_Blutbild_Differenzierung():
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
     Dictionary = {}
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
-    for key in zaehler.keys(): 
-    #for key in st.session_state.keys():
-        Dictionary[key]=st.session_state.meine_gruppe[key]
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D] 
+    for key in st.session_state.keys():
+        if key in zaehler:
+            Dictionary[key]=st.session_state[key]
     return Dictionary
 
 def clear_session_state():
     #löscht den session_state
-    for key in st.session_state.meine_gruppe.keys():
+    for key in st.session_state.keys():
         del st.session_state.meine_gruppe[key]
         if key in globals():
             del globals()[key]
