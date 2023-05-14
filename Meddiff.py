@@ -124,8 +124,8 @@ def Tastatur_Blutbild_Differenzierung():
 
     if 'D' not in st.session_state:
        st.session_state.D=0
-
-
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    zaehler = sum(zaehler)
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
@@ -222,23 +222,19 @@ st.title("manuelle Differenzierung (Blutbilder)")
 
 tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
 
-
 ###################################################################################
 #TAB1
 st.write(st.session_state)
-zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
 with tab1:   
     st.header("Tastatur")
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
-
-    
-    zaehler = sum(zaehler)
-
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
     Tastatur_Blutbild_Differenzierung()
     Speicherplatz=load_data()
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    zaehler = sum(zaehler)
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler == 100 and len(Speicherplatz)!=0:
