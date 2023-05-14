@@ -41,15 +41,14 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
-
 def load_data():
     return load_key(api_key_1, bin_id_1, username)
         
 # Funktion zum Speichern in einer Jsonbin-Datei
-
 def save_data(data):
     return save_key(api_key_1, bin_id_1, username, data)
 
+#Funktion zum Laden aus einer Jsonbin-Datei
 def load_data_1():
     return load_key(api_key_2,bin_id_2, username)
 
@@ -355,11 +354,12 @@ with tab3:
     st.header('Resultate') 
     st.write("Hier können Sie nichts ändern. Sie können nur die Zählung vollständig löschen oder speichern.")
     st.subheader(Identifikation)
+    #Laden der Speicher um Dataframe zu generieren 
     Speicherplatz = load_data()
+    st.write(Speicherplatz)
     st.subheader("Zählung")
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
-
     if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zählung vorhanden.")
