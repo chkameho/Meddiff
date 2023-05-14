@@ -60,7 +60,7 @@ zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
 if Leukozyten_Wert != 0:
       zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
 st.dataframe(zugeschnittene_Patienten_Daten)
-
+st.write(zugeschnittene_Patienten_Daten.index())
 # Extrahiere den Namen
 name = zugeschnittene_Patienten_Daten.columns[-1]
 
