@@ -286,7 +286,7 @@ with tab1:
     elif zaehler == 100 and len(Speicherplatz)!=0:
         st.success("Sie haben 200 Zellen gezählt")
         if len(Speicherplatz) > 1:
-            if st.button("Zählung neu anfangen") != 0:
+            if st.button("Zählung neu anfangen"):
                 clear_all()
     st.caption('''Tasten "Normoblast", "C" und "D" werden nicht in den 100 Zellen gezählt. Diese Tasten sind für Zählungen von Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeit gedacht. Tasten "A" und "B" sind für die Speziellen Zellen gedacht und werden mit in den 100 Zellen gezählt.''')  
     A_B_C_D= st.text_input("A|B|C|D gebraucht? Schreibe die Variablen an")
@@ -311,7 +311,7 @@ with tab1:
                 #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
                 clear_session_state()
     with col2:
-        if st.button("Zählung beenden") != 0:
+        if st.button("Zählung beenden"):
             if Speicherplatz != 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
@@ -323,11 +323,11 @@ with tab1:
                 
         
     with col3:
-        if st.button("erste Zählung Löschen") != 0:
+        if st.button("erste Zählung Löschen"):
             del_erste_Zählung()
             
     with col4: 
-        if st.button('Aktuelle Zählung Löschen') != 0:
+        if st.button('Aktuelle Zählung Löschen'):
             # Delete all the items in Session state
             
             clear_session_state()
@@ -395,7 +395,7 @@ with tab3:
         st.dataframe(Zählung_1)
     st.write("Legende: ",A_B_C_D)
 
-    if st.button("Alle Zählungen löschen")!=0:
+    if st.button("Alle Zählungen löschen"):
         clear_all()
 
     st.subheader("Beurteilung")
@@ -414,7 +414,7 @@ with tab3:
     else:
         st.error("Beurteilung nicht vollständig ausgefüllt.")
     st.write("---")
-    if st.button("Speicherung")!=0:
+    if st.button("Speicherung"):
         Patientenspeicherung = load_data_1()
         if "Mittelwert" in Speicherplatz: 
             Jetzt = datetime.datetime.now().strftime("%Y-%M-%d %H:%M:%S")
