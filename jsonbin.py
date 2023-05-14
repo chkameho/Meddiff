@@ -51,9 +51,10 @@ def save_key(api_key, bin_id, key, data):
     res = requests.put(url, headers=headers, json=res).json()
     return res
         
-def del_erste_Zählung_(api_key, bin_id):
-    url = BIN_API_URL + '/' + bin_id
-    headers = {'X-Master-Key': api_key, 'Content-Type': 'application/json'}
-    data = [{}]
-    res = requests.put(url, headers=headers, json=data).json()
-    return res
+def del_erste_Zählung_(api_key, bin_id,username):
+    # Laden der Daten
+    data = load_key(api_key, bin_id, username)
+
+    # Löschen der Daten
+    data = None
+    return save_key(api_key, bin_id, username, data)
