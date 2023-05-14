@@ -208,7 +208,7 @@ def clear_all():
         del st.session_state[key]
         if key in globals():
             del globals()[key]
-    return del_erste_Zählung_(api_key_1, bin_id_1)
+    return del_erste_Zählung_(api_key_1, bin_id_1,username)
 def session_state_initialisieren():
     #Damit die session_state intialisiert wird
     if 'Basophilen' not in st.session_state:
