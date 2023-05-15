@@ -68,7 +68,7 @@ def save_data_1(data):
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1,username)  
 
-def Tastatur_Blutbild_Differenzierung():  
+def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):  
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
     
@@ -121,7 +121,7 @@ def Tastatur_Blutbild_Differenzierung():
     if 'D' not in st.session_state:
        st.session_state.D=0
     #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     #zaehler ist der Counter
     zaehler = sum(zaehler)
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
@@ -129,66 +129,107 @@ def Tastatur_Blutbild_Differenzierung():
     if zaehler <= 99:
        with col1:
            if st.button('Basophile')!= 0:
-               st.session_state.Basophilen += 1
+               if auf_oder_unter_zählen == 0:
+                    st.session_state.Basophilen += 1
+               elif auf_oder_unter_zählen == 0:
+                    st.session_state.Basophilen -= 1
 
 
            if st.button('Monozyt') != 0:
-               st.session_state.Monozyten += 1
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Monozyten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Monozyten -= 1
 
 
            if  st.button('Blast')!= 0:
-               st.session_state.Blasten += 1
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Blasten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Blasten -= 1
 
 
            if st.button('A'):
-               st.session_state.A += 1
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.A += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.A -= 1
 
 
        with col2:
            if st.button('Eosinophil') != 0:
-               st.session_state.Eosinophilen += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Eosinophilen += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Eosinophilen -= 1
 
            if st.button('Lymphozyt') != 0:
-               st.session_state.Lymphozyten += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Lymphozyten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Lymphozyten -= 1
 
            if st.button('Promyelozyt') != 0:
-               st.session_state.Promyelozyten += 1
-                
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Promyelozyten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Promyelozyten -= 1
+                    
            if st.button('B'):
-               st.session_state.B += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.B += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.B -= 1
        with col3:
            if st.button('Normoblast') != 0:
-               st.session_state.Normoblast += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Normoblast += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Normoblast -= 1
+                    
            if st.button('Segmentiert') != 0:
-               st.session_state.Segmentierten += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Segmentierten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Segmentierten -= 1
 
            if st.button('Myelozyt') != 0:
-               st.session_state.Myelozyten += 1
-                
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Myelozyten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Myelozyten -= 1
+                    
            if st.button('C'):
-               st.session_state.C += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.C += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.C -= 1
  
        with col4:
            if st.button('Plasmazelle') != 0:
-               st.session_state.Plasmazellen += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Plasmazellen += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Plasmazellen -= 1
 
            if st.button('Stabkernige') != 0:
-               st.session_state.Stabkernigen += 1
-   
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Stabkernigen += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Stabkernigen -= 1   
 
            if st.button('Metamyelozyt') != 0:
-               st.session_state.Metamyelozyten += 1
-            
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.Metamyelozyten += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.Metamyelozyten -= 1
+                    
            if st.button('D'):
-               st.session_state.D += 1
-
+               if auf_oder_unter_zählen == 'hoch':
+                    st.session_state.D += 1
+               elif auf_oder_unter_zählen == 'unter':
+                    st.session_state.D -= 1
+                    
     elif zaehler == 100:
         return st.session_state
         return load_data_not_cache()
@@ -284,12 +325,15 @@ with tab1:
     Speicherplatz = load_data()
     #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
+    auf_oder_unter_zaehlen = st.radio(
+    "Zählung",
+    ('hoch', 'unter'))
     if len(Speicherplatz)>1:
         if st.button("Start"):
             del_erste_Zählung()
-            Tastatur_Blutbild_Differenzierung()
+            Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
     else:
-        Tastatur_Blutbild_Differenzierung()
+        Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
     session_state_initialisieren()
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
     zaehler = sum(zaehler)
