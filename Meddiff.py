@@ -108,7 +108,6 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     if 'C' not in st.session_state:
         st.session_state.C=0
 
-
     if 'Plasmazellen' not in st.session_state:
         st.session_state.Plasmazellen=0
 
@@ -120,29 +119,30 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
 
     if 'D' not in st.session_state:
        st.session_state.D=0
+    
     #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     #zaehler ist der Counter
     zaehler = sum(zaehler)
-    #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. 
+    #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
        with col1:
-           if st.button('Basophile')!= 0:
+           if st.button('Basophile'):
                if auf_oder_unter_zählen == 0:
                     st.session_state.Basophilen += 1
                elif auf_oder_unter_zählen == 0:
                     st.session_state.Basophilen -= 1
 
 
-           if st.button('Monozyt') != 0:
+           if st.button('Monozyt'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Monozyten += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Monozyten -= 1
 
 
-           if  st.button('Blast')!= 0:
+           if  st.button('Blast'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Blasten += 1
                elif auf_oder_unter_zählen == 'unter':
@@ -157,19 +157,19 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
 
 
        with col2:
-           if st.button('Eosinophil') != 0:
+           if st.button('Eosinophil'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Eosinophilen += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Eosinophilen -= 1
 
-           if st.button('Lymphozyt') != 0:
+           if st.button('Lymphozyt'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Lymphozyten += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Lymphozyten -= 1
 
-           if st.button('Promyelozyt') != 0:
+           if st.button('Promyelozyt'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Promyelozyten += 1
                elif auf_oder_unter_zählen == 'unter':
@@ -181,13 +181,13 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.B -= 1
        with col3:
-           if st.button('Normoblast') != 0:
+           if st.button('Normoblast'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Normoblast += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Normoblast -= 1
                     
-           if st.button('Segmentiert') != 0:
+           if st.button('Segmentiert'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Segmentierten += 1
                elif auf_oder_unter_zählen == 'unter':
@@ -206,19 +206,19 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     st.session_state.C -= 1
  
        with col4:
-           if st.button('Plasmazelle') != 0:
+           if st.button('Plasmazelle'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Plasmazellen += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Plasmazellen -= 1
 
-           if st.button('Stabkernige') != 0:
+           if st.button('Stabkernige'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Stabkernigen += 1
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Stabkernigen -= 1   
 
-           if st.button('Metamyelozyt') != 0:
+           if st.button('Metamyelozyt'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Metamyelozyten += 1
                elif auf_oder_unter_zählen == 'unter':
@@ -232,8 +232,6 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     
     elif zaehler == 100:
         return st.session_state
-        return load_data_not_cache()
-    
     return st.write( zaehler ,"/100 Zellen")       
 
 def Zählung_Dictionary():
@@ -245,6 +243,7 @@ def Zählung_Dictionary():
     return Dictionary
 
 def clear_session_state():
+    # Löscht die Zählung komplet.
     zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
         del st.session_state[key]
@@ -252,12 +251,14 @@ def clear_session_state():
             del globals()[key]
 
 def clear_all():
+    #löscht alle Zählung
     zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
     for key in zaehler:
         del st.session_state[key]
         if key in globals():
             del globals()[key]
     return del_erste_Zählung_(api_key_1, bin_id_1,username)
+
 def session_state_initialisieren():
     #Damit die session_state intialisiert wird
     if 'Basophilen' not in st.session_state:
@@ -323,11 +324,12 @@ with tab1:
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
     Speicherplatz = load_data()
-    #Damit die Tastatur gut dargestellt werden kann.
     st.write("---")
+    # ermöglicht die Zählung zu korregieren.
     auf_oder_unter_zaehlen = st.radio(
     "Zählung",
     ('hoch', 'unter'))
+    #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz)>1:
         if st.button("Start"):
             del_erste_Zählung()
@@ -393,8 +395,8 @@ with tab1:
             clear_session_state()
             session_state_initialisieren()
 
-    with st.expander("Aktuelle Zählung"):
-        st.dataframe(Zählung_Dictionary())
+    
+    st.table(Zählung_Dictionary())
         
 ##################################################################################
 #TAB2
