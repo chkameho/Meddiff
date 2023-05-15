@@ -71,11 +71,6 @@ def del_erste_Zählung():
 def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):  
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
     #st.session_state wird gebraucht,damit die Zählung gelingt.
-    def local_css(file_name):
-        with open(file_name) as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-    local_css("style.css")
     
     if 'Basophilen' not in st.session_state:
         st.session_state.Basophilen=0
