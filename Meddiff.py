@@ -349,7 +349,7 @@ with tab1:
             if st.button("Zählung neu anfangen"):
                 clear_all()
     session_state_initialisieren()
-    with st.expander("Nutzeranleitung")
+    with st.expander("Nutzeranleitung"):
         st.caption('''Tasten "Normoblast", "C" und "D" werden nicht in den 100 Zellen gezählt. Diese Tasten sind für Zählungen von Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeit gedacht. Tasten "A" und "B" sind für die Speziellen Zellen gedacht und werden mit in den 100 Zellen gezählt.''')  
     A_B_C_D= st.text_input("A|B|C|D gebraucht? Schreibe die Variablen an")
     st.write("---")  
