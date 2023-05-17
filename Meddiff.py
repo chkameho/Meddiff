@@ -413,7 +413,7 @@ with tab2:
     Erythrozyten_Beurteilung = st.text_area("Erythrozyten Beurteilung")
     Leukozyten_Beurteilung = st.text_area("Leukozyten Beurteilung")
     Thrombozyten_Beurteilung = st.text_area("Thrombozyten Beurteilung")
-    st.write('Im nächsten Tab "Resultate" können Sie Ihre gesamte Eingabe überprüfen.')
+    st.write("Im Tab 'Resultate' findest du eine Übersicht und Bewertung deiner eingetragenen Daten, wo du sie überprüfen und auswerten kannst.")
 ######################################################################################
 #TAB3
 with tab3:
