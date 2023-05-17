@@ -338,7 +338,7 @@ with tab1:
     else:
         Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
     session_state_initialisieren()
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     zaehler = sum(zaehler)
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
