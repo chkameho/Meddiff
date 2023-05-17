@@ -375,7 +375,7 @@ with tab1:
                     #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
                     clear_session_state()
                     session_state_initialisieren()
-            if Identifikation == 0:
+            if len(Identifikation) == 0:
                 st.error("Schreibe die ein Identifikationsnummer")
     with col2:
         if st.button("Zählung beenden"):
