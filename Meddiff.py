@@ -329,10 +329,10 @@ with tab1:
     # ermöglicht die Zählung zu korregieren.
     auf_oder_unter_zaehlen = st.radio(
     "Zählung",
-    ('hoch', 'unter'))
+    ('Plus', 'Minus'))
     #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz)>1:
-        if st.button("Start"):
+        if st.button("Differenzierung starten"):
             del_erste_Zählung()
             Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
     else:
@@ -343,15 +343,15 @@ with tab1:
     if zaehler == 100 and len(Speicherplatz)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
-        st.error("Ops, du bist über 100 Zellen. Klicke nicht so schnell. Lösche deine aktuelle Zählung und fange von Anfang an.")
+        st.error("Ops, du bist über 100 Zellen. Klicke nicht so schnell. Lösche einige Zellen von der Zählung.")
     elif zaehler == 100 and len(Speicherplatz)!=0:
-        st.success("Sie haben 200 Zellen gezählt")
+        st.success("Du hast 200 Zellen ausgezählt")
         if len(Speicherplatz) > 1:
-            if st.button("Zählung neu anfangen"):
+            if st.button("Zählung ganz neu anfangen"):
                 clear_all()
     session_state_initialisieren()
     with st.expander("Nutzeranleitung"):
-        st.caption('''Tasten "Normoblast", "C" und "D" werden nicht in den 100 Zellen gezählt. Diese Tasten sind für Zählungen von Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeit gedacht. Tasten "A" und "B" sind für die Speziellen Zellen gedacht und werden mit in den 100 Zellen gezählt.''')  
+        st.write('''"Normoblast", "C" und "D" werden nicht in den 100 Zellen gezählt. "A" und "B" werden mit in den 100 Zellen gezählt. Diese Tasten geben dir die Möglichkeit spezielle Zellen auszuzählen. Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeit gedacht. Vergiss nicht die Variablen anzuschreiben. ''')  
     A_B_C_D= st.text_input("A|B|C|D gebraucht? Schreibe die Variablen an")
     st.write("---")  
     
@@ -381,12 +381,12 @@ with tab1:
         if st.button("Zählung beenden"):
             if Speicherplatz != 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
-                st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
+                st.info('Du kannst im Tab "Beurteilung" das Blutbild beurteilen.')
             elif Speicherplatz == 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
-                st.error("Zählen Sie noch auf 100.")
+                st.error("Zähle 100 Zellen aus")
                 
         
     with col3:
@@ -400,7 +400,7 @@ with tab1:
             clear_session_state()
             session_state_initialisieren()
 
-    
+    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),columns=["Aktuelle Zählung"])
     st.table(Zählung_Dictionary())
         
 ##################################################################################
@@ -417,16 +417,16 @@ with tab2:
 #TAB3
 with tab3:
     st.header('Resultate') 
-    st.write("Hier können Sie nichts ändern. Sie können nur die Zählung vollständig löschen oder speichern.")
+    st.write("Hier kannst du nichts ändern. In diesem Tab kannst du nur die die Zählungen löschen oder speichern.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Normoblast,st.session_state.Segmentierten,st.session_state.Myelozyten, st.session_state.C,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten,st.session_state.D]
+    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     zaehler = sum(zaehler)
     #Laden der Speicher um Dataframe zu generieren 
     Speicherplatz = load_data()
     if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
-        st.error("Noch keine 100 Zählung vorhanden.")
+        st.error("Noch keine 100 Zellen gezählt.")
     elif len(Speicherplatz) != 0 and zaehler == 100:
         #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
         if len(Speicherplatz) == 1:
