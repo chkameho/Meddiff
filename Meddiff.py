@@ -47,7 +47,7 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
-@st.cache_data(ttl=60)
+@st.cache_data(ttl=10)
 def load_data():
     load =load_key(api_key_1, bin_id_1, username)
     if load == None:
