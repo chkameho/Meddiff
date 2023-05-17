@@ -47,7 +47,7 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden. 
-@st.cache_data(ttl=5)
+@st.cache_data(ttl=10)
 def load_data():
     load =load_key(api_key_1, bin_id_1, username)
     if load == None:
@@ -233,6 +233,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     
     elif zaehler == 100:
         return st.session_state
+    zaehler = sum(zaehler)
     return st.write( zaehler ,"/100 Zellen")       
 
 def Zählung_Dictionary():
