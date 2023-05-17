@@ -530,7 +530,7 @@ with tab3:
 
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
-            st.write(result)
+            st.dataframe(result)
             #predicted_class = result[0]["label"]
             st.image(image_file)
 
