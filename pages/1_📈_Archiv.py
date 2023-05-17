@@ -37,17 +37,34 @@ elif authentication_status == None:
 #Funktionen 
 
 def load_data():
+    #Aus der Jsonbin loaden
     load =load_key(api_key, bin_id, username)
     if load == None:
         load=[]
     return load
 
+def Identifikation_sortieren(Identifikationsnummer):
+    # Dublikate der Identifikationnummer wird gelöscht.
+    lenght = []
+    for key in Identifikationsnummer:
+        if key not in lenght:
+            lenght.append(key)
+        else:
+            None
+    return lenght            
+
+##################################################################################
+
 st.title("Archiv")
 Datei = load_data()
 DataFrame= pd.DataFrame(Datei)
 Identifikationsnummer=DataFrame["Identifikationsnummer"]
-Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
-gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
+Identifikationsnummer=Identifikation_sortieren(Identifikationsnummer)
+if len(Datei) == 0:
+    st.warning("Noch keine Daten")
+else
+    Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
+    gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
 if len(gewählte_Patienten_Daten)>1:
     #Speicherzeit später korregieren
     Speicherzeit=gewählte_Patienten_Daten["Specherzeit"]
