@@ -129,7 +129,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
        with col1:
-           if st.button('Basophile'):
+           if st.button('Basophil'):
                if auf_oder_unter_zählen == 0:
                     st.session_state.Basophilen += 1
                elif auf_oder_unter_zählen == 0:
@@ -188,7 +188,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                elif auf_oder_unter_zählen == 'unter':
                     st.session_state.Normoblast -= 1
                     
-           if st.button('Segmentiert'):
+           if st.button('Segmentierte'):
                if auf_oder_unter_zählen == 'hoch':
                     st.session_state.Segmentierten += 1
                elif auf_oder_unter_zählen == 'unter':
@@ -351,8 +351,10 @@ with tab1:
                 clear_all()
     session_state_initialisieren()
     with st.expander("Nutzeranleitung"):
-        st.write('''"Normoblast", "C" und "D" werden nicht in den 100 Zellen gezählt. "A" und "B" werden mit in den 100 Zellen gezählt. Diese Tasten geben dir die Möglichkeit spezielle Zellen auszuzählen. Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeit gedacht. Vergiss nicht die Variablen anzuschreiben. ''')  
-    A_B_C_D= st.text_input("A|B|C|D gebraucht? Schreibe die Variablen an")
+        st.write(" ")
+    with st.expander("A/B/C/D"):
+        st.write('''A, B, C, D ist für die speziellen Zellen (Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeiten) während der hundert Zellen-Zählung reserviert. "C" und "D" werden nicht in den 100 Zellen gezählt. "A" und "B" werden mit in den 100 Zellen gezählt. Der "Normoblast" gehört nicht zu den Leukozyten und wird nicht zu den hundert Zellen dazu gezählt.'''
+    A_B_C_D= st.text_input("Schreibe A/B/C/D an.")
     st.write("---")  
     
     col1, col2, col3, col4 = st.columns(4)
