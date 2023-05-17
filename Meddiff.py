@@ -530,7 +530,8 @@ with tab3:
 
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
-            result = pd.DataFrame(result).sort_values(ascending=False)                                
+            result = pd.DataFrame(result)
+            result= result["score"].sort_values(ascending=False)                                
             st.dataframe(result).head()
             #predicted_class = result[0]["label"]
             st.image(image_file)
