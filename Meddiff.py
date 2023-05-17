@@ -315,7 +315,7 @@ def session_state_initialisieren():
 ###################################################################################
 st.title("manuelle Differenzierung (Blutbilder)")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Hilfe beim Differenzieren"])
+tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zellen Identifizieren"])
 
 ###################################################################################
 #TAB1
@@ -513,7 +513,7 @@ with tab3:
 #tab 4 
     with tab4:
         # Define the API endpoint
-        st.header("Hilfe beim Differenzieren")
+        st.header("Zellen Identifizieren")
         st.write("Falls du eine Zelle nicht erkennst, kannst du das untere System für die Klassifizierung der Leukozyten verwenden. Das API erkennt nur die Reifenformen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe. Je näher die Score auf Eins ist, desto sicherer ist das API auf die Antwort.")
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
