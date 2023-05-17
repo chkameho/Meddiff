@@ -527,12 +527,13 @@ with tab3:
 
             # Send a POST request to the API with the image data and headers
             response = requests.post(API_URL, headers=headers, data=image_bytes)
+            st.write(response)
 
             # Get the predicted class from the response
-            result = json.loads(response.content.decode())
-            predicted_class = result[0]["label"]
+            #result = json.loads(response.content.decode())
+            #predicted_class = result[0]["label"]
             st.image(image_file)
 
             # Display the predicted class to the user
-            st.write("Predicted Class: ", predicted_class)
+            #st.write("Predicted Class: ", predicted_class)
             
