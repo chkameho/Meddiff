@@ -233,7 +233,6 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     
     elif zaehler == 100:
         return st.session_state
-    zaehler = sum(zaehler)
     return st.write( zaehler ,"/100 Zellen")       
 
 def Zählung_Dictionary():
