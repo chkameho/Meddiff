@@ -3,7 +3,7 @@ credentials:
     samuel:
       email:
       name: Pinkpanther
-      password: $2b$12$OwT1PCt0FSH5QTlOz1IdJ.h11fAbMKxTkx5SbMdaI312NwENIb0Kuu
+      password: $2b$12$OwT1PCt0FSH5QTlOz1IdJ.h11fAbMKxTkx5SbMdaI312NwENIb0Ku
     guest:
       name: Gast
       password: $2b$12$tK8SbVmvMUakwq1ADl2sgOGoeQY6AcRsHSJhZc672.517Cg23kLZK # To be replaced with hashed password
