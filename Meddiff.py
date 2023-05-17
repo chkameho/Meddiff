@@ -529,8 +529,9 @@ with tab3:
             response = requests.post(API_URL, headers=headers, data=image_bytes)
 
             # Get the predicted class from the response
-            result = json.loads(response.content.decode())
-            st.dataframe(result)
+            result = json.loads(response.content.decode()
+            result = pd.DataFrame(result).sort_values(ascending=False)                                
+            st.dataframe(result).head()
             #predicted_class = result[0]["label"]
             st.image(image_file)
 
