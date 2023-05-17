@@ -350,8 +350,6 @@ with tab1:
             if st.button("Zählung ganz neu anfangen"):
                 clear_all()
     session_state_initialisieren()
-    with st.expander("Nutzeranleitung"):
-        st.write(" ")
     with st.expander("A/B/C/D"):
         st.write('''A, B, C, D ist für die speziellen Zellen (Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeiten) während der hundert Zellen-Zählung reserviert. "C" und "D" werden nicht in den 100 Zellen gezählt. "A" und "B" werden mit in den 100 Zellen gezählt. Der "Normoblast" gehört nicht zu den Leukozyten und wird nicht zu den hundert Zellen dazu gezählt.''')
     A_B_C_D= st.text_input("Schreibe A/B/C/D an.")
