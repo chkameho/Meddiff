@@ -130,105 +130,105 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     if zaehler <= 99:
        with col1:
            if st.button('Basophil'):
-               if auf_oder_unter_zählen == 0:
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Basophilen += 1
-               elif auf_oder_unter_zählen == 0:
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Basophilen -= 1
 
 
            if st.button('Monozyt'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Monozyten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Monozyten -= 1
 
 
            if  st.button('Blast'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Blasten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Blasten -= 1
 
 
            if st.button('A'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.A += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.A -= 1
 
 
        with col2:
            if st.button('Eosinophil'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Eosinophilen += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Eosinophilen -= 1
 
            if st.button('Lymphozyt'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Lymphozyten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Lymphozyten -= 1
 
            if st.button('Promyelozyt'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Promyelozyten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Promyelozyten -= 1
                     
            if st.button('B'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.B += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.B -= 1
        with col3:
            if st.button('Normoblast'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Normoblast += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Normoblast -= 1
                     
            if st.button('Segmentierte'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Segmentierten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Segmentierten -= 1
 
            if st.button('Myelozyt') != 0:
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Myelozyten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Myelozyten -= 1
                     
            if st.button('C'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.C += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.C -= 1
  
        with col4:
            if st.button('Plasmazelle'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Plasmazellen += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Plasmazellen -= 1
 
            if st.button('Stabkernige'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Stabkernigen += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Stabkernigen -= 1   
 
            if st.button('Metamyelozyt'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Metamyelozyten += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Metamyelozyten -= 1
                     
            if st.button('D'):
-               if auf_oder_unter_zählen == 'hoch':
+               if auf_oder_unter_zählen == 'addieren':
                     st.session_state.D += 1
-               elif auf_oder_unter_zählen == 'unter':
+               elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.D -= 1
                     
     elif zaehler == 100:
@@ -329,7 +329,8 @@ with tab1:
     # ermöglicht die Zählung zu korregieren.
     auf_oder_unter_zaehlen = st.radio(
     "",
-    ('hochzählen', 'rückwärtszählen'))
+    ('addieren', 'subtrahieren'))
+    
     #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz)>1:
         if st.button("Differenzierung starten"):
