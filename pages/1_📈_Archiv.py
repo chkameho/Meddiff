@@ -58,11 +58,11 @@ def Identifikation_sortieren(Identifikationsnummer):
 st.title("Archiv")
 Datei = load_data()
 DataFrame= pd.DataFrame(Datei)
-Identifikationsnummer=DataFrame["Identifikationsnummer"]
-Identifikationsnummer=Identifikation_sortieren(Identifikationsnummer)
 if len(Datei) == 0:
     st.warning("Noch keine Daten")
 else:
+    Identifikationsnummer=DataFrame["Identifikationsnummer"]
+    Identifikationsnummer=Identifikation_sortieren(Identifikationsnummer)
     Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
     gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
 if len(gewählte_Patienten_Daten)>1:
