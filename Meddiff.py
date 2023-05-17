@@ -405,10 +405,9 @@ with tab1:
         
 ##################################################################################
 #TAB2
-
 with tab2:
     st.header("Beurteilung")
-    st.caption("In diesen Feldern kannst du die Beurteilung des Blutbildes hinschreiben. Achte darauf, dass die Mengen Angaben in Worten oder in Kreuze angegeben werden kann.")
+    st.caption("In diesen Feldern kannst du die Beurteilung des Blutbildes hinschreiben. Achte darauf, dass die Mengenangaben in Worten oder in Kreuze angegeben werden kann.")
     Erythrozyten_Beurteilung = st.text_area("Erythrozyten Beurteilung")
     Leukozyten_Beurteilung = st.text_area("Leukozyten Beurteilung")
     Thrombozyten_Beurteilung = st.text_area("Thrombozyten Beurteilung")
