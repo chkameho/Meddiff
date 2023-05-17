@@ -514,7 +514,7 @@ with tab3:
     with tab4:
         # Define the API endpoint
         st.header("Hilfe beim Differenzieren")
-        st.write("Falls ihr eine Zelle nicht erkennt könnt ihr den untere Leukozytensubtypen-Erkennungssystem verwenden.")
+        st.write("Falls ihr eine Zelle nicht erkennt könnt ihr das untere Leukozytensubtypen-Erkennungssystem verwenden. Das API erkennt nur die Reifenformen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe.")
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
         # Set your authorization header with your token
@@ -532,10 +532,7 @@ with tab3:
             result = json.loads(response.content.decode())
             result = pd.DataFrame(result)
             result= result.sort_values(by="score",ascending=False)                      
-            st.dataframe(result).head(1)
             #predicted_class = result[0]["label"]
             st.image(image_file)
 
-            # Display the predicted class to the user
-            #st.write("Predicted Class: ", predicted_class)
             
