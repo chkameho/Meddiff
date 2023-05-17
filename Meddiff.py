@@ -359,22 +359,24 @@ with tab1:
     #Tasten kompakter darstellen.
     with col1:
         if st.button('Auf 200 Zählen'):
-            Reload_variable = 1 
-            #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
-            if len(Speicherplatz) != 0:
-                #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
-                st.error("Kann nur auf 200 gezählt werden.")
-            elif zaehler != 100:
-                #Ein Error sollte angezeigt werden, wenn kein 100 Zellen gezählt wurde.
-                st.error("Noch nicht auf 100 gezählt.")
-            else:
-                #Damit die neue Zählung die Session_State wiederverwenden kann, muss die Session_State für die vorherige Zählung aufgehoben werden. 
-                Zählung_1=Zählung_Dictionary()
-                Speicherplatz.append(Zählung_1)
-                save_data(Speicherplatz)
-                #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
-                clear_session_state()
-                session_state_initialisieren()
+            if len(Identifikation) != 0:
+                #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
+                if len(Speicherplatz) != 0:
+                    #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
+                    st.error("Kann nur auf 200 gezählt werden.")
+                elif zaehler != 100:
+                    #Ein Error sollte angezeigt werden, wenn kein 100 Zellen gezählt wurde.
+                 st.error("Noch nicht auf 100 gezählt.")
+                else:
+                    #Damit die neue Zählung die Session_State wiederverwenden kann, muss die Session_State für die vorherige Zählung aufgehoben werden. 
+                    Zählung_1=Zählung_Dictionary()
+                    Speicherplatz.append(Zählung_1)
+                    save_data(Speicherplatz)
+                    #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
+                    clear_session_state()
+                    session_state_initialisieren()
+            if Identifikation == 0:
+                st.error("Schreibe die ein Identifikationsnummer")
     with col2:
         if st.button("Zählung beenden"):
             if Speicherplatz != 0 and zaehler == 100:
