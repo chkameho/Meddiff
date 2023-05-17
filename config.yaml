@@ -7,8 +7,8 @@ credentials:
     guest:
       name: Gast
       password: $2b$12$tK8SbVmvMUakwq1ADl2sgOGoeQY6AcRsHSJhZc672.517Cg23kLZK # To be replaced with hashed password
-    Test_1:
-      name: TFT
+    TFT:
+      name: Test_1
       password: $2b$12$evBYd2O94ASdw6DCShtHGu6T/MN/KodunYQIFNgCYi4bTn92tPWPC
     Test_2:
       name: Spiel
