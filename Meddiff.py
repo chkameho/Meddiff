@@ -532,7 +532,7 @@ with tab3:
             result = json.loads(response.content.decode())
             result = pd.DataFrame(result)
             result= result.sort_values(by="score",ascending=False)                      
-            st.dataframe(result).head()
+            st.dataframe(result).head(1)
             #predicted_class = result[0]["label"]
             st.image(image_file)
 
