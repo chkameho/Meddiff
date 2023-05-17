@@ -233,7 +233,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     
     elif zaehler == 100:
         return st.session_state
-    return st.write( zaehler ,"/100 Zellen")       
+    #return st.write( zaehler ,"/100 Zellen")
 
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
@@ -336,6 +336,11 @@ with tab1:
         if st.button("Differenzierung starten"):
             del_erste_Zählung()
             Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
+                #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
+            zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
+            #zaehler ist der Counter
+            zaehler = sum(zaehler)    
+            st.write( zaehler ,"/100 Zellen")
     else:
         Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
     session_state_initialisieren()
@@ -431,7 +436,7 @@ with tab3:
         #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
         if len(Speicherplatz) == 1:
             #Wenn die Differenzierung mit 200 Zellen duchgeführt wurde. 
-            Zählung_2 = Zählung_Dictionary()
+            Zählung_2 = Zählung_Dictionary() 
             Speicherplatz.append(Zählung_2)
             #die erste 100 Zellen Zählung mit den zweiten 100 Zellen Zählung zusammenfügen.
             del_erste_Zählung()
