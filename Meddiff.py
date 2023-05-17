@@ -401,7 +401,7 @@ with tab1:
             session_state_initialisieren()
 
     Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),columns=["Aktuelle Zählung"])
-    st.table(Zählung_Dictionary())
+    st.table(Aktuelle_Zählung)
         
 ##################################################################################
 #TAB2
