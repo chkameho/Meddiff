@@ -47,10 +47,13 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei
+@st.cache(max_entries=1, allow_output_mutation=True)
 def load_data():
     load =load_key(api_key_1, bin_id_1, username)
     if load == None:
         load=[]
+    if Reload_variable == 1:
+        st.caching.clear_cache()
     return load
         
 # Funktion zum Speichern in einer Jsonbin-Datei
@@ -323,6 +326,7 @@ with tab1:
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
+    Reload_variable =0
     Speicherplatz = load_data()
     st.write("---")
     # ermöglicht die Zählung zu korregieren.
@@ -358,6 +362,7 @@ with tab1:
     #Tasten kompakter darstellen.
     with col1:
         if st.button('Auf 200 Zählen'):
+            Reload_variable = 1 
             #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
             if len(Speicherplatz) != 0:
                 #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
