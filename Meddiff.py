@@ -47,7 +47,7 @@ elif authentication_status == None:
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden. 
-@st.cache_data(ttl=10)
+@st.cache_data(ttl=5)
 def load_data():
     load =load_key(api_key_1, bin_id_1, username)
     if load == None:
