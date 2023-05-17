@@ -400,7 +400,7 @@ with tab1:
             clear_session_state()
             session_state_initialisieren()
 
-    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"])
+    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"]).T
     st.table(Aktuelle_Zählung)
         
 ##################################################################################
