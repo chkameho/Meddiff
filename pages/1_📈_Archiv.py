@@ -59,7 +59,7 @@ st.title("Archiv")
 Datei = load_data()
 DataFrame= pd.DataFrame(Datei)
 if len(Datei) == 0:
-    st.warning("Noch keine Daten")
+    st.warning("Keine Daten vorhanden")
 else:
     Identifikationsnummer=DataFrame["Identifikationsnummer"]
     Identifikationsnummer=Identifikation_sortieren(Identifikationsnummer)
