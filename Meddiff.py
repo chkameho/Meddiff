@@ -525,7 +525,7 @@ with tab3:
     with tab4:
         # Define the API endpoint
         st.header("Zellen Identifizieren")
-        st.write("Falls du eine Zelle nicht erkennst, kannst du das untere System für die Klassifizierung der Leukozyten verwenden. Das API erkennt nur die Reifenformen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe. Je näher die Score auf Eins ist, desto sicherer ist das API auf die Antwort.")
+        st.write("Wenn eine Zelle nicht erkannt wird, kannst du das untenstehende System zur Klassifizierung der Leukozyten verwenden. Beachte, dass das API nur die reifen Formen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe erkennt. Die Score-Werte näher an Eins deuten auf eine höhere Sicherheit der API-Antwort hin.")
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
         # Set your authorization header with your token
