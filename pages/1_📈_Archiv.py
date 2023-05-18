@@ -89,10 +89,33 @@ else:
     st.plotly_chart(fig)
     
     #Zeigt die Bewertung der Zellen an
+    #Leukozyten
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    Erythrozyten_Bewertungen =Bewertungen["Erythrozyten Beurteilung"]
+    if Bewertungen["Leukozyten Beurteilung"]== None:
+        Leukozyten_Morphologie={Leukozyten_Bewertung: keine}
+    elif Bewertungen["Leukozyten Beurteilung"]!= None:
+        Leukozyten_Morphologie={Leukozyten_Bewertung: Bewertungen["Leukozyten Beurteilung"]}
+        
+    #Erythorzyten
+    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
+    if Bewertungen["Erythrozyten Beurteilung"]== None:
+        Erythrozyten_Morphologie={Erythrozyten_Bewertung: keine}
+    elif Bewertungen["Erythrozyten Beurteilung"]!= None:
+        Erythrozyten_Morphologie={Erythrozyten_Bewertung: Bewertungen["Erythrozyten Beurteilung"]}
+        
+
+    #Thrombozyten
+    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
+    if Bewertungen["Thrombozyten Beurteilung"]== None:
+        Thrombozyten_Morphologie={Thrombozyten_Bewertung: keine}
+    elif Bewertungen["Thrombozyten Beurteilung"]!= None:
+        Thrombozyten_Morphologie={Thrombozyten_Bewertung: Bewertungen["Thrombozyten Beurteilung"]}
     
-    st.write(Erythrozyten_Bewertungen)
+    #Bewertungen Zusammenfügen
+    Beurteiulung={**Erythrozyten_Morphologie, **Leukozyten_Morphologie, Thrombozyten_Morphologie}
+    
+    st.write(Beurteilungen)
+    
 
     # Add a download button
     csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
