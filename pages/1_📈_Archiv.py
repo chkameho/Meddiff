@@ -111,9 +111,9 @@ else:
     if len(Thrombozyten_Morphologie_Resultat) == 0:
         Thrombozyten_Morphologie_Resultat = "keine Beurteilung angegeben"    
     
+    st.write("---")
     st.markdown("**Erythrozyten Beurteilung:**")
     st.write(Erythrozyten_Morphologie_Resultat)
-    st.write("---")
     st.write("---")
     st.markdown("**Leukozyten Beurteilung:**")
     st.write(Leukozyten_Morphologie_Resultat)
