@@ -92,7 +92,7 @@ else:
     #Leukozyten
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
     st.write(Bewertungen)
-    if Bewertungen["Leukozyten Beurteilung"].empty:
+    if len(Bewertungen["Leukozyten Beurteilung"]) == 0:
         Leukozyten_Morphologie={Leukozyten_Bewertung: keine}
     elif len (Bewertungen["Leukozyten Beurteilung"]) != 0:
         Leukozyten_Morphologie={Leukozyten_Bewertung: Bewertungen["Leukozyten Beurteilung"]}
