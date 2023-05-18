@@ -112,7 +112,7 @@ else:
         Thrombozyten_Morphologie={Thrombozyten_Bewertung: Bewertungen["Thrombozyten Beurteilung"]}
     
     #Bewertungen Zusammenfügen
-    Beurteiulung={**Erythrozyten_Morphologie, **Leukozyten_Morphologie, Thrombozyten_Morphologie}
+    Beurteiulung={**Erythrozyten_Morphologie, **Leukozyten_Morphologie, **Thrombozyten_Morphologie}
     
     st.write(Beurteilungen)
     
