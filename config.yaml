@@ -10,18 +10,22 @@ credentials:
     TFT:
       name: Test_1
       password: $2b$12$evBYd2O94ASdw6DCShtHGu6T/MN/KodunYQIFNgCYi4bTn92tPWPC
-    Test_2:
-      name: Spiel
+    Spiel:
+      name: Test_2
       password: $2b$12$zQ39usMbC3PFuvdYUulMSOyEk71wWF8W1hpokpaaLsHWP.b7i/8/m
-    Test_3:
-      name: Sport
+    Sport:
+      name: Test_3
       password: $2b$12$hB0MJw4ZRR1YhALIJlbvgOzAfnVmjlXbQZu/T2oDBE/Zv1a0yS/.q
-    Test_4:
-      name: Reiten
+    Reiten:
+      name: Test_4
       password: $2b$12$ntZ1HbaLY2WTN11FYA815ujP7IfqsNB7rOjKavCyqhq5xeqiQDXbm
-    Test_5:
-      name: Surfen
+    Surfen:
+      name: Test_5
       password: $2b$12$tiiSC7CqlIhl06r0.D.n2.ZHTgIlOQhzP3eBm5Mw4CadHxP6qZ.C6
+    Green:
+      name: Test_5
+      password: $2b$12$Fcyn3o55BcrEb13WqidtYefzJdtmzIMgRN6ReidLXZ6hPkP1aLNSi
+      
 cookie:
   expiry_days: 30  # number of days until password is asked again
   key: JgDyEoKUNItM5prxo194jDeLYzVzmYE6 # Must be string, use https://randomkeygen.com/
