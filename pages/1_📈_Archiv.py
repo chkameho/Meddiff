@@ -91,31 +91,8 @@ else:
     #Zeigt die Bewertung der Zellen an
     #Leukozyten
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
-    st.write(Bewertungen)
-    if len(Bewertungen["Leukozyten Beurteilung"]) == 0:
-        Leukozyten_Morphologie={Leukozyten_Bewertung: keine}
-    elif len (Bewertungen["Leukozyten Beurteilung"]) != 0:
-        Leukozyten_Morphologie={Leukozyten_Bewertung: Bewertungen["Leukozyten Beurteilung"]}
-        
-    st.write(Leukozyten_Morphologie)
-        
-    #Erythorzyten
-    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    if Bewertungen["Erythrozyten Beurteilung"]== None:
-        Erythrozyten_Morphologie={Erythrozyten_Bewertung: keine}
-    elif Bewertungen["Erythrozyten Beurteilung"]!= None:
-        Erythrozyten_Morphologie={Erythrozyten_Bewertung: Bewertungen["Erythrozyten Beurteilung"]}
-        
+    st.write(type(Bewertungen))
 
-    #Thrombozyten
-    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    if Bewertungen["Thrombozyten Beurteilung"].empty:
-        Thrombozyten_Morphologie={Thrombozyten_Bewertung: keine}
-    elif Bewertungen["Thrombozyten Beurteilung"]!= None:
-        Thrombozyten_Morphologie={Thrombozyten_Bewertung: Bewertungen["Thrombozyten Beurteilung"]}
-    
-    #Bewertungen Zusammenfügen
-    Beurteilungen={**Erythrozyten_Morphologie, **Leukozyten_Morphologie, **Thrombozyten_Morphologie}
     
     st.write(Beurteilungen)
     
