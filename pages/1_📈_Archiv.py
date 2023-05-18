@@ -92,7 +92,6 @@ else:
     
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
-    col1, col2, col3 = st.columns(3)
       
     #Leukozyten Bewertung
     Liste_Leukozyten_Bewertung = list(Bewertungen["Leukozyten Beurteilung"])
@@ -112,14 +111,18 @@ else:
     if len(Thrombozyten_Morphologie_Resultat) == 0:
         Thrombozyten_Morphologie_Resultat = "keine Beurteilung angegeben"    
     
-    with col1:
-        st.markdown("**Leukozytenmorphologie:**")
-        st.markdown("**Erythrozytenmorphologie:**")
-        st.markdown("**Thrombozytenmorphologie:**")
-    with col2:
-        st.write(Leukozyten_Morphologie_Resultat)
-        st.write(Erythrozyten_Morphologie_Resultat)
-        st.write(Thrombozyten_Morphologie_Resultat)
+    st.markdown("**Erythrozyten Beurteilung:**")
+    st.write(Erythrozyten_Morphologie_Resultat)
+    st.write("---")
+    st.write("---")
+    st.markdown("**Leukozyten Beurteilung:**")
+    st.write(Leukozyten_Morphologie_Resultat)
+    st.write("---")
+    st.markdown("**Thrombozyten Beurteilung:**")
+    st.write(Thrombozyten_Morphologie_Resultat)
+    st.write("---")
+ 
+
 
     # Add a download button
     csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
