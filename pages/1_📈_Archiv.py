@@ -89,9 +89,11 @@ else:
     st.plotly_chart(fig)
     
     #Zeigt die Bewertung der Zellen an
-    #Leukozyten
+    
+    
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
-    st.write(type(Bewertungen))
+    
+    st.write(Bewertungen["Leukozyten Beurteilung"])
 
     
     st.write(Beurteilungen)
