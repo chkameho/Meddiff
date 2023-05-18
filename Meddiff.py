@@ -23,7 +23,7 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
-#####user login######
+#####user login###################################################################################################################################################
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
@@ -46,10 +46,11 @@ elif authentication_status == None:
     st.stop()
     
 ##################################################################################################################################################################
-# Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden. 
+# Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
 @st.cache_data(ttl=10)
 def load_data():
     load =load_key(api_key_1, bin_id_1, username)
+    #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
     if load == None:
         load=[]
     return load
@@ -121,11 +122,12 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     if 'D' not in st.session_state:
        st.session_state.D=0
     
-    #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
+    #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird. 
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     #zaehler ist der Counter
     zaehler = sum(zaehler)
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
+    # auf_oder_unter_zählen verschlüsselt addieren oder subthrahieren. Damit je nach st.radio die Nutzer die Option hat die Zählung auf oder rückwärts zu zählen.
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
        with col1:
@@ -233,7 +235,6 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     
     elif zaehler == 100:
         return st.session_state
-    #return st.write( zaehler ,"/100 Zellen")
 
 def Zählung_Dictionary():
     #Regeneriert die Zählung in session_state zu Dictionary
@@ -324,15 +325,15 @@ with tab1:
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
-    Speicherplatz = load_data()
+    Speicherplatz_erste_Zählung = load_data()
     st.write("---")
-    # ermöglicht die Zählung zu korregieren.
+    # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
     auf_oder_unter_zaehlen = st.radio(
     "",
     ('addieren', 'subtrahieren'))
     
     #Damit die Tastatur gut dargestellt werden kann.
-    if len(Speicherplatz)>1:
+    if len(Speicherplatz_erste_Zählung)>1:
         if st.button("Differenzierung starten"):
             del_erste_Zählung()
             Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
@@ -351,13 +352,13 @@ with tab1:
     session_state_initialisieren()
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
     zaehler = sum(zaehler)
-    if zaehler == 100 and len(Speicherplatz)==0:
+    if zaehler == 100 and len(Speicherplatz_erste_Zählung)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
         st.error("Ops, du bist über 100 Zellen. Klicke nicht so schnell. Lösche einige Zellen von der Zählung.")
-    elif zaehler == 100 and len(Speicherplatz)!=0:
+    elif zaehler == 100 and len(Speicherplatz_erste_Zählung)!=0:
         st.success("Du hast 200 Zellen ausgezählt")
-        if len(Speicherplatz) > 1:
+        if len(Speicherplatz_erste_Zählung) > 1:
             if st.button("Zählung ganz neu anfangen"):
                 clear_all()
     session_state_initialisieren()
@@ -372,7 +373,7 @@ with tab1:
         if st.button('Auf 200 Zählen'):
             if len(Identifikation) != 0:
                 #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
-                if len(Speicherplatz) != 0:
+                if len(Speicherplatz_erste_Zählung) != 0:
                     #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                     st.error("Kann nur auf 200 gezählt werden.")
                 elif zaehler != 100:
@@ -381,8 +382,8 @@ with tab1:
                 else:
                     #Damit die neue Zählung die Session_State wiederverwenden kann, muss die Session_State für die vorherige Zählung aufgehoben werden. 
                     Zählung_1=Zählung_Dictionary()
-                    Speicherplatz.append(Zählung_1)
-                    save_data(Speicherplatz)
+                    Speicherplatz_erste_Zählung.append(Zählung_1)
+                    save_data(Speicherplatz_erste_Zählung)
                     #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
                     clear_session_state()
                     session_state_initialisieren()
@@ -390,10 +391,10 @@ with tab1:
                 st.error("Schreibe die ein Identifikationsnummer")
     with col2:
         if st.button("Zählung beenden"):
-            if Speicherplatz != 0 and zaehler == 100:
+            if Speicherplatz_erste_Zählung != 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Du kannst im Tab "Beurteilung" das Blutbild beurteilen.')
-            elif Speicherplatz == 0 and zaehler == 100:
+            elif Speicherplatz_erste_Zählung == 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
