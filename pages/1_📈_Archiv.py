@@ -95,21 +95,20 @@ else:
     col1, col2, col3 = st.columns(3)
       
     #Leukozyten Bewertung
-    Dict_Leukozyten_Bewertung = dict(Bewertungen["Leukozyten Beurteilung"])
-    st.write(Dict_Leukozyten_Bewertung)
-    Leukozyten_Morphologie_Resultat= Dict_Leukozyten_Bewertung[0]
+    Liste_Leukozyten_Bewertung = list(Bewertungen["Leukozyten Beurteilung"])
+    Leukozyten_Morphologie_Resultat = Liste_Leukozyten_Bewertung[0]
     if len(Leukozyten_Morphologie_Resultat) == 0:
         Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
 
     #Erythrozyten Bewertung
-    Dict_Erythrozyten_Bewertung = dict(Bewertungen["Erythrozyten Beurteilung"])
-    Erythrozyten_Morphologie_Resultat= Dict_Erythrozyten_Bewertung[0]
+    Liste_Erythrozyten_Bewertung = list(Bewertungen["Erythrozyten Beurteilung"])
+    Erythrozyten_Morphologie_Resultat= Liste_Erythrozyten_Bewertung[0]
     if len(Erythrozyten_Morphologie_Resultat) == 0:
         Erythrozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
         
     #Thrombozyten Bewertung
-    Dict_Thrombozyten_Bewertung = dict(Bewertungen["Thrombozyten Beurteilung"])
-    Thrombozyten_Morphologie_Resultat= Dict_Thrombozyten_Bewertung[0]
+    Liste_Thrombozyten_Bewertung = list(Bewertungen["Thrombozyten Beurteilung"])
+    Thrombozyten_Morphologie_Resultat= Liste_Thrombozyten_Bewertung[0]
     if len(Thrombozyten_Morphologie_Resultat) == 0:
         Thrombozyten_Morphologie_Resultat = "keine Beurteilung angegeben"    
     
