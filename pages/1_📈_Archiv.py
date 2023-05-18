@@ -90,8 +90,9 @@ else:
     
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    Bewertungen =dict(Bewertungen)
-    st.write(Bewertungen)
+    Erythrozyten_Bewertungen =Bewertungen["Erythrozyten Beurteilung"]
+    
+    st.write(Erythrozyten_Bewertungen)
 
     # Add a download button
     csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
