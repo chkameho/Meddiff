@@ -90,7 +90,7 @@ else:
     
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     #Leukozyten Bewertung
     Dict_Leukozyten_Bewertung = dict(Bewertungen["Leukozyten Beurteilung"])
     Leukozyten_Morphologie_Resultat= Dict_Leukozyten_Bewertung[0]
