@@ -66,8 +66,7 @@ else:
     Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
     gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
     if len(gewählte_Patienten_Daten)>1:
-        #Speicherzeit später korregieren
-        Speicherzeit=gewählte_Patienten_Daten["Specherzeit"]
+        Speicherzeit=gewählte_Patienten_Daten["Speicherzeit"]
         Nach_Speicherzeit_selektieren=st.selectbox("Selektiere die Identifikationsnummer",(Speicherzeit))
         gewählte_Patienten_Daten=DataFrame[DataFrame["Specherzeit"]== Nach_Speicherzeit_selektieren]
     Leukozyten_Wert = st.number_input("Leukozyten mit dem Einheit G/L")
