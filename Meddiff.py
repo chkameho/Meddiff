@@ -427,7 +427,7 @@ with tab2:
 #TAB3
 with tab3:
     st.header('Resultate') 
-    st.write("Hier kannst du nichts ändern. In diesem Tab kannst du nur die die Zählungen löschen oder speichern.")
+    st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Änderungen können hier nicht vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
