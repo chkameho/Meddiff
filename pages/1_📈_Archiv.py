@@ -96,8 +96,8 @@ else:
       
     #Leukozyten Bewertung
     Dict_Leukozyten_Bewertung = dict(Bewertungen["Leukozyten Beurteilung"])
+    st.write(Dict_Leukozyten_Bewertung)
     Leukozyten_Morphologie_Resultat= Dict_Leukozyten_Bewertung[0]
-    st.write(Leukozyten_Morphologie_Resultat)
     if len(Leukozyten_Morphologie_Resultat) == 0:
         Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
 
