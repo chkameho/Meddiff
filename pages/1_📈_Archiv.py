@@ -93,10 +93,9 @@ else:
     
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
     
-    st.write(Bewertungen["Leukozyten Beurteilung"])
+    st.write(dict(Bewertungen["Leukozyten Beurteilung"]))
 
     
-    st.write(Beurteilungen)
     
 
     # Add a download button
