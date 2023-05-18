@@ -91,10 +91,13 @@ else:
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
     
+    #Leukozyten Bewertung
     Dict_Leukozyten_Bewertung = dict(Bewertungen["Leukozyten Beurteilung"])
     Leukozyten_Morphologie_Resultat= Dict_Leukozyten_Bewertung[0]
+    if Leukozyten_Morphologie_Resultat is None:
+        Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
     
-    st.write("Hier",Leukozyten_Morphologie_Resultat)
+    st.write("Leukozytenmorphologie: ",Leukozyten_Morphologie_Resultat)
 
     
     
