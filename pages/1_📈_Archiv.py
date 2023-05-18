@@ -107,7 +107,7 @@ else:
 
     #Thrombozyten
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    if Bewertungen["Thrombozyten Beurteilung"]== None:
+    if Bewertungen["Thrombozyten Beurteilung"].empty:
         Thrombozyten_Morphologie={Thrombozyten_Bewertung: keine}
     elif Bewertungen["Thrombozyten Beurteilung"]!= None:
         Thrombozyten_Morphologie={Thrombozyten_Bewertung: Bewertungen["Thrombozyten Beurteilung"]}
