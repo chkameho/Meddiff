@@ -91,15 +91,33 @@ else:
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
     col1, col2, col3 = st.columns(3)
+    
     #Leukozyten Bewertung
     Dict_Leukozyten_Bewertung = dict(Bewertungen["Leukozyten Beurteilung"])
     Leukozyten_Morphologie_Resultat= Dict_Leukozyten_Bewertung[0]
     if len(Leukozyten_Morphologie_Resultat) == 0:
         Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
+
+    #Erythrozyten Bewertung
+    Dict_Erythrozyten_Bewertung = dict(Bewertungen["Erythrozyten Beurteilung"])
+    Erythrozyten_Morphologie_Resultat= Dict_Erythrozyten_Bewertung[0]
+    if len(Erythrozyten_Morphologie_Resultat) == 0:
+        Erythrozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
+        
+    #Thrombozyten Bewertung
+    Dict_Thrombozyten_Bewertung = dict(Bewertungen["Thrombozyten Beurteilung"])
+    Thrombozyten_Morphologie_Resultat= Dict_Thrombozyten_Bewertung[0]
+    if len(Thrombozyten_Morphologie_Resultat) == 0:
+        Thrombozyten_Morphologie_Resultat = "keine Beurteilung angegeben"    
+    
     with col1:
         st.markdown("**Leukozytenmorphologie:**")
+        st.markdown("**Erythrozytenmorphologie:**")
+        st.markdown("**Thrombozytenmorphologie:**")
     with col2:
         st.write(Leukozyten_Morphologie_Resultat)
+        st.write(Erythrozyten_Morphologie_Resultat)
+        st.write(Thrombozyten_Morphologie_Resultat)
 
     
     
