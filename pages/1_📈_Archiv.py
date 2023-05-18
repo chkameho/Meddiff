@@ -97,7 +97,7 @@ else:
     if len(Leukozyten_Morphologie_Resultat) == 0:
         Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
     
-    st.write("Leukozytenmorphologie: ",Leukozyten_Morphologie_Resultat)
+    st.write("Leukozytenmorphologie:       ",Leukozyten_Morphologie_Resultat)
 
     
     
