@@ -90,7 +90,7 @@ else:
     
     #Zeigt die Bewertung der Zellen an
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
-    Bewertung =str(Bewertung)
+    Bewertung =dict(Bewertung)
     st.table(Bewertungen)
 
     # Add a download button
