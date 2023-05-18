@@ -76,10 +76,10 @@ else:
     if Leukozyten_Wert != 0:
          zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
     st.table(zugeschnittene_Patienten_Daten)
-    Dict_Legende = dict(gewählte_Patienten_Daten["Legende"])
-    if len(Dict_Legende[2]) != 0:
+    Liste_Legende = list(gewählte_Patienten_Daten["Legende"])
+    if len(Liste_Legende[0]) != 0:
         st.markdown("**Legende:**")
-        st.write(Dict_Legende[2])
+        st.write(Liste_Legende[0])
 
     # Extrahiere den Namen
     name = zugeschnittene_Patienten_Daten.index
