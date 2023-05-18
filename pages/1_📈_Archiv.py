@@ -90,7 +90,7 @@ else:
     
     #Zeigt die Bewertung der Zellen an
     #Leukozyten
-    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
+    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
     st.write(Bewertungen)
     if Bewertungen["Leukozyten Beurteilung"]== None:
         Leukozyten_Morphologie={Leukozyten_Bewertung: keine}
