@@ -97,6 +97,8 @@ else:
     elif Bewertungen["Leukozyten Beurteilung"]!= None:
         Leukozyten_Morphologie={Leukozyten_Bewertung: Bewertungen["Leukozyten Beurteilung"]}
         
+    st.write(Leukozyten_Morphologie)
+        
     #Erythorzyten
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21]
     if Bewertungen["Erythrozyten Beurteilung"]== None:
