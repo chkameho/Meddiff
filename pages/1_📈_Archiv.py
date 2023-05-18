@@ -78,9 +78,9 @@ else:
     st.table(zugeschnittene_Patienten_Daten)
     Dict_Legende = dict(gewählte_Patienten_Daten["Legende"])
     st.write(Dict_Legende)
-    if len(Dict_Legende[0]) != 0:
+    if len(Dict_Legende[2]) != 0:
         st.markdown("**Legende:**")
-        st.write(Dict_Legende[0])
+        st.write(Dict_Legende[2])
 
     # Extrahiere den Namen
     name = zugeschnittene_Patienten_Daten.index
