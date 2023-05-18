@@ -77,6 +77,7 @@ else:
          zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
     st.table(zugeschnittene_Patienten_Daten)
     Dict_Legende = dict(gewählte_Patienten_Daten["Legende"])
+    st.write(Dict_Legende)
     if len(Dict_Legende[0]) != 0:
         st.markdown("**Legende:**")
         st.write(Dict_Legende[0])
@@ -120,9 +121,6 @@ else:
         st.write(Leukozyten_Morphologie_Resultat)
         st.write(Erythrozyten_Morphologie_Resultat)
         st.write(Thrombozyten_Morphologie_Resultat)
-
-    
-    
 
     # Add a download button
     csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
