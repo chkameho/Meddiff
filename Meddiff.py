@@ -453,25 +453,25 @@ with tab3:
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"
-            st.dataframe(Speicherplatz)
+            st.experimental_data_editor(Speicherplatz)
         else:
             #Wenn else nicht definiert wird, wird die Speicherung wiederholen oder nur die erste Zählung anzeigen.
             Speicherplatz = load_data()
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"            
-            st.dataframe(Speicherplatz)
+            st.experimental_data_editor(Speicherplatz)
     elif len(Speicherplatz) == 1:
         #Damit beim zweiten Zählung die erste Zählung noch ersichtlich ist.
         Zählung_1 = pd.DataFrame(Speicherplatz, index=["erste Zählung"]).T
         Zählung_1["Einheit"]= "%"
-        st.dataframe(Zählung_1)
+        st.experimental_data_editor(Zählung_1)
     else:
     #Nicht gespeicherte Daten in Dataframe darstellen.        
         Zählung_1 = Zählung_Dictionary()
         Zählung_1 = pd.DataFrame(Zählung_1, index=["erste Zählung"]).T
         Zählung_1["Einheit"]="%"
-        st.dataframe(Zählung_1)
+        st.experimental_data_editor(Zählung_1)
     st.write("Legende: ",A_B_C_D)
 
     if st.button("Alle Zählungen löschen"):
