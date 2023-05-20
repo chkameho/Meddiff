@@ -428,7 +428,7 @@ with tab2:
 #TAB3
 with tab3:
     st.header('Resultate') 
-    st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Änderungen können hier nicht vorgenommen werden.")
+    st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
     zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
@@ -453,25 +453,25 @@ with tab3:
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"
-            st.experimental_data_editor(Speicherplatz)
+            st.st.dataframe(Speicherplatz)
         else:
             #Wenn else nicht definiert wird, wird die Speicherung wiederholen oder nur die erste Zählung anzeigen.
             Speicherplatz = load_data()
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"            
-            st.experimental_data_editor(Speicherplatz)
+            st.dataframe(Speicherplatz)
     elif len(Speicherplatz) == 1:
         #Damit beim zweiten Zählung die erste Zählung noch ersichtlich ist.
         Zählung_1 = pd.DataFrame(Speicherplatz, index=["erste Zählung"]).T
         Zählung_1["Einheit"]= "%"
-        st.experimental_data_editor(Zählung_1)
+        st.dataframe(Zählung_1)
     else:
     #Nicht gespeicherte Daten in Dataframe darstellen.        
         Zählung_1 = Zählung_Dictionary()
         Zählung_1 = pd.DataFrame(Zählung_1, index=["erste Zählung"]).T
         Zählung_1["Einheit"]="%"
-        st.experimental_data_editor(Zählung_1)
+        st.dataframe(Zählung_1)
     st.write("Legende: ",A_B_C_D)
 
     if st.button("Alle Zählungen löschen"):
