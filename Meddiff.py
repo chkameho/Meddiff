@@ -535,21 +535,16 @@ with tab3:
         # Load the image
         image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
         
-        # Take a photo
-        if st.button("Kamera 📸", on_click= 1):
-            image_file= st.camera_input("Zellen fotografieren")
-        
         if image_file is not None:
             image_bytes = image_file.read()
-
             # Send a POST request to the API with the image data and headers
             response = requests.post(API_URL, headers=headers, data=image_bytes)
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
             st.write(result)
             result = pd.DataFrame(result)
-            st.image(image_file)
             st.write(result)
+            st.image(image_file)
 
             
 
