@@ -128,7 +128,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     zaehler = sum(zaehler)
     #Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
     # auf_oder_unter_zählen verschlüsselt addieren oder subthrahieren. Damit je nach st.radio die Nutzer die Option hat die Zählung auf oder rückwärts zu zählen.
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(4, gap="small")
     if zaehler <= 99:
        with col1:
            if st.button('Basophil', use_container_width = True):
