@@ -321,7 +321,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zelle
 ###################################################################################
 #TAB1
 with tab1:   
-    st.header("Tastatur")
+    st.header("Tastatur ⌨️")
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
@@ -418,7 +418,7 @@ with tab1:
 ##################################################################################
 #TAB2
 with tab2:
-    st.header("Beurteilung")
+    st.header("Beurteilung ✒️")
     st.caption("In den dafür vorgesehenen Feldern kannst du die Beurteilungen der Blutbilder eintragen. Achte darauf, dass die Mengenangaben sowohl in Worten als auch durch Kreuze angegeben werden können.")
     Erythrozyten_Beurteilung = st.text_area("Erythrozyten Beurteilung")
     Leukozyten_Beurteilung = st.text_area("Leukozyten Beurteilung")
@@ -427,7 +427,7 @@ with tab2:
 ######################################################################################
 #TAB3
 with tab3:
-    st.header('Resultate') 
+    st.header('Resultate 📄') 
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
@@ -525,7 +525,7 @@ with tab3:
 #tab 4 
     with tab4:
         # Define the API endpoint
-        st.header("Zellen Identifizieren")
+        st.header("Zellen Identifizieren 📷")
         st.write("Wenn eine Zelle nicht erkannt wird, kannst du das untenstehende System zur Klassifizierung der Leukozyten verwenden. Beachte, dass das API nur die reifen Formen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe erkennt. Die Score-Werte näher an Eins deuten auf eine höhere Sicherheit der API-Antwort hin.")
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
