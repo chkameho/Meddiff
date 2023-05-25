@@ -536,7 +536,7 @@ with tab3:
         image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
         
         # Take a photo
-        if st.button("Kamera 📸"):
+        if st.button("Kamera 📸", on_click= True):
             image_file= st.camera_input("Zellen fotografieren")
         
         if image_file is not None:
