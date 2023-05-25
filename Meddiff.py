@@ -534,6 +534,11 @@ with tab3:
 
         # Load the image
         image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
+        
+        # Take a photo
+        #if st.button("Kamera 📸"):
+        image_file= st.camera_input("Kamera 📸")
+        
         if image_file is not None:
             image_bytes = image_file.read()
 
