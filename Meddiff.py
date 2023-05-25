@@ -131,7 +131,7 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
     col1, col2, col3, col4 = st.columns(4)
     if zaehler <= 99:
        with col1:
-           if st.button('Basophil'):
+           if st.button('Basophil', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Basophilen += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
