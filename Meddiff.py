@@ -330,7 +330,7 @@ with tab1:
     # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
     auf_oder_unter_zaehlen = st.radio(
     "",
-    ('addieren ➕', 'subtrahieren ➖'))
+    ('addieren', 'subtrahieren'))
     
     #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz_erste_Zählung)>1:
