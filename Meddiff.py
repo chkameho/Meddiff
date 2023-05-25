@@ -542,7 +542,7 @@ with tab3:
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
             result = pd.DataFrame(result)
-            st.dataframe(result)
+            st.write(result)
 
             st.image(image_file)
 
