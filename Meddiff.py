@@ -314,7 +314,7 @@ def session_state_initialisieren():
     
     
 ###################################################################################
-st.title("manuelle Differenzierung (Blutbilder 🩸)")
+st.title("manuelle Differenzierung (Blutbilder)")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zellen Identifizieren"])
 
