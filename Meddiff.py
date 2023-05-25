@@ -138,21 +138,21 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
                     st.session_state.Basophilen -= 1
 
 
-           if st.button('Monozyt'):
+           if st.button('Monozyt', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Monozyten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Monozyten -= 1
 
 
-           if  st.button('Blast'):
+           if  st.button('Blast', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Blasten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Blasten -= 1
 
 
-           if st.button('A'):
+           if st.button('A', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.A += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
@@ -160,74 +160,74 @@ def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):
 
 
        with col2:
-           if st.button('Eosinophil'):
+           if st.button('Eosinophil', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Eosinophilen += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Eosinophilen -= 1
 
-           if st.button('Lymphozyt'):
+           if st.button('Lymphozyt', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Lymphozyten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Lymphozyten -= 1
 
-           if st.button('Promyelozyt'):
+           if st.button('Promyelozyt', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Promyelozyten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Promyelozyten -= 1
                     
-           if st.button('B'):
+           if st.button('B', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.B += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.B -= 1
        with col3:
-           if st.button('Normoblast'):
+           if st.button('Normoblast', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Normoblast += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Normoblast -= 1
                     
-           if st.button('Segmentierte'):
+           if st.button('Segmentierte', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Segmentierten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Segmentierten -= 1
 
-           if st.button('Myelozyt') != 0:
+           if st.button('Myelozyt', use_container_width = True) != 0:
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Myelozyten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Myelozyten -= 1
                     
-           if st.button('C'):
+           if st.button('C', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.C += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.C -= 1
  
        with col4:
-           if st.button('Plasmazelle'):
+           if st.button('Plasmazelle', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Plasmazellen += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Plasmazellen -= 1
 
-           if st.button('Stabkernige'):
+           if st.button('Stabkernige', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Stabkernigen += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Stabkernigen -= 1   
 
-           if st.button('Metamyelozyt'):
+           if st.button('Metamyelozyt', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.Metamyelozyten += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
                     st.session_state.Metamyelozyten -= 1
                     
-           if st.button('D'):
+           if st.button('D', use_container_width = True):
                if auf_oder_unter_zählen == 'addieren':
                     st.session_state.D += 1
                elif auf_oder_unter_zählen == 'subtrahieren':
