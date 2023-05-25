@@ -541,7 +541,7 @@ with tab3:
             response = requests.post(API_URL, headers=headers, data=image_bytes)
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
-            #result = pd.DataFrame(result)
+            result = pd.DataFrame(result)
             st.dataframe(result)
 
             st.image(image_file)
