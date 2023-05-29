@@ -542,7 +542,7 @@ with tab3:
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
             st.write(result)
-            if result == error:
+            if "error" in result:
                 st.error("Derzeit gibt es einen internen Serverfehler. Bitte versuchen Sie die Seite neu zu laden, um das Problem zu beheben. Beachten Sie jedoch, dass beim Neustart möglicherweise die Zählungen verloren gehen.")
             else:
                 result = pd.DataFrame(result)
