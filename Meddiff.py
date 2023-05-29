@@ -370,7 +370,7 @@ with tab1:
     col1, col2, col3, col4 = st.columns(4)
     #Tasten kompakter darstellen.
     with col1:
-        if st.button('Auf 200 Zählen'):
+        if st.button('Auf 200 Zählen', use_container_width = True):
             if len(Identifikation) != 0:
                 #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
                 if len(Speicherplatz_erste_Zählung) != 0:
@@ -390,7 +390,7 @@ with tab1:
             if len(Identifikation) == 0:
                 st.error("Schreibe die ein Identifikationsnummer")
     with col2:
-        if st.button("Zählung beenden"):
+        if st.button("Zählung beenden", use_container_width = True):
             if Speicherplatz_erste_Zählung != 0 and zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Du kannst im Tab "Beurteilung" das Blutbild beurteilen.')
@@ -402,12 +402,12 @@ with tab1:
                 
         
     with col3:
-        if st.button("erste Zählung Löschen"):
+        if st.button("erste Zählung Löschen", use_container_width = True):
             del_erste_Zählung()
             session_state_initialisieren()
             
     with col4: 
-        if st.button('Aktuelle Zählung Löschen'):
+        if st.button('Aktuelle Zählung Löschen', use_container_width = True):
             # Delete all the items in Session state            
             clear_session_state()
             session_state_initialisieren()
