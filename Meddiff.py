@@ -541,7 +541,6 @@ with tab3:
             response = requests.post(API_URL, headers=headers, data=image_bytes)
             # Get the predicted class from the response
             result = json.loads(response.content.decode())
-            st.write(result)
             if "error" in result:
                 st.error("Derzeit gibt es einen internen Serverfehler. Bitte versuchen Sie die Seite neu zu laden, um das Problem zu beheben. Beachten Sie jedoch, dass beim Neustart möglicherweise die Zählungen verloren gehen.")
             else:
