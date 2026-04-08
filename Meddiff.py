@@ -34,22 +34,17 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-fullname, authentication_status, username = authenticator.login(key='Login', location = 'main')
+hi = authenticator.login(key='Login', location = 'main')
 
-if authentication_status == True:   # login successful
-    authenticator.logout('Logout', 'main')   # show logout button
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
-    st.stop()
-elif authentication_status == None:
-    st.warning('Please enter your username and password')
-    st.stop()
+st.write(st.session_state)
     
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
 @st.cache_data(ttl=10)
+
+
 def load_data():
-    load =load_key(api_key_1, bin_id_1, username)
+    load =load_key(api_key_1, bin_id_1, st.session_state["username"])
     #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
     if load == None:
         load=[]
@@ -57,18 +52,18 @@ def load_data():
         
 # Funktion zum Speichern in einer Jsonbin-Datei
 def save_data(data):
-    return save_key(api_key_1, bin_id_1, username, data)
+    return save_key(api_key_1, bin_id_1, st.session_state["username"], data)
 
 #Funktion zum Laden aus einer Jsonbin-Datei
 def load_data_1():
-    return load_key(api_key_2,bin_id_2, username)
+    return load_key(api_key_2,bin_id_2, st.session_state["username"])
 
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
-    return save_key(api_key_2, bin_id_2, username, data)
+    return save_key(api_key_2, bin_id_2, st.session_state["username"], data)
 
 def del_erste_Zählung():
-    return del_erste_Zählung_(api_key_1, bin_id_1,username)  
+    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])  
 
 def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):  
     # Generiert ein Tastatur für die Blutbiddifferenzierung 
@@ -259,7 +254,7 @@ def clear_all():
         del st.session_state[key]
         if key in globals():
             del globals()[key]
-    return del_erste_Zählung_(api_key_1, bin_id_1,username)
+    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])
 
 def session_state_initialisieren():
     #Damit die session_state intialisiert wird
@@ -312,6 +307,7 @@ def session_state_initialisieren():
     if 'D' not in st.session_state:
        st.session_state.D=0
     
+
     
 ###################################################################################
 st.title("manuelle Differenzierung (Blutbilder)")
