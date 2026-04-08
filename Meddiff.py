@@ -36,6 +36,11 @@ authenticator = stauth.Authenticate(
 
 hi = authenticator.login(key='Login', location = 'main')
 
+blood_count_dict = {'Basophilen': 0, 'Monozyten':0, 'Blasten':0,'A':0,'Eosinophilen':0,'Lymphozyten':0,'Promyelozyten':0,'B':0,'Normoblast':0,'Segmentierten':0,'Myelozyten':0,'C':0,'Plasmazellen':0,'Stabkernigen':0,'Metamyelozyten':0,'D':0}
+
+if "blood_count" not in st.session_state:
+    st.session_state.blood_count = blood_count_dict
+
 st.write(st.session_state)
     
 ##################################################################################################################################################################
@@ -44,7 +49,7 @@ st.write(st.session_state)
 
 
 def load_data():
-    load =load_key(api_key_1, bin_id_1, st.session_state["username"])
+    load = load_key(api_key_1, bin_id_1, st.session_state["username"])
     #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
     if load == None:
         load=[]
