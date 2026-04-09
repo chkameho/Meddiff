@@ -70,7 +70,7 @@ def save_data_1(data):
     return save_key(api_key_2, bin_id_2, st.session_state["username"], data)
 
 def del_erste_Zählung():
-    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])  
+    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])  #<-----------------------strange!
 
 def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):      
     
@@ -209,56 +209,13 @@ def clear_all():
     clear_session_state()
     return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])
 
-def session_state_initialisieren():  #<--------------------------------------DEL
-    #Damit die session_state intialisiert wird
-    if 'Basophilen' not in st.session_state:
-        st.session_state.Basophilen=0
-
-    if 'Monozyten' not in st.session_state:
-        st.session_state.Monozyten=0
-
-    if 'Blasten' not in st.session_state:
-        st.session_state.Blasten=0
-
-    if 'A' not in st.session_state:
-        st.session_state.A=0
-
-    if 'Eosinophilen' not in st.session_state:
-        st.session_state.Eosinophilen=0
-
-    if 'Lymphozyten' not in st.session_state:
-        st.session_state.Lymphozyten=0
-
-    if 'Promyelozyten' not in st.session_state:
-        st.session_state.Promyelozyten=0
-
-    if 'B' not in st.session_state:
-        st.session_state.B=0
-
-    if 'Normoblast' not in st.session_state:
-        st.session_state.Normoblast=0
-
-    if 'Segmentierten' not in st.session_state:
-        st.session_state.Segmentierten=0
-
-    if 'Myelozyten' not in st.session_state:
-        st.session_state.Myelozyten=0
-
-    if 'C' not in st.session_state:
-        st.session_state.C=0
-
-
-    if 'Plasmazellen' not in st.session_state:
-        st.session_state.Plasmazellen=0
-
-    if 'Stabkernigen' not in st.session_state:
-        st.session_state.Stabkernigen=0
-
-    if 'Metamyelozyten' not in st.session_state:
-        st.session_state.Metamyelozyten=0
-
-    if 'D' not in st.session_state:
-       st.session_state.D=0
+def session_state_initialisieren(): 
+    leucocyte_count_dict = {'Basophilen': 0, 'Monozyten':0, 'Blasten':0,'A':0,'Eosinophilen':0,'Lymphozyten':0,'Promyelozyten':0,'B':0,'Segmentierten':0,'Myelozyten':0,'Plasmazellen':0,'Stabkernigen':0,'Metamyelozyten':0}
+    diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
+    if "leucocyte_count" not in st.session_state:
+        st.session_state.leucocyte_count = leucocyte_count_dict
+    if "diverse_count" not in st.session_state:
+        st.session_state.diverse_count = diverse_count_dict
     
 
     
@@ -286,21 +243,15 @@ with tab1:
         if st.button("Differenzierung starten"):
             del_erste_Zählung()
             Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
-            #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
-            zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
             #zaehler ist der Counter
-            zaehler = sum(zaehler)    
+            zaehler = sum(st.session_state.leucocyte_count.values())    
             st.write( zaehler ,"/100 Zellen")
     else:
         Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
         #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
-        zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
-        #zaehler ist der Counter
-        zaehler = sum(zaehler)    
+        zaehler = sum(st.session_state.leucocyte_count.values())    
         st.write( zaehler ,"/100 Zellen")
     session_state_initialisieren()
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
-    zaehler = sum(zaehler)
     if zaehler == 100 and len(Speicherplatz_erste_Zählung)==0:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
     elif zaehler > 100:
@@ -380,8 +331,7 @@ with tab3:
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
-    zaehler = [st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten]
-    zaehler = sum(zaehler)
+    zaehler = sum(st.session_state.leucocyte_count.values())
     #Laden der Speicher um Dataframe zu generieren 
     Speicherplatz = load_data()
     if len(Speicherplatz) == 0 and zaehler != 100:
