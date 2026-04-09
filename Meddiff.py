@@ -35,7 +35,10 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-authenticator.login(key='Login', location = 'main')
+try:
+    authenticator.login(key='Login', location = 'main')
+except Exception as e:
+    st.error(e)
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
