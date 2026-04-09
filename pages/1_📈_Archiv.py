@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
-from jsonbin import load_key
+from utils.jsonbin import load_key
 import streamlit_authenticator as stauth
 import plotly.express as px
 import base64

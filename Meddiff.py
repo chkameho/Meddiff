@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
 import datetime
-from jsonbin import save_key, load_key, del_erste_Zählung_
+from utils.jsonbin import save_key, load_key, del_erste_Zählung_
 import streamlit_authenticator as stauth
 import requests
 import json
@@ -35,7 +35,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-dummy = authenticator.login(key='Login', location = 'main')
+authenticator.login(key='Login', location = 'main')
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
@@ -66,15 +66,23 @@ def del_erste_Zählung():
 def count_of_leucocyte():
     return sum(st.session_state["leucocyte_count"].values())
 
-def Tastatur_Blutbild_Differenzierung(add_or_sub_count):     
+def Tastatur_Blutbild_Differenzierung(add_or_sub_count):  
+    """
+    Displays the counter for leucocytes, including Normoblast and some non-leucocyte types as C and D.
+    
+    Args:
+        add_or_sub_count (str): The string can either be "addieren" or "subtrahieren".
+    """   
     count = count_of_leucocyte()
-    # Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
-    # auf_oder_unter_zählen verschlüsselt addieren oder subthrahieren. Damit je nach st.radio die Nutzer die Option hat die Zählung auf oder rückwärts zu zählen.
+
     col1, col2, col3, col4 = st.columns(4, gap="small")
+
     if add_or_sub_count == "addieren":
         variable = +1
-    if add_or_sub_count == "subtrahieren":
+    elif add_or_sub_count == "subtrahieren":
         variable = -1
+    else:
+        raise TypeError("Input can either be 'addieren' or 'subtrahieren'") 
 
     if count <= 99:
        with col1:
@@ -109,7 +117,6 @@ def Tastatur_Blutbild_Differenzierung(add_or_sub_count):
                     
            if st.button('Segmentierte', use_container_width = True):
                 st.session_state.leucocyte_count["Segmentierten"] += variable
-
 
            if st.button('Myelozyt', use_container_width = True) != 0:
                 st.session_state.leucocyte_count["Myelozyten"] += variable
@@ -173,7 +180,7 @@ with tab1:
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
-    Speicherplatz_erste_Zählung = load_data()
+    Speicherplatz_erste_Zählung = load_data() #<-------------------------------a problem that hinders fast clicking
     st.write("---")
     # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
     auf_oder_unter_zaehlen = st.radio(
