@@ -35,7 +35,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-authenticator.login(key='Login', location = 'main')
+dummy = authenticator.login(key='Login', location = 'main')
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
@@ -63,124 +63,75 @@ def save_data_1(data):
 def del_erste_Zählung():
     return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])  #<-----------------------strange!
 
-def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):      
-    
-    zaehler = sum(st.session_state["leucocyte_count"].values())
+def count_of_leucocyte():
+    return sum(st.session_state["leucocyte_count"].values())
+
+def Tastatur_Blutbild_Differenzierung(add_or_sub_count):     
+    count = count_of_leucocyte()
     # Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
     # auf_oder_unter_zählen verschlüsselt addieren oder subthrahieren. Damit je nach st.radio die Nutzer die Option hat die Zählung auf oder rückwärts zu zählen.
     col1, col2, col3, col4 = st.columns(4, gap="small")
-    if zaehler <= 99:
+    if add_or_sub_count == "addieren":
+        variable = +1
+    if add_or_sub_count == "subtrahieren":
+        variable = -1
+
+    if count <= 99:
        with col1:
            if st.button('Basophil', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Basophilen"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Basophilen"] -= 1
-
+                st.session_state.leucocyte_count["Basophilen"] += variable
 
            if st.button('Monozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Monozyten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Monozyten"] -= 1
-
+                st.session_state.leucocyte_count["Monozyten"] += variable
 
            if  st.button('Blast', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Blasten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Blasten"] -= 1
-
+                st.session_state.leucocyte_count["Blasten"] += variable
 
            if st.button('A', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["A"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["A"] -= 1
-
+                st.session_state.leucocyte_count["A"] += variable
 
        with col2:
            if st.button('Eosinophil', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Eosinophilen"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Eosinophilen"] -= 1
+                st.session_state.leucocyte_count["Eosinophilen"] += variable
 
            if st.button('Lymphozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Lymphozyten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Lymphozyten"] -= 1
+                st.session_state.leucocyte_count["Lymphozyten"] += variable
 
            if st.button('Promyelozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Promyelozyten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Promyelozyten"] -= 1
+                st.session_state.leucocyte_count["Promyelozyten"] += variable
                     
            if st.button('B', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["B"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state["B"] -= 1
+                st.session_state.leucocyte_count["B"] += variable
+
        with col3:
            if st.button('Normoblast', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.diverse_count["Normoblast"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.diverse_count["Normoblast"]-= 1
+                st.session_state.diverse_count["Normoblast"] += variable
                     
            if st.button('Segmentierte', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Segmentierten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Segmentierten"] -= 1
+                st.session_state.leucocyte_count["Segmentierten"] += variable
+
 
            if st.button('Myelozyt', use_container_width = True) != 0:
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Myelozyten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Myelozyten"] -= 1
+                st.session_state.leucocyte_count["Myelozyten"] += variable
                     
            if st.button('C', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.diverse_count["C"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.diverse_count["C"] -= 1
+                st.session_state.diverse_count["C"] += variable
  
        with col4:
            if st.button('Plasmazelle', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Plasmazellen"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Plasmazellen"] -= 1
+                st.session_state.leucocyte_count["Plasmazellen"] += variable
 
            if st.button('Stabkernige', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Stabkernigen"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Stabkernigen"] -= 1   
+                st.session_state.leucocyte_count["Stabkernigen"] += variable
 
            if st.button('Metamyelozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.leucocyte_count["Metamyelozyten"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.leucocyte_count["Metamyelozyten"] -= 1
+                st.session_state.leucocyte_count["Metamyelozyten"] += variable
                     
            if st.button('D', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.diverse_count["D"] += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.diverse_count["D"] -= 1
-                    
-    elif zaehler == 100:
-        return st.session_state
+                st.session_state.diverse_count["D"] += variable
 
-def Zählung_Dictionary(): #<--------------------------------------DEL
-    #Regeneriert die Zählung in session_state zu Dictionary
-    #zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
-    #for key in zaehler:
-    #    Dictionary[key]=st.session_state[key]
+
+def Zählung_Dictionary(): 
     Dict = copy.deepcopy(st.session_state.leucocyte_count)
     for cell in st.session_state.diverse_count:
         Dict[cell] = st.session_state.diverse_count[cell]
