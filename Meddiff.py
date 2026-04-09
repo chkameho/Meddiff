@@ -37,18 +37,9 @@ authenticator = stauth.Authenticate(
 
 authenticator.login(key='Login', location = 'main')
 
-leucocyte_count_dict = {'Basophilen': 0, 'Monozyten':0, 'Blasten':0,'A':0,'Eosinophilen':0,'Lymphozyten':0,'Promyelozyten':0,'B':0,'Segmentierten':0,'Myelozyten':0,'Plasmazellen':0,'Stabkernigen':0,'Metamyelozyten':0}
-diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
-
-if "leucocyte_count" not in st.session_state:
-    st.session_state.leucocyte_count = leucocyte_count_dict
-if "diverse_count" not in st.session_state:
-    st.session_state.diverse_count = diverse_count_dict
-
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
 @st.cache_data(ttl=10)
-
 
 def load_data():
     load = load_key(api_key_1, bin_id_1, st.session_state["username"])

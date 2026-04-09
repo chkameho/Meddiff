@@ -23,22 +23,15 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-fullname, authentication_status, username = authenticator.login(key = 'Login', location = 'main')
+authenticator.login(key = 'Login', location = 'main')
 
-if authentication_status == True:   # login successful
-    authenticator.logout('Logout', 'main')   # show logout button
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
-    st.stop()
-elif authentication_status == None:
-    st.warning('Please enter your username and password')
-    st.stop()
+
 ###############################################################################
 #Funktionen 
 
 def load_data():
     #Aus der Jsonbin loaden
-    load =load_key(api_key, bin_id, username)
+    load =load_key(api_key, bin_id, st.session_state.username)
     if load == None:
         load=[]
     return load
