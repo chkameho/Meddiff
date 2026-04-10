@@ -1,4 +1,6 @@
 /__pycache__
+/__pycache__/jsonbin.cpython-313.pyc
 /.streamlit
 /.devcontainer
+/.devcontainer/devcontainer.json
 /.vscode

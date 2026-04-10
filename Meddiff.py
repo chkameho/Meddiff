@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
 import datetime
-from utils.jsonbin import save_key, load_key, del_erste_Zählung_
+from utils.jsonbin import save_key, load_key, del_first_count
 import streamlit_authenticator as stauth
 import requests
 import json
@@ -35,10 +35,20 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-try:
-    authenticator.login(key='Login', location = 'main')
+try: 
+    username = authenticator.login('main','Login')
+
 except Exception as e:
     st.error(e)
+
+if st.session_state.get("authentication_status") == True:   # login successful
+    authenticator.logout('Logout', 'main')   # show logout button
+elif st.session_state.get("authentication_status") == False:
+    st.error('Username/password is incorrect')
+    st.stop()
+elif st.session_state.get("authentication_status") == None:
+    st.warning('Please enter your username and password')
+    st.stop()
 
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
@@ -62,9 +72,6 @@ def load_data_1():
 # Funktion zum Speichern in einer JSON-Datei
 def save_data_1(data):
     return save_key(api_key_2, bin_id_2, st.session_state["username"], data)
-
-def del_erste_Zählung():
-    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])  #<-----------------------strange!
 
 def count_of_leucocyte():
     return sum(st.session_state["leucocyte_count"].values())
@@ -159,16 +166,16 @@ def clear_session_state():
 def clear_all():
     #löscht alle Zählung
     clear_session_state()
-    return del_erste_Zählung_(api_key_1, bin_id_1,st.session_state["username"])
+    return del_first_count(api_key_1, bin_id_1,st.session_state["username"])
 
 def session_state_initialisieren(): 
+    """Initialize streamlit.session_state to add 'leucocyte_count' and 'diverse_count' into the  """
     leucocyte_count_dict = {'Basophilen': 0, 'Monozyten':0, 'Blasten':0,'A':0,'Eosinophilen':0,'Lymphozyten':0,'Promyelozyten':0,'B':0,'Segmentierten':0,'Myelozyten':0,'Plasmazellen':0,'Stabkernigen':0,'Metamyelozyten':0}
     diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
     if "leucocyte_count" not in st.session_state:
         st.session_state.leucocyte_count = leucocyte_count_dict
     if "diverse_count" not in st.session_state:
         st.session_state.diverse_count = diverse_count_dict
-    
 
     
 ###################################################################################
@@ -193,7 +200,7 @@ with tab1:
     #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz_erste_Zählung)>1:
         if st.button("Differenzierung starten"):
-            del_erste_Zählung()
+            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
             Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
             #zaehler ist der Counter
             zaehler = sum(st.session_state.leucocyte_count.values())    
@@ -255,7 +262,7 @@ with tab1:
         
     with col3:
         if st.button("erste Zählung Löschen", use_container_width = True):
-            del_erste_Zählung()
+            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
             session_state_initialisieren()
             
     with col4: 
@@ -296,7 +303,7 @@ with tab3:
             Zählung_2 = Zählung_Dictionary() 
             Speicherplatz.append(Zählung_2)
             #die erste 100 Zellen Zählung mit den zweiten 100 Zellen Zählung zusammenfügen.
-            del_erste_Zählung()
+            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
             #Session_State löschen.
             save_data(Speicherplatz)
             #erste und zweite Zählung speichern und somit vom session_state lösen.
