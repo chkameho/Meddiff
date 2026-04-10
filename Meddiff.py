@@ -3,24 +3,25 @@ import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
 import datetime
-from utils.jsonbin import save_key, load_key, del_first_count
+from utils.jsonbin import save_key, load_key, del_first_count, load_data
 import streamlit_authenticator as stauth
 import requests
 import json
 import copy
+from utils.count_function import clear_session_state, clear_all,sum_of_leucocyte, HemaDiff_tool, session_state_initialisieren, Zählung_Dictionary
 ################################################################################################################################################################
-#secrets
-#Jsonbin_1
+# load secrets
+# Jsonbin_1
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
 bin_id_1 = jsonbin_secrets_1["bin_id"]
 
-#Jsonbin_2
+# Jsonbin_2
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
-#huggning_face
+# huggning_face
 hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
@@ -50,132 +51,9 @@ elif st.session_state.get("authentication_status") == None:
     st.warning('Please enter your username and password')
     st.stop()
 
+# @st.cache_data(ttl=10) <----------------may be not be needed anymore in the future after refactoring
 ##################################################################################################################################################################
 # Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
-@st.cache_data(ttl=10)
-
-def load_data():
-    load = load_key(api_key_1, bin_id_1, st.session_state["username"])
-    #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
-    if load == None:
-        load=[]
-    return load
-        
-# Funktion zum Speichern in einer Jsonbin-Datei
-def save_data(data):
-    return save_key(api_key_1, bin_id_1, st.session_state["username"], data)
-
-#Funktion zum Laden aus einer Jsonbin-Datei
-def load_data_1():
-    return load_key(api_key_2,bin_id_2, st.session_state["username"])
-
-# Funktion zum Speichern in einer JSON-Datei
-def save_data_1(data):
-    return save_key(api_key_2, bin_id_2, st.session_state["username"], data)
-
-def count_of_leucocyte():
-    return sum(st.session_state["leucocyte_count"].values())
-
-def Tastatur_Blutbild_Differenzierung(add_or_sub_count):  
-    """
-    Displays the counter for leucocytes, including Normoblast and some non-leucocyte types as C and D.
-    
-    Args:
-        add_or_sub_count (str): The string can either be "addieren" or "subtrahieren".
-    """   
-    count = count_of_leucocyte()
-
-    col1, col2, col3, col4 = st.columns(4, gap="small")
-
-    if add_or_sub_count == "addieren":
-        variable = +1
-    elif add_or_sub_count == "subtrahieren":
-        variable = -1
-    else:
-        raise TypeError("Input can either be 'addieren' or 'subtrahieren'") 
-
-    if count <= 99:
-       with col1:
-           if st.button('Basophil', use_container_width = True):
-                st.session_state.leucocyte_count["Basophilen"] += variable
-
-           if st.button('Monozyt', use_container_width = True):
-                st.session_state.leucocyte_count["Monozyten"] += variable
-
-           if  st.button('Blast', use_container_width = True):
-                st.session_state.leucocyte_count["Blasten"] += variable
-
-           if st.button('A', use_container_width = True):
-                st.session_state.leucocyte_count["A"] += variable
-
-       with col2:
-           if st.button('Eosinophil', use_container_width = True):
-                st.session_state.leucocyte_count["Eosinophilen"] += variable
-
-           if st.button('Lymphozyt', use_container_width = True):
-                st.session_state.leucocyte_count["Lymphozyten"] += variable
-
-           if st.button('Promyelozyt', use_container_width = True):
-                st.session_state.leucocyte_count["Promyelozyten"] += variable
-                    
-           if st.button('B', use_container_width = True):
-                st.session_state.leucocyte_count["B"] += variable
-
-       with col3:
-           if st.button('Normoblast', use_container_width = True):
-                st.session_state.diverse_count["Normoblast"] += variable
-                    
-           if st.button('Segmentierte', use_container_width = True):
-                st.session_state.leucocyte_count["Segmentierten"] += variable
-
-           if st.button('Myelozyt', use_container_width = True) != 0:
-                st.session_state.leucocyte_count["Myelozyten"] += variable
-                    
-           if st.button('C', use_container_width = True):
-                st.session_state.diverse_count["C"] += variable
- 
-       with col4:
-           if st.button('Plasmazelle', use_container_width = True):
-                st.session_state.leucocyte_count["Plasmazellen"] += variable
-
-           if st.button('Stabkernige', use_container_width = True):
-                st.session_state.leucocyte_count["Stabkernigen"] += variable
-
-           if st.button('Metamyelozyt', use_container_width = True):
-                st.session_state.leucocyte_count["Metamyelozyten"] += variable
-                    
-           if st.button('D', use_container_width = True):
-                st.session_state.diverse_count["D"] += variable
-
-
-def Zählung_Dictionary(): 
-    Dict = copy.deepcopy(st.session_state.leucocyte_count)
-    for cell in st.session_state.diverse_count:
-        Dict[cell] = st.session_state.diverse_count[cell]
-    return Dict
-
-def clear_session_state():
-    # Löscht die Zählung komplet. 
-    del st.session_state.leucocyte_count
-    del st.session_state.diverse_count
-    if "leucocyte_count" in globals():
-        del globals()["leucocygte_count"]
-    if "diverse_count" in globals():
-        del globals()["diverse_count"]
-
-def clear_all():
-    #löscht alle Zählung
-    clear_session_state()
-    return del_first_count(api_key_1, bin_id_1,st.session_state["username"])
-
-def session_state_initialisieren(): 
-    """Initialize streamlit.session_state to add 'leucocyte_count' and 'diverse_count' into the  """
-    leucocyte_count_dict = {'Basophilen': 0, 'Monozyten':0, 'Blasten':0,'A':0,'Eosinophilen':0,'Lymphozyten':0,'Promyelozyten':0,'B':0,'Segmentierten':0,'Myelozyten':0,'Plasmazellen':0,'Stabkernigen':0,'Metamyelozyten':0}
-    diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
-    if "leucocyte_count" not in st.session_state:
-        st.session_state.leucocyte_count = leucocyte_count_dict
-    if "diverse_count" not in st.session_state:
-        st.session_state.diverse_count = diverse_count_dict
 
     
 ###################################################################################
@@ -190,7 +68,7 @@ with tab1:
     session_state_initialisieren()
     #Um die Zählung einer Probennummer einzuordnen zu können.
     Identifikation=st.text_input("Identifikationsnummer")
-    Speicherplatz_erste_Zählung = load_data() #<-------------------------------a problem that hinders fast clicking
+    Speicherplatz_erste_Zählung = load_data(api_key_1, bin_id_1, st.session_state["username"]) #<-------------------------------a problem that hinders fast clicking
     st.write("---")
     # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
     auf_oder_unter_zaehlen = st.radio(
@@ -201,14 +79,14 @@ with tab1:
     if len(Speicherplatz_erste_Zählung)>1:
         if st.button("Differenzierung starten"):
             del_first_count(api_key_1, bin_id_1,st.session_state["username"])
-            Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
+            HemaDiff_tool(auf_oder_unter_zaehlen)
             #zaehler ist der Counter
-            zaehler = sum(st.session_state.leucocyte_count.values())    
+            zaehler = sum_of_leucocyte()   
             st.write( zaehler ,"/100 Zellen")
     else:
-        Tastatur_Blutbild_Differenzierung(auf_oder_unter_zaehlen)
+        HemaDiff_tool(auf_oder_unter_zaehlen)
         #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
-        zaehler = sum(st.session_state.leucocyte_count.values())    
+        zaehler = sum_of_leucocyte() 
         st.write( zaehler ,"/100 Zellen")
     session_state_initialisieren()
     if zaehler == 100 and len(Speicherplatz_erste_Zählung)==0:
@@ -219,7 +97,7 @@ with tab1:
         st.success("Du hast 200 Zellen ausgezählt")
         if len(Speicherplatz_erste_Zählung) > 1:
             if st.button("Zählung ganz neu anfangen"):
-                clear_all()
+                clear_all(api_key_1,bin_id_1,st.session_state["username"])
     session_state_initialisieren()
     with st.expander("A/B/C/D"):
         st.write('''Die Tasten A, B, C und D sind für spezielle Zellen wie Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeiten während der hundert Zellen-Zählung vorgesehen. Während "C" und "D" nicht in die 100 Zellen gezählt werden, werden "A" und "B" in die Zählung einbezogen. Beachte bitte, dass der "Normoblast" nicht zu den Leukozyten gehört und daher nicht zu den hundert Zellen zählt.''')
@@ -242,7 +120,7 @@ with tab1:
                     #Damit die neue Zählung die Session_State wiederverwenden kann, muss die Session_State für die vorherige Zählung aufgehoben werden. 
                     Zählung_1=Zählung_Dictionary()
                     Speicherplatz_erste_Zählung.append(Zählung_1)
-                    save_data(Speicherplatz_erste_Zählung)
+                    save_key(api_key_1, bin_id_1, st.session_state["username"],Speicherplatz_erste_Zählung)
                     #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
                     clear_session_state()
                     session_state_initialisieren()
@@ -290,9 +168,9 @@ with tab3:
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
-    zaehler = sum(st.session_state.leucocyte_count.values())
+    zaehler = sum_of_leucocyte()
     #Laden der Speicher um Dataframe zu generieren 
-    Speicherplatz = load_data()
+    Speicherplatz = load_data(api_key_1, bin_id_1, st.session_state["username"])
     if len(Speicherplatz) == 0 and zaehler != 100:
         #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
         st.error("Noch keine 100 Zellen gezählt.")
@@ -305,16 +183,16 @@ with tab3:
             #die erste 100 Zellen Zählung mit den zweiten 100 Zellen Zählung zusammenfügen.
             del_first_count(api_key_1, bin_id_1,st.session_state["username"])
             #Session_State löschen.
-            save_data(Speicherplatz)
+            save_key(api_key_1, bin_id_1, st.session_state["username"],Speicherplatz)
             #erste und zweite Zählung speichern und somit vom session_state lösen.
-            Speicherplatz=load_data()
+            Speicherplatz= load_data(api_key_1, bin_id_1, st.session_state["username"])
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"
             st.table(Speicherplatz)
         else:
             #Wenn else nicht definiert wird, wird die Speicherung wiederholen oder nur die erste Zählung anzeigen.
-            Speicherplatz = load_data()
+            Speicherplatz = load_data(api_key_1, bin_id_1, st.session_state["username"])
             Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
             Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
             Speicherplatz["Einheit"]="%"            
@@ -333,7 +211,7 @@ with tab3:
     st.write("Legende: ",A_B_C_D)
 
     if st.button("Alle Zählungen löschen"):
-        clear_all()
+        clear_all(api_key_1,bin_id_1,st.session_state["username"])
 
     st.subheader("Beurteilung")
     st.write('Änderungen können nur im Tab "Beurteilung" durchgeführt werden.')
@@ -352,7 +230,7 @@ with tab3:
         st.error("Beurteilung nicht vollständig ausgefüllt.")
     st.write("---")
     if st.button("Speicherung"):
-        Patientenspeicherung = load_data_1()
+        Patientenspeicherung = load_key(api_key_2,bin_id_2, st.session_state["username"])
         if "Mittelwert" in Speicherplatz: 
             Jetzt = datetime.datetime.now().strftime("%Y-%M-%d %H:%M:%S")
             neue_Patient=dict(Speicherplatz["Mittelwert"])
@@ -362,8 +240,8 @@ with tab3:
             neue_Patient["Leukozyten Beurteilung"]=Leukozyten_Beurteilung
             neue_Patient["Thrombozyten Beurteilung"]=Thrombozyten_Beurteilung
             neue_Patient["Legende"]=A_B_C_D
-            Patientenspeicherung.append(neue_Patient)
-            save_data_1(Patientenspeicherung)
+            Patientenspeicherung.append(neue_Patient) 
+            save_key(api_key_2, bin_id_2, st.session_state["username"],Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
         elif zaehler != 100 and len(Speicherplatz) == 0:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
@@ -377,7 +255,7 @@ with tab3:
             neue_Patient["Thrombozyten Beurteilung"]=Thrombozyten_Beurteilung
             neue_Patient["Legende"]=A_B_C_D
             Patientenspeicherung.append(neue_Patient)
-            save_data_1(Patientenspeicherung)
+            save_key(api_key_2, bin_id_2, st.session_state["username"],Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
 ####################################################################################################################
 #tab 4 

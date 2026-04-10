@@ -1,217 +1,90 @@
 import streamlit as st
-from utils.jsonbin import save_key, load_key, del_erste_Zählung_
+import copy
+from utils.jsonbin import del_first_count
 
-@st.cache_data(ttl=10)
-
-def load_data(api_key_1, bin_id_1, username):
-    load =load_key(api_key_1, bin_id_1, username)
-    #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
-    if load == None:
-        load=[]
-    return load
-        
-# Funktion zum Speichern in einer Jsonbin-Datei
-def save_data(data, api_key_1, bin_id_1, username):
-    return save_key(api_key_1, bin_id_1, username, data)
-
-#Funktion zum Laden aus einer Jsonbin-Datei
-def load_data_1(api_key_2,bin_id_2, username):
-    return load_key(api_key_2,bin_id_2, username)
-
-# Funktion zum Speichern in einer JSON-Datei
-def save_data_1(data, api_key_2, bin_id_2, username):
-    return save_key(api_key_2, bin_id_2, username, data)
-
-def del_erste_Zählung(api_key_1, bin_id_1,username):
-    return del_erste_Zählung_(api_key_1, bin_id_1,username)  
-
-
-def Tastatur_Blutbild_Differenzierung(auf_oder_unter_zählen):     
-    # sum up all cells 
-    zaehler = sum([st.session_state.Basophilen,st.session_state.Monozyten,st.session_state.Blasten, st.session_state.A, st.session_state.Eosinophilen,st.session_state.Lymphozyten,st.session_state.Promyelozyten,st.session_state.B,st.session_state.Segmentierten,st.session_state.Myelozyten,st.session_state.Plasmazellen,st.session_state.Stabkernigen,st.session_state.Metamyelozyten])
-
-    # Um Tastatur, wie im Realität zu imitieren, werden die Tastatur in 4 Reihen aufgeteilt. Die Tastaturen zählen auf und runter.
-    # auf_oder_unter_zählen verschlüsselt addieren oder subthrahieren. Damit je nach st.radio die Nutzer die Option hat die Zählung auf oder rückwärts zu zählen.
-       
-    col1, col2, col3, col4 = st.columns(4, gap="small")
-    if zaehler <= 99:
-       with col1:
-           if st.button('Basophil', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Basophilen += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Basophilen -= 1
-
-           if st.button('Monozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Monozyten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Monozyten -= 1
-
-           if  st.button('Blast', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Blasten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Blasten -= 1
-
-
-           if st.button('A', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.A += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.A -= 1
-
-
-       with col2:
-           if st.button('Eosinophil', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Eosinophilen += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Eosinophilen -= 1
-
-           if st.button('Lymphozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Lymphozyten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Lymphozyten -= 1
-
-           if st.button('Promyelozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Promyelozyten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Promyelozyten -= 1
-                    
-           if st.button('B', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.B += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.B -= 1
-                    
-       with col3:
-           if st.button('Normoblast', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Normoblast += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Normoblast -= 1
-                    
-           if st.button('Segmentierte', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Segmentierten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Segmentierten -= 1
-
-           if st.button('Myelozyt', use_container_width = True) != 0:
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Myelozyten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Myelozyten -= 1
-                    
-           if st.button('C', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.C += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.C -= 1
- 
-       with col4:
-           if st.button('Plasmazelle', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Plasmazellen += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Plasmazellen -= 1
-
-           if st.button('Stabkernige', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Stabkernigen += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Stabkernigen -= 1   
-
-           if st.button('Metamyelozyt', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.Metamyelozyten += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.Metamyelozyten -= 1
-                    
-           if st.button('D', use_container_width = True):
-               if auf_oder_unter_zählen == 'addieren':
-                    st.session_state.D += 1
-               elif auf_oder_unter_zählen == 'subtrahieren':
-                    st.session_state.D -= 1
-                    
-    elif zaehler == 100:
-        return st.session_state
-    
-def Zählung_Dictionary():
-    #Regeneriert die Zählung in session_state zu Dictionary
-    Dictionary = {}
-    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
-    for key in zaehler:
-        Dictionary[key]=st.session_state[key]
-    return Dictionary
 
 def clear_session_state():
-    # Löscht die Zählung komplet.
-    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
-    for key in zaehler:
-        del st.session_state[key]
-        if key in globals():
-            del globals()[key]
+    """
+    Clear leucocyte_count and diverse_count in the session_state powered by streamlit""" 
+    del st.session_state.leucocyte_count
+    del st.session_state.diverse_count
+    if "leucocyte_count" in globals():
+        del globals()["leucocygte_count"]
+    if "diverse_count" in globals():
+        del globals()["diverse_count"]
 
-def clear_all(key,api_key_1,bin_id_1, username):
-    #löscht alle Zählung
-    zaehler = ['Basophilen', 'Monozyten', 'Blasten','A','Eosinophilen','Lymphozyten','Promyelozyten','B','Normoblast','Segmentierten','Myelozyten','C','Plasmazellen','Stabkernigen','Metamyelozyten','D'] 
-    for key in zaehler:
-        del st.session_state[key]
-        if key in globals():
-            del globals()[key]
-    return del_erste_Zählung_(api_key_1, bin_id_1,username)
+def clear_all(api_key, bin_id, username):
+    """Delete the current count in streamlit's session_state and the first count saved in jsonbin"""
+    clear_session_state()
+    return del_first_count(api_key, bin_id, username)
+
+def sum_of_leucocyte(): 
+    """Sum up the cell count in session_state.leucocyte_count"""
+    return sum(st.session_state["leucocyte_count"].values())
+
+def one_row_col(list_of_input,variable):
+    """
+    
+    Arg:
+        list_of_input
+        variable (int): 
+    """
+    for key_name in list_of_input:
+        if st.button(key_name, use_container_width = True):
+                if key_name not in ["Normoblast","D","C"]:
+                    st.session_state.leucocyte_count[key_name] += variable
+                else:
+                    st.session_state.diverse_count[key_name] += variable
+
+def add_or_sub_one(add_or_sub_count):
+
+    if add_or_sub_count == "addieren":
+        variable = +1
+    elif add_or_sub_count == "subtrahieren":
+        variable = -1
+    else:
+        raise TypeError("Input can either be 'addieren' or 'subtrahieren'") 
+    
+    return variable
+
+def HemaDiff_tool(add_or_sub_count):
+    """
+    A digital tool for counting different types of leukocytes 
+    (basophils, monocytes, blasts, eosinophils, lymphocytes, segmented and rod-like neutrophils, myelocytes, plasma cells, and metamyelocytes), 
+    as well as normocytes, powered by Streamlit for web visualization. Additionally, it includes diverse cell types represented as A, B, C, and D.
+
+    Args:
+    add_or_sub_count (str): Can be either "addieren" or "subtrahieren".
+    """ 
+    
+    count = sum_of_leucocyte()
+
+    variable = add_or_sub_one(add_or_sub_count)
+
+    col1, col2, col3, col4 = st.columns(4, gap="small")
+
+    if count <= 99:
+       with col1:
+           one_row_col(['Basophil','Monozyt','Blast','A'], variable = variable)
+       with col2: 
+           one_row_col(['Eosinophil','Lymphozyt','Promyelozyt','B'], variable = variable)
+       with col3: 
+           one_row_col(['Normoblast','Segmentierte','Myelozyt','C'], variable = variable)
+       with col4: 
+           one_row_col(['Plasmazelle','Stabkernige','Metamyelozyt','D'], variable = variable)
 
 
-def session_state_initialisieren():
-    #Damit die session_state intialisiert wird
-    if 'Basophilen' not in st.session_state:
-        st.session_state.Basophilen=0
+def Zählung_Dictionary(): 
+    Dict = copy.deepcopy(st.session_state.leucocyte_count)
+    for cell in st.session_state.diverse_count:
+        Dict[cell] = st.session_state.diverse_count[cell]
+    return Dict
 
-    if 'Monozyten' not in st.session_state:
-        st.session_state.Monozyten=0
-
-    if 'Blasten' not in st.session_state:
-        st.session_state.Blasten=0
-
-    if 'A' not in st.session_state:
-        st.session_state.A=0
-
-    if 'Eosinophilen' not in st.session_state:
-        st.session_state.Eosinophilen=0
-
-    if 'Lymphozyten' not in st.session_state:
-        st.session_state.Lymphozyten=0
-
-    if 'Promyelozyten' not in st.session_state:
-        st.session_state.Promyelozyten=0
-
-    if 'B' not in st.session_state:
-        st.session_state.B=0
-
-    if 'Normoblast' not in st.session_state:
-        st.session_state.Normoblast=0
-
-    if 'Segmentierten' not in st.session_state:
-        st.session_state.Segmentierten=0
-
-    if 'Myelozyten' not in st.session_state:
-        st.session_state.Myelozyten=0
-
-    if 'C' not in st.session_state:
-        st.session_state.C=0
-
-    if 'Plasmazellen' not in st.session_state:
-        st.session_state.Plasmazellen=0
-
-    if 'Stabkernigen' not in st.session_state:
-        st.session_state.Stabkernigen=0
-
-    if 'Metamyelozyten' not in st.session_state:
-        st.session_state.Metamyelozyten=0
-
-    if 'D' not in st.session_state:
-       st.session_state.D=0
+def session_state_initialisieren(): 
+    """Initialize streamlit.session_state to add 'leucocyte_count' and 'diverse_count' into the """
+    leucocyte_count_dict = {'Basophil': 0, 'Monozyt':0, 'Blast':0,'A':0,'Eosinophil':0,'Lymphozyt':0,'Promyelozyt':0,'B':0,'Segmentierte':0,'Myelozyt':0,'Plasmazelle':0,'Stabkernige':0,'Metamyelozyt':0}
+    diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
+    if "leucocyte_count" not in st.session_state:
+        st.session_state.leucocyte_count = leucocyte_count_dict
+    if "diverse_count" not in st.session_state:
+        st.session_state.diverse_count = diverse_count_dict
