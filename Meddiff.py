@@ -1,15 +1,15 @@
 import streamlit as st
 import pandas as pd
-import yaml
-from yaml.loader import SafeLoader
-import datetime
-from utils.jsonbin import save_key, load_key, del_first_count, load_data
-import streamlit_authenticator as stauth
 import requests
 import json
-import copy
-from utils.count_function import clear_session_state, clear_all,sum_of_leucocyte, HemaDiff_tool, session_state_initialisieren, Zählung_Dictionary
-################################################################################################################################################################
+
+import datetime
+from utils.jsonbin import save_key, load_key, del_first_count, load_data
+from utils.login import login
+from utils.count_tool import sum_of_leucocyte, HemaDiff_tool, session_state_initialisieren, Zählung_Dictionary
+from utils.clear_session_state import clear_session_state, clear_all
+
+
 # load secrets
 # Jsonbin_1
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
@@ -25,38 +25,10 @@ bin_id_2 = jsonbin_secrets_2["bin_id"]
 hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
-#####user login###################################################################################################################################################
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-)
-
-try: 
-    username = authenticator.login('main','Login')
-
-except Exception as e:
-    st.error(e)
-
-if st.session_state.get("authentication_status") == True:   # login successful
-    authenticator.logout('Logout', 'main')   # show logout button
-elif st.session_state.get("authentication_status") == False:
-    st.error('Username/password is incorrect')
-    st.stop()
-elif st.session_state.get("authentication_status") == None:
-    st.warning('Please enter your username and password')
-    st.stop()
+login()
 
 # @st.cache_data(ttl=10) <----------------may be not be needed anymore in the future after refactoring
-##################################################################################################################################################################
-# Funktion zum Laden aus einer Jsonbin-Datei, Mit st.cache soll 10 Sekunden reloaden.
 
-    
-###################################################################################
 st.title("manuelle Differenzierung (Blutbilder)")
 
 tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zellen Identifizieren"])
@@ -71,9 +43,7 @@ with tab1:
     Speicherplatz_erste_Zählung = load_data(api_key_1, bin_id_1, st.session_state["username"]) #<-------------------------------a problem that hinders fast clicking
     st.write("---")
     # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
-    auf_oder_unter_zaehlen = st.radio(
-    "",
-    ('addieren', 'subtrahieren'))
+    auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
     
     #Damit die Tastatur gut dargestellt werden kann.
     if len(Speicherplatz_erste_Zählung)>1:
