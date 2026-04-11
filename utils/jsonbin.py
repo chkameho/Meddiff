@@ -4,7 +4,7 @@ BIN_API_URL = r'https://api.jsonbin.io/v3/b'
 
 def load_key(api_key, bin_id, key, empty_value=[]):
     """
-    Load key from bin
+    Load key from jsonbin
     """
     url = BIN_API_URL + '/' + bin_id + '/latest'
     headers = {'X-Master-Key': api_key}
@@ -15,10 +15,9 @@ def load_key(api_key, bin_id, key, empty_value=[]):
     else:
         return empty_value
 
-
 def save_key(api_key, bin_id, key, data):
     """
-    Save key to bin
+    Save key to jsonbin
     """
     url = BIN_API_URL + '/' + bin_id
     headers = {'X-Master-Key': api_key, 'Content-Type': 'application/json'}
@@ -35,7 +34,6 @@ def save_key(api_key, bin_id, key, data):
 def del_first_count(api_key , bin_id ,username):
     # Laden der Daten
     data = load_key(api_key, bin_id, username)
-
     # Löschen der Daten
     data = None
     return save_key(api_key, bin_id, username, data)
@@ -47,3 +45,4 @@ def load_data(api_key_1, bin_id_1,username):
     if load == None:
         load=[]
     return load
+
