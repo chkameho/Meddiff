@@ -14,6 +14,15 @@ def session_state_initialisieren():
     if "diverse_count" not in st.session_state:
         st.session_state.diverse_count = diverse_count_dict
 
+def initialize_session_state_new(count_times): #<---------------------should_work but the code need adoption
+    """Initialize streamlit.session_state to add 'leucocyte_count' and 'diverse_count' into the corresponding count """
+    leucocyte_count_dict = {'Basophil': 0, 'Monozyt':0, 'Blast':0,'A':0,'Eosinophil':0,
+                            'Lymphozyt':0,'Promyelozyt':0,'B':0,'Segmentierte':0,'Myelozyt':0,
+                            'Plasmazelle':0,'Stabkernige':0,'Metamyelozyt':0}
+    diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
+    if count_times not in st.session_state:
+        st.session_state[count_times] = {'leucocyte_count':leucocyte_count_dict, 'diverse_count' : diverse_count_dict}
+
 def sum_of_leucocyte(): 
     """Sum up the cell count in session_state.leucocyte_count
     Return (int): The sum of the session_state leucocyte_count powered by streamlit"""
