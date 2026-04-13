@@ -6,7 +6,7 @@ import json
 import datetime
 from utils.jsonbin import save_key, load_key, del_first_count, load_data
 from utils.login import login
-from utils.count_tool import sum_of_leucocyte, HemaDiff_tool, session_state_initialisieren, Zählung_Dictionary
+from utils.count_tool import count_tool
 from utils.clear_session_state import clear_session_state, clear_all
 
 
@@ -37,63 +37,48 @@ tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zelle
 #TAB1
 with tab1:   
     st.header("Tastatur ⌨️")
-    session_state_initialisieren()
-    #Um die Zählung einer Probennummer einzuordnen zu können.
-    Identifikation=st.text_input("Identifikationsnummer")
-    Speicherplatz_erste_Zählung = load_data(api_key_1, bin_id_1, st.session_state["username"]) #<-------------------------------a problem that hinders fast clicking
+    Identifikation = st.text_input("Identifikationsnummer")
     st.write("---")
-    # ermöglicht die Zählung zu korregieren in dem man addieren oder subtrahieren kann.
     auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
+
+    first_count = count_tool("first_count")
+    first_count.initialize_session_state()
+
+    second_count = count_tool("second_count")
+    second_count.initialize_session_state()
     
-    #Damit die Tastatur gut dargestellt werden kann.
-    if len(Speicherplatz_erste_Zählung)>1:
-        if st.button("Differenzierung starten"):
-            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
-            HemaDiff_tool(auf_oder_unter_zaehlen)
-            #zaehler ist der Counter
-            zaehler = sum_of_leucocyte()   
-            st.write( zaehler ,"/100 Zellen")
+    if first_count.sum_of_leucocyte() < 100:
+        first_count.HemaDiff_tool(auf_oder_unter_zaehlen)
+        zaehler = first_count.sum_of_leucocyte()   
     else:
-        HemaDiff_tool(auf_oder_unter_zaehlen)
-        #Da Login auch mit session_state arbeitet, muss ich genau definieren, welchen Parameter in session_state zusammen gezählt wird.
-        zaehler = sum_of_leucocyte() 
-        st.write( zaehler ,"/100 Zellen")
-    session_state_initialisieren()
-    if zaehler == 100 and len(Speicherplatz_erste_Zählung)==0:
+        second_count.HemaDiff_tool(auf_oder_unter_zaehlen)
+        zaehler = second_count.sum_of_leucocyte() 
+
+    st.write( zaehler ,"/100 Zellen")
+
+    if first_count.sum_of_leucocyte() == 100:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
-    elif zaehler > 100:
-        st.error("Ops, du bist über 100 Zellen. Klicke nicht so schnell. Lösche einige Zellen von der Zählung.")
-    elif zaehler == 100 and len(Speicherplatz_erste_Zählung)!=0:
+    elif first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte() == 200:
         st.success("Du hast 200 Zellen ausgezählt")
-        if len(Speicherplatz_erste_Zählung) > 1:
-            if st.button("Zählung ganz neu anfangen"):
-                clear_all(api_key_1,bin_id_1,st.session_state["username"])
-    session_state_initialisieren()
     with st.expander("A/B/C/D"):
         st.write('''Die Tasten A, B, C und D sind für spezielle Zellen wie Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeiten während der hundert Zellen-Zählung vorgesehen. Während "C" und "D" nicht in die 100 Zellen gezählt werden, werden "A" und "B" in die Zählung einbezogen. Beachte bitte, dass der "Normoblast" nicht zu den Leukozyten gehört und daher nicht zu den hundert Zellen zählt.''')
     A_B_C_D= st.text_input('Spezifiziere Zelltypen für A, B, C, D Tasten im Textfeld.')
     st.write("---")  
     
-    col1, col2, col3, col4 = st.columns(4)
-    #Tasten kompakter darstellen.
+    col1, col2, col3, col4 = st.columns(4) # for compact key layout
     with col1:
         if st.button('Auf 200 Zählen', use_container_width = True):
             if len(Identifikation) != 0:
                 #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
-                if len(Speicherplatz_erste_Zählung) != 0:
+                if (first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte()) != 0:
                     #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
                     st.error("Kann nur auf 200 gezählt werden.")
-                elif zaehler != 100:
-                    #Ein Error sollte angezeigt werden, wenn kein 100 Zellen gezählt wurde.
+                elif first_count.sum_of_leucocyte() != 100:
                  st.error("Noch nicht auf 100 gezählt.")
+
                 else:
-                    #Damit die neue Zählung die Session_State wiederverwenden kann, muss die Session_State für die vorherige Zählung aufgehoben werden. 
-                    Zählung_1=Zählung_Dictionary()
-                    Speicherplatz_erste_Zählung.append(Zählung_1)
-                    save_key(api_key_1, bin_id_1, st.session_state["username"],Speicherplatz_erste_Zählung)
-                    #Die st.session_state wird nach der Speicherung gelöscht, damit die Session_State von vorne angefangen werden kann.
-                    clear_session_state()
-                    session_state_initialisieren()
+                    second_count_bottom = 1 ### need better idea
+
             if len(Identifikation) == 0:
                 st.error("Schreibe die ein Identifikationsnummer")
     with col2:
@@ -106,20 +91,19 @@ with tab1:
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
                 st.error("Zähle 100 Zellen aus")
-                
-        
+                 
     with col3:
         if st.button("erste Zählung Löschen", use_container_width = True):
             del_first_count(api_key_1, bin_id_1,st.session_state["username"])
-            session_state_initialisieren()
+            first_count.initialize_session_state()
             
     with col4: 
         if st.button('Aktuelle Zählung Löschen', use_container_width = True):
             # Delete all the items in Session state            
             clear_session_state()
-            session_state_initialisieren()
+            second_count.initialize_session_state
 
-    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"]).T
+#    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"]).T <----need something to show two counts
     st.table(Aktuelle_Zählung)
         
 ##################################################################################
