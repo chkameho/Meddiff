@@ -82,7 +82,7 @@ class count_tool:
     def Zählung_Dictionary(self):
         "Connect the key leucocyte_count with diverse_count inside the session_state" 
         Dict = copy.deepcopy(st.session_state[self.count_times]["leucocyte_count"])
-        for cell in st.session_state.diverse_count:
+        for cell in st.session_state[self.count_times]["diverse_count"]:
             Dict[cell] = st.session_state[self.count_times]["diverse_count"][cell]
         return Dict
 
