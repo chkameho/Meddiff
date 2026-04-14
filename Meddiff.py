@@ -7,104 +7,81 @@ import datetime
 from utils.jsonbin import save_key, load_key, del_first_count, load_data
 from utils.login import login
 from utils.count_tool import count_tool
-from utils.clear_session_state import clear_session_state, clear_all
+from utils.clear_session_state import clear_session_state
 
-
-# load secrets
-# Jsonbin_1
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
 bin_id_1 = jsonbin_secrets_1["bin_id"]
 
-# Jsonbin_2
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
-# huggning_face
 hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
 login()
 
-# @st.cache_data(ttl=10) <----------------may be not be needed anymore in the future after refactoring
-
 st.title("manuelle Differenzierung (Blutbilder)")
+st.write(st.session_state)
 
 tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zellen Identifizieren"])
 
-###################################################################################
-#TAB1
-with tab1:   
+first_count = count_tool("first_count")
+first_count.initialize_session_state()
+
+second_count = count_tool("second_count")
+second_count.initialize_session_state()
+
+with tab1:  
     st.header("Tastatur ⌨️")
     Identifikation = st.text_input("Identifikationsnummer")
     st.write("---")
     auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
-
-    first_count = count_tool("first_count")
-    first_count.initialize_session_state()
-
-    second_count = count_tool("second_count")
-    second_count.initialize_session_state()
     
     if first_count.sum_of_leucocyte() < 100:
-        first_count.HemaDiff_tool(auf_oder_unter_zaehlen)
-        zaehler = first_count.sum_of_leucocyte()   
-    else:
-        second_count.HemaDiff_tool(auf_oder_unter_zaehlen)
-        zaehler = second_count.sum_of_leucocyte() 
-
-    st.write( zaehler ,"/100 Zellen")
-
-    if first_count.sum_of_leucocyte() == 100:
+        first_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
+        zaehler = first_count.sum_of_leucocyte()
+        st.write( zaehler ,"/100 Zellen")
+    elif first_count.sum_of_leucocyte() == 100:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
-    elif first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte() == 200:
+
+    elif second_count.sum_of_leucocyte() < 100: ## does not reach yet
+        second_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
+        zaehler = second_count.sum_of_leucocyte() 
+        st.write( zaehler ,"/100 Zellen")
+    else:
         st.success("Du hast 200 Zellen ausgezählt")
+
     with st.expander("A/B/C/D"):
         st.write('''Die Tasten A, B, C und D sind für spezielle Zellen wie Gumprecht'sche Kernschatten, Haarzellen und andere Auffälligkeiten während der hundert Zellen-Zählung vorgesehen. Während "C" und "D" nicht in die 100 Zellen gezählt werden, werden "A" und "B" in die Zählung einbezogen. Beachte bitte, dass der "Normoblast" nicht zu den Leukozyten gehört und daher nicht zu den hundert Zellen zählt.''')
     A_B_C_D= st.text_input('Spezifiziere Zelltypen für A, B, C, D Tasten im Textfeld.')
     st.write("---")  
     
-    col1, col2, col3, col4 = st.columns(4) # for compact key layout
+    col1, col2, col3 = st.columns(3) # for compact key layout
+
     with col1:
-        if st.button('Auf 200 Zählen', use_container_width = True):
-            if len(Identifikation) != 0:
-                #Gibt die Möglichkeit, auf 200 Zellen zu zählen.
-                if (first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte()) != 0:
-                    #Bei Blutbilder differenzieren, sollte man in der Regel nur 200 Zellen zählen.
-                    st.error("Kann nur auf 200 gezählt werden.")
-                elif first_count.sum_of_leucocyte() != 100:
-                 st.error("Noch nicht auf 100 gezählt.")
-
-                else:
-                    second_count_bottom = 1 ### need better idea
-
-            if len(Identifikation) == 0:
-                st.error("Schreibe die ein Identifikationsnummer")
-    with col2:
         if st.button("Zählung beenden", use_container_width = True):
-            if (first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte()) != 0:
-                #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
+            if (first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte()) >= 100:
                 st.info('Du kannst im Tab "Beurteilung" das Blutbild beurteilen.')
-            elif zaehler == 100:
-                #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
-                st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
                 st.error("Zähle 100 Zellen aus")
                  
-    with col3:
-        if st.button("erste Zählung Löschen", use_container_width = True):
-            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
+    with col2:
+        if st.button("erste Zählung Löschen", use_container_width = True): # does not work yet & function?
+            first_count = count_tool("first_count")
             first_count.initialize_session_state()
             
-    with col4: 
-        if st.button('Aktuelle Zählung Löschen', use_container_width = True):
-            # Delete all the items in Session state            
-            clear_session_state()
-            second_count.initialize_session_state
+    with col3: 
+        if st.button('Zweite Zählung Löschen', use_container_width = True): # does not work yet & function?  
+            second_count = count_tool("second_count")
+            second_count.initialize_session_state()   
 
-#    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"]).T <----need something to show two counts
-#    st.table(Aktuelle_Zählung)
+    if second_count.sum_of_leucocyte() > 0: # better would be to create one table with two counts
+        st.table(second_count.Zählung_Dictionary())
+    else:
+        st.table(first_count.Zählung_Dictionary())
+
         
 ##################################################################################
 #TAB2
@@ -165,7 +142,8 @@ with tab3:
     st.write("Legende: ",A_B_C_D)
 
     if st.button("Alle Zählungen löschen"):
-        clear_all(api_key_1,bin_id_1,st.session_state["username"])
+        clear_session_state("first_count")
+        clear_session_state("second_count")
 
     st.subheader("Beurteilung")
     st.write('Änderungen können nur im Tab "Beurteilung" durchgeführt werden.')
