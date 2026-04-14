@@ -85,4 +85,14 @@ class count_tool:
         for cell in st.session_state[self.count_times]["diverse_count"]:
             Dict[cell] = st.session_state[self.count_times]["diverse_count"][cell]
         return Dict
+    
+    def reset_category(self, category):
+        """To reset the streamlit.session_state of a key inside count_times"""
+        for session in st.session_state[self.count_times][category]:
+            st.session_state[self.count_times][category][session] = 0
+
+    def reset(self):
+        """To reset leucocyte_count and diverse_count inside the streamlit.session_state"""
+        self.reset_category("leucocyte_count")
+        self.reset_category("diverse_count")
 
