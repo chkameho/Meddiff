@@ -83,10 +83,10 @@ with tab1:
                 st.error("Schreibe die ein Identifikationsnummer")
     with col2:
         if st.button("Zählung beenden", use_container_width = True):
-            if Speicherplatz_erste_Zählung != 0 and zaehler == 100:
+            if (first_count.sum_of_leucocyte() + second_count.sum_of_leucocyte()) != 0:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Du kannst im Tab "Beurteilung" das Blutbild beurteilen.')
-            elif Speicherplatz_erste_Zählung == 0 and zaehler == 100:
+            elif zaehler == 100:
                 #Wie eine Anleitung, damit die Nutzer instruktiv nach der Zählung weiter machen können.
                 st.info('Sie können im Tab "Beurteilung" das Blutbild beurteilen.')
             else:
@@ -104,7 +104,7 @@ with tab1:
             second_count.initialize_session_state
 
 #    Aktuelle_Zählung=pd.DataFrame(Zählung_Dictionary(),index=["Aktuelle Zählung"]).T <----need something to show two counts
-    st.table(Aktuelle_Zählung)
+#    st.table(Aktuelle_Zählung)
         
 ##################################################################################
 #TAB2
@@ -122,7 +122,7 @@ with tab3:
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
-    zaehler = sum_of_leucocyte()
+    zaehler = first_count.sum_of_leucocyte()
     #Laden der Speicher um Dataframe zu generieren 
     Speicherplatz = load_data(api_key_1, bin_id_1, st.session_state["username"])
     if len(Speicherplatz) == 0 and zaehler != 100:
@@ -132,7 +132,7 @@ with tab3:
         #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
         if len(Speicherplatz) == 1:
             #Wenn die Differenzierung mit 200 Zellen duchgeführt wurde. 
-            Zählung_2 = Zählung_Dictionary() 
+            Zählung_2 = second_count.Zählung_Dictionary() 
             Speicherplatz.append(Zählung_2)
             #die erste 100 Zellen Zählung mit den zweiten 100 Zellen Zählung zusammenfügen.
             del_first_count(api_key_1, bin_id_1,st.session_state["username"])
@@ -158,7 +158,7 @@ with tab3:
         st.table(Zählung_1)
     else:
     #Nicht gespeicherte Daten in Dataframe darstellen.        
-        Zählung_1 = Zählung_Dictionary()
+        Zählung_1 = first_count.Zählung_Dictionary()
         Zählung_1 = pd.DataFrame(Zählung_1, index=["erste Zählung"]).T
         Zählung_1["Einheit"]="%"
         st.table(Zählung_1)
@@ -200,7 +200,7 @@ with tab3:
         elif zaehler != 100 and len(Speicherplatz) == 0:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
         elif zaehler == 100 and len(Speicherplatz)== 0:
-            neue_Patient=Zählung_Dictionary()
+            neue_Patient= first_count.Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             neue_Patient["Speicherzeit"]= Jetzt
             neue_Patient["Identifikationsnummer"]=Identifikation
