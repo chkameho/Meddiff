@@ -7,7 +7,6 @@ import datetime
 from utils.jsonbin import save_key, load_key, del_first_count, load_data
 from utils.login import login
 from utils.count_tool import count_tool
-from utils.clear_session_state import clear_session_state
 
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
@@ -42,14 +41,14 @@ with tab1:
     if first_count.sum_of_leucocyte() < 100:
         first_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
         zaehler = first_count.sum_of_leucocyte()
-        st.write( zaehler ,"/100 Zellen")
+        st.write( zaehler ,"/100 Zellen") # after resetting the counting, this resets with delay.
     elif first_count.sum_of_leucocyte() == 100:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
 
     elif second_count.sum_of_leucocyte() < 100: ## does not reach yet
         second_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
         zaehler = second_count.sum_of_leucocyte() 
-        st.write( zaehler ,"/100 Zellen")
+        st.write( zaehler ,"/100 Zellen") # after resetting the counting, this resets with delay.
     else:
         st.success("Du hast 200 Zellen ausgezählt")
 
@@ -68,23 +67,18 @@ with tab1:
                 st.error("Zähle 100 Zellen aus")
                  
     with col2:
-        if st.button("erste Zählung Löschen", use_container_width = True): # does not work yet & function?
-            first_count = count_tool("first_count")
-            first_count.initialize_session_state()
+        if st.button("Erste Zählung Löschen", use_container_width = True): 
+            first_count.reset()
             
     with col3: 
-        if st.button('Zweite Zählung Löschen', use_container_width = True): # does not work yet & function?  
-            second_count = count_tool("second_count")
-            second_count.initialize_session_state()   
+        if st.button('Zweite Zählung Löschen', use_container_width = True):
+            second_count.reset() 
 
     if second_count.sum_of_leucocyte() > 0: # better would be to create one table with two counts
         st.table(second_count.Zählung_Dictionary())
     else:
         st.table(first_count.Zählung_Dictionary())
 
-        
-##################################################################################
-#TAB2
 with tab2:
     st.header("Beurteilung ✒️")
     st.caption("In den dafür vorgesehenen Feldern kannst du die Beurteilungen der Blutbilder eintragen. Achte darauf, dass die Mengenangaben sowohl in Worten als auch durch Kreuze angegeben werden können.")
@@ -92,8 +86,7 @@ with tab2:
     Leukozyten_Beurteilung = st.text_area("Leukozyten Beurteilung")
     Thrombozyten_Beurteilung = st.text_area("Thrombozyten Beurteilung")
     st.write("Im Tab 'Resultate' findest du eine Übersicht und Bewertung deiner eingetragenen Daten, wo du sie überprüfen und auswerten kannst.")
-######################################################################################
-#TAB3
+
 with tab3:
     st.header('Resultate 📄') 
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
@@ -142,8 +135,9 @@ with tab3:
     st.write("Legende: ",A_B_C_D)
 
     if st.button("Alle Zählungen löschen"):
-        clear_session_state("first_count")
-        clear_session_state("second_count")
+        first_count.reset()
+        second_count.reset()
+
 
     st.subheader("Beurteilung")
     st.write('Änderungen können nur im Tab "Beurteilung" durchgeführt werden.')
