@@ -39,16 +39,14 @@ with tab1:
     auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
     
     if first_count.sum_of_leucocyte() < 100:
-        first_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
-        zaehler = first_count.sum_of_leucocyte()
-        st.write( zaehler ,"/100 Zellen") # after resetting the counting, this resets with delay.
+        first_count.HemaDiff_tool(auf_oder_unter_zaehlen)
+
     elif first_count.sum_of_leucocyte() == 100:
         st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
 
     elif second_count.sum_of_leucocyte() < 100: ## does not reach yet
-        second_count.HemaDiff_tool(auf_oder_unter_zaehlen) # new class?
-        zaehler = second_count.sum_of_leucocyte() 
-        st.write( zaehler ,"/100 Zellen") # after resetting the counting, this resets with delay.
+        second_count.HemaDiff_tool(auf_oder_unter_zaehlen)
+
     else:
         st.success("Du hast 200 Zellen ausgezählt")
 
@@ -69,10 +67,12 @@ with tab1:
     with col2:
         if st.button("Erste Zählung Löschen", use_container_width = True): 
             first_count.reset()
+            st.rerun()
             
     with col3: 
         if st.button('Zweite Zählung Löschen', use_container_width = True):
             second_count.reset() 
+            st.rerun()
 
     if second_count.sum_of_leucocyte() > 0: # better would be to create one table with two counts
         st.table(second_count.Zählung_Dictionary())
