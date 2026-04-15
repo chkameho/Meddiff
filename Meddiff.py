@@ -73,11 +73,8 @@ with tab1:
         if st.button('Zweite Zählung Löschen', use_container_width = True):
             second_count.reset() 
             st.rerun()
-
-    if second_count.sum_of_leucocyte() > 0: # better would be to create one table with two counts
-        st.table(second_count.Zählung_Dictionary())
-    else:
-        st.table(first_count.Zählung_Dictionary())
+    df_all_counts = pd.DataFrame([first_count.Zählung_Dictionary(), second_count.Zählung_Dictionary()], index =["Erste Zählung", "Zweite Zählung"]).T
+    st.table(df_all_counts)
 
 with tab2:
     st.header("Beurteilung ✒️")
