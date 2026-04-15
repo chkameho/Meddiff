@@ -77,6 +77,8 @@ class count_tool:
                 self.one_column_col(['Normoblast','Segmentierte','Myelozyt','C'], variable = variable)
             with col4: 
                 self.one_column_col(['Plasmazelle','Stabkernige','Metamyelozyt','D'], variable = variable)
+        
+        st.write(count)
 
 
     def Zählung_Dictionary(self):
