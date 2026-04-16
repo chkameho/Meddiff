@@ -4,15 +4,16 @@ import copy
 class count_tool:
     def __init__(self,count_times):
         self.count_times = count_times
+        self.leucocyte_count_dict = {'Basophil': 0, 'Monozyt':0, 'Blast':0,'A':0,'Eosinophil':0,
+                                'Lymphozyt':0,'Promyelozyt':0,'B':0,'Segmentierte':0,'Myelozyt':0,
+                                'Plasmazelle':0,'Stabkernige':0,'Metamyelozyt':0}
+        self.diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
 
     def initialize_session_state(self): 
         """Initialize streamlit.session_state to add 'leucocyte_count' and 'diverse_count' into the corresponding count"""
-        leucocyte_count_dict = {'Basophil': 0, 'Monozyt':0, 'Blast':0,'A':0,'Eosinophil':0,
-                                'Lymphozyt':0,'Promyelozyt':0,'B':0,'Segmentierte':0,'Myelozyt':0,
-                                'Plasmazelle':0,'Stabkernige':0,'Metamyelozyt':0}
-        diverse_count_dict = {'Normoblast':0, 'C':0, 'D':0}
+
         if self.count_times not in st.session_state:
-            st.session_state[self.count_times] = {'leucocyte_count':leucocyte_count_dict, 'diverse_count' : diverse_count_dict}
+            st.session_state[self.count_times] = {'leucocyte_count':self.leucocyte_count_dict, 'diverse_count' : self.diverse_count_dict}
 
     def sum_of_leucocyte(self): 
         """Sum up the cell count in session_state.leucocyte_count
@@ -48,7 +49,7 @@ class count_tool:
         for key_name in list_of_input:
             if st.button(key_name, use_container_width = True):
                 if key_name not in ["Normoblast","D","C"]:
-                    st.session_state[self.count_times]["leucocyte_count"][key_name] += variable
+                    st.session_state[self.count_times]['leucocyte_count'][key_name] += variable
                 else:
                     st.session_state[self.count_times]["diverse_count"][key_name] += variable
 
@@ -78,7 +79,7 @@ class count_tool:
             with col4: 
                 self.one_column_col(['Plasmazelle','Stabkernige','Metamyelozyt','D'], variable = variable)
         
-        st.write(count)
+        st.write(self.sum_of_leucocyte())
 
 
     def Zählung_Dictionary(self):
