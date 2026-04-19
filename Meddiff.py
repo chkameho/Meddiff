@@ -7,7 +7,7 @@ import datetime
 from utils.jsonbin import save_key, load_key, del_first_count, load_data
 from utils.login import login
 from utils.count_tool import count_tool
-from utils.placeholder import exchange_count
+from utils.manipulate_session_state import transfer_count
 
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
@@ -68,11 +68,8 @@ with tab1:
                  
     with col2:
         if st.button("Erste Zählung Löschen", use_container_width = True): 
-            if second_count.sum_of_leucocyte() == 0:
-                first_count.reset()
-            else:
-                exchange_count(first_count.count_times, second_count.count_times)
-                second_count.reset()
+            transfer_count(first_count.count_times, second_count.count_times)
+            second_count.reset()
             st.rerun()
             
     with col3: 
