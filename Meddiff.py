@@ -7,6 +7,7 @@ import datetime
 from utils.jsonbin import save_key, load_key, del_first_count, load_data
 from utils.login import login
 from utils.count_tool import count_tool
+from utils.placeholder import exchange_count
 
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
@@ -41,10 +42,11 @@ with tab1:
     if first_count.sum_of_leucocyte() < 100:
         first_count.HemaDiff_tool(auf_oder_unter_zaehlen)
 
-    elif first_count.sum_of_leucocyte() == 100:
-        st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
+        if first_count.sum_of_leucocyte() == 100:
+            st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
+            st.rerun() 
 
-    elif second_count.sum_of_leucocyte() < 100: ## does not reach yet
+    elif second_count.sum_of_leucocyte() < 100:
         second_count.HemaDiff_tool(auf_oder_unter_zaehlen)
 
     else:
@@ -66,7 +68,11 @@ with tab1:
                  
     with col2:
         if st.button("Erste Zählung Löschen", use_container_width = True): 
-            first_count.reset()
+            if second_count.sum_of_leucocyte() == 0:
+                first_count.reset()
+            else:
+                exchange_count(first_count.count_times, second_count.count_times)
+                second_count.reset()
             st.rerun()
             
     with col3: 
@@ -180,8 +186,7 @@ with tab3:
             Patientenspeicherung.append(neue_Patient)
             save_key(api_key_2, bin_id_2, st.session_state["username"],Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-####################################################################################################################
-#tab 4 
+
     with tab4:
         # Define the API endpoint
         st.header("Zellen Identifizieren 📷")
