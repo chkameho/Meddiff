@@ -92,52 +92,20 @@ with tab3:
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
     st.subheader(Identifikation)
     st.subheader("Zählung")
-    zaehler = first_count.sum_of_leucocyte()
-    #Laden der Speicher um Dataframe zu generieren 
-    Speicherplatz = load_data(api_key_1, bin_id_1, st.session_state["username"])
-    if len(Speicherplatz) == 0 and zaehler != 100:
-        #Kann nicht bewertet werden, da noch keine 100 Zellen Zählung vorhanden ist.
+
+    if first_count.sum_of_leucocyte() != 100:
         st.error("Noch keine 100 Zellen gezählt.")
-    elif len(Speicherplatz) != 0 and zaehler == 100:
-        #Wird mit weiteren if-Statement verschachtelt, da wir mit session_state zu tun haben.
-        if len(Speicherplatz) == 1:
-            #Wenn die Differenzierung mit 200 Zellen duchgeführt wurde. 
-            Zählung_2 = second_count.Zählung_Dictionary() 
-            Speicherplatz.append(Zählung_2)
-            #die erste 100 Zellen Zählung mit den zweiten 100 Zellen Zählung zusammenfügen.
-            del_first_count(api_key_1, bin_id_1,st.session_state["username"])
-            #Session_State löschen.
-            save_key(api_key_1, bin_id_1, st.session_state["username"],Speicherplatz)
-            #erste und zweite Zählung speichern und somit vom session_state lösen.
-            Speicherplatz= load_data(api_key_1, bin_id_1, st.session_state["username"])
-            Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
-            Speicherplatz=Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
-            Speicherplatz["Einheit"]="%"
-            st.table(Speicherplatz)
-        else:
-            #Wenn else nicht definiert wird, wird die Speicherung wiederholen oder nur die erste Zählung anzeigen.
-            Speicherplatz = load_data(api_key_1, bin_id_1, st.session_state["username"])
-            Speicherplatz= pd.DataFrame(Speicherplatz, index=["erste Zählung","zweite Zählung"]).T
-            Speicherplatz["Mittelwert"]= (Speicherplatz["erste Zählung"]+Speicherplatz["zweite Zählung"])/2 
-            Speicherplatz["Einheit"]="%"            
-            st.table(Speicherplatz)
-    elif len(Speicherplatz) == 1:
-        #Damit beim zweiten Zählung die erste Zählung noch ersichtlich ist.
-        Zählung_1 = pd.DataFrame(Speicherplatz, index=["erste Zählung"]).T
-        Zählung_1["Einheit"]= "%"
-        st.table(Zählung_1)
-    else:
-    #Nicht gespeicherte Daten in Dataframe darstellen.        
-        Zählung_1 = first_count.Zählung_Dictionary()
-        Zählung_1 = pd.DataFrame(Zählung_1, index=["erste Zählung"]).T
-        Zählung_1["Einheit"]="%"
-        st.table(Zählung_1)
-    st.write("Legende: ",A_B_C_D)
-
-    if st.button("Alle Zählungen löschen"):
-        first_count.reset()
-        second_count.reset()
-
+    else: 
+        if first_count.sum_of_leucocyte():
+            result = first_count.Zählung_Dictionary() 
+            index = ["Erste Zählung"]
+        if second_count.sum_of_leucocyte() == 100:
+            result = (first_count.Zählung_Dictionary(), second_count.Zählung_Dictionary()) 
+            index = ["Erste Zählung", "Zweite Zählung"]
+        df_result = pd.DataFrame(result, index = index).T
+        df_result["Mittelwert"]= df_result.mean(axis=1,)
+        df_result["Einheit"] = "%"
+        st.table(df_result)
 
     st.subheader("Beurteilung")
     st.write('Änderungen können nur im Tab "Beurteilung" durchgeführt werden.')
@@ -157,9 +125,9 @@ with tab3:
     st.write("---")
     if st.button("Speicherung"):
         Patientenspeicherung = load_key(api_key_2,bin_id_2, st.session_state["username"])
-        if "Mittelwert" in Speicherplatz: 
+        if "Mittelwert" in df_result: 
             Jetzt = datetime.datetime.now().strftime("%Y-%M-%d %H:%M:%S")
-            neue_Patient=dict(Speicherplatz["Mittelwert"])
+            neue_Patient=dict(df_result["Mittelwert"])
             neue_Patient["Specherzeit"]= Jetzt
             neue_Patient["Identifikationsnummer"]=Identifikation
             neue_Patient["Erythrozyten Beurteilung"]=Erythrozyten_Beurteilung
@@ -169,9 +137,9 @@ with tab3:
             Patientenspeicherung.append(neue_Patient) 
             save_key(api_key_2, bin_id_2, st.session_state["username"],Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
-        elif zaehler != 100 and len(Speicherplatz) == 0:
+        elif first_count.sum_of_leucocyte() != 100:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
-        elif zaehler == 100 and len(Speicherplatz)== 0:
+        elif first_count.sum_of_leucocyte() == 100:
             neue_Patient= first_count.Zählung_Dictionary()
             Jetzt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             neue_Patient["Speicherzeit"]= Jetzt
