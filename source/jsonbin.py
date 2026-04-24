@@ -52,9 +52,9 @@ def save_key(api_key, bin_id, key, data):
     return res
         
 def del_erste_Zählung_(api_key, bin_id,username):
-    # Laden der Daten
+    # Loading the data
     data = load_key(api_key, bin_id, username)
 
-    # Löschen der Daten
+    # Deleting the data
     data = None
     return save_key(api_key, bin_id, username, data)
