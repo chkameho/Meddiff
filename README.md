@@ -2,17 +2,17 @@
 
 <div align="center">
 
-# Optimisation and Bio-Inspired Algorithms
+# Meddiff **TODO**
 
-This is the semester project for the course of *CO3: Optimisation and Bio-Inspired Algorithms*, for the Spring 2026 semester of the ZHAW Master in Life Sciences.
-
+Helps with white blood cells counting in school.
+**TODO**
 
 
 </div>
 
 ## Table of Contents
 
-- [Optimisation and Bio-Inspired Algorithms](#optimisation-and-bio-inspired-algorithms)
+- [Meddiff](#optimisation-and-bio-inspired-algorithms)
 	- [Table of Contents](#table-of-contents)
 	- [About](#about)
 	- [Project Structure](#project-structure)
@@ -26,18 +26,13 @@ This is the semester project for the course of *CO3: Optimisation and Bio-Inspir
 
 ## About
 
-This repository contains the semester project for the ZHAW course of CO3: Optimisation and Bio-Inspired Algorithms.
-
-It tackles the problem of safe drinking water distribution in rural Nepal; how to allocate a limited communal supply once the infrastructure is in place. 
+TODO
 
 [Back to top](#readme-top)
 
 ## Goals
 
-- Formulate the problem and apply two different methods from the course's theory:
-	- Lagrange–Newton
-	- Simulated Annealing
-- Compare the two methods.
+**TODO**
 
 [Back to top](#readme-top)
 
@@ -45,17 +40,13 @@ It tackles the problem of safe drinking water distribution in rural Nepal; how t
 
 
 ```text
-Optimisation and Bio-Inspired Algorithms/
+Meddiff/
 	README.md
 	LICENSE
-	Code/
+	source/
 		python scripts
-	Presentation/
-		presetation files
-	Problem/
-		problem definition related PDFs
-	Report/
-		Latex files, final PDFs and images
+	pages/
+		???
 ```
 
 [Back to top](#readme-top)
@@ -64,37 +55,43 @@ Optimisation and Bio-Inspired Algorithms/
 
 ### Prerequisites
 
-- Git
-- Python 3.10+
-- Jupyter Notebook
+- git
+- python 3.10+
+- streamlit
+- pandas
+- streamlit_authenticator
+- plotly
 
 ### Installation
 
 ```sh
-git clone https://github.com/the-nerd-sloth/co3-semester-project.git
-cd co3-semester-project/Code
+git clone git@github.com:chkameho/Meddiff.git
+cd Meddiff
+python -m venv meddiff
+source meddiff/bin/activate
+pip install -r requirements.txt
+TODO
 ```
 
 [Back to top](#readme-top)
 
 ## Usage
 
+- Set up the credentials in streamlit:
+	- TODO
 - Follow the Installation instructions.
-- Open the `project_script_lagrange.ipynb` in Jupyter.
-- Run it.
+- Run the program: `python source/Meddiff.py`
 
 [Back to top](#readme-top)
 
 ### Authors
 
-- **Triantafyllia Giora**
-	- GitHub: [@triantafylliagiora](https://github.com/triantafylliagiora)
+- **Ka Men Ho**
+	- GitHub: [@chkameho](https://github.com/chkameho)
+- **Sara Kasraian Fard**
+	- Github: [@????](https://github.com/????)
 - **Spyridon Margomenos**
 	- Github: [@the-nerd-sloth](https://github.com/the-nerd-sloth)
-- **Robin Giacomelli**
-	- Github: [@xgunnarx](https://github.com/xgunnarx)
-- **Nicolas Biner**
-	- Github: [@tNico407](https://github.com/Nico407)
 
 [Back to top](#readme-top)
 
