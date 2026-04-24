@@ -70,7 +70,7 @@ cd Meddiff
 python -m venv meddiff
 source meddiff/bin/activate
 pip install -r requirements.txt
-TODO
+cd source
 ```
 
 [Back to top](#readme-top)
@@ -80,7 +80,7 @@ TODO
 - Set up the credentials in streamlit:
 	- TODO
 - Follow the Installation instructions.
-- Run the program: `python source/Meddiff.py`
+- Run the program: `streamlit run Meddiff.py`
 
 [Back to top](#readme-top)
 
