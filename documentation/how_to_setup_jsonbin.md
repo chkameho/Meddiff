@@ -9,7 +9,7 @@
 5. Done.
 
 
-## Setup two Bins
+## Create two Bins
 
 1. Go to the [login page](https://jsonbin.io/login).
 2. Input your credentials and login.
