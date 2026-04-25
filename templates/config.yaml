@@ -1,0 +1,10 @@
+cookie:
+  name: streamlitcookie
+  key: a_random_secret_key                  # update this with a random string for signing
+  expiry_days: 30
+
+credentials:
+  usernames:
+    your_username:                          # update this with your username
+      name: your_username                   # update this with your name
+      password: mysecretpassword            # put your plaintext password, it is hashed automatically on the first run
