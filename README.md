@@ -89,7 +89,7 @@ cd source
 - **Ka Men Ho**
 	- GitHub: [@chkameho](https://github.com/chkameho)
 - **Sara Kasraian Fard**
-	- Github: [@????](https://github.com/????)
+	- Github: [@sarakasraian](https://github.com/sarakasraian)
 - **Spyridon Margomenos**
 	- Github: [@the-nerd-sloth](https://github.com/the-nerd-sloth)
 
