@@ -41,12 +41,12 @@ TODO
 
 ```text
 Meddiff/
-	README.md
 	LICENSE
-	source/
-		python scripts
+	README.md
+	documentation
 	pages/
-		???
+	source/
+	templates/
 ```
 
 [Back to top](#readme-top)
@@ -72,19 +72,21 @@ source meddiff/bin/activate
 pip install -r requirements.txt
 cd source
 mkdir .streamlit
-touch .streamlit/secrets.toml
+cp ../templates/secrets.toml .streamlit/
+cp ../templates/config.yaml .
 ```
 
 [Back to top](#readme-top)
 
 ## Usage
 
+- Follow the Installation instructions.
 - Set up the environment:
 	- [create a JSONBIN.io account](documentation/how_to_setup_jsonbin.md#register-an-account), if you do not have one.
 	- [create two Bins](documentation/how_to_setup_jsonbin.md#create-two-bins) and copy their **Bin ID**.
 	- [create an API Key](documentation/how_to_setup_jsonbin.md#create-an-api-key) and copy its token.
-	
-- Follow the Installation instructions.
+	- [setup Streamlit's .toml file](documentation/how_to_setup_jsonbin.md#setup-the-streamlit-.toml-file).
+- [Set up the user authentication](documentation/how_to_setup_user_auth.md).
 - Run the program: `streamlit run Meddiff.py`
 
 [Back to top](#readme-top)
