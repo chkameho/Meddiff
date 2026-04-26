@@ -84,7 +84,7 @@ cp ../templates/config.yaml .
 - Set up the environment:
 	- [create a JSONBIN.io account](documentation/how_to_setup_jsonbin.md#register-an-account), if you do not have one.
 	- [create two Bins](documentation/how_to_setup_jsonbin.md#create-two-bins) and copy their **Bin ID**.
-	- [create an API Key](documentation/how_to_setup_jsonbin.md#create-an-api-key) and copy its token.
+	- [get the Master Key](documentation/how_to_setup_jsonbin.md#get-the-master-key).
 	- [setup Streamlit's .toml file](documentation/how_to_setup_jsonbin.md#setup-the-streamlit-.toml-file).
 - [Set up the user authentication](documentation/how_to_setup_user_auth.md).
 - Run the program: `streamlit run Meddiff.py`

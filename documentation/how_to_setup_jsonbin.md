@@ -332,24 +332,21 @@
 11. Done.
 
 
-## Create an API key
+## Get the Master key
 
 1. Go to the [login page](https://jsonbin.io/login).
 2. Input your credentials and login.
 3. Select **API KEYS** on the left side menu.
-4. Press **Create Access Key**
-5. In the **Name** field input a name of your choice.
-6. Select the `Read` and `Update` options in the **Bins** list.
-7. Press **Save Access Key**.
-8. Copy the token that has been created for later use.
-9. Done.
+4. Copy the **X-Master-Key** for later use.
+5. If you need a new key, for possible security reasons, you can press the two circular arrows button to generate a new one. Make sure to update it everywhere afterwards.
+5. Done.
 
 
 ## Setup the Streamlit .toml file
 
 1. Make sure you have followed the [Installation](../README.md#Installation) instructions correctly.
 2. Open the `Meddiff/source/.streamlit/secrets.toml` file with a text editor.
-3. Copy the **token** you created above to the two `api_key` occurences (within single quotes).
+3. Copy the **X-Master-Key** mentioned above to the two `api_key` occurences (within single quotes).
 4. Copy the **Bin ID** of the `jsonbin_1` bin to the `bin_id` field under the `[jsonbin_1]` tag (within single quotes).
 5. Do the same for `jsonbin_2`.
 6. Save the file.
