@@ -43,7 +43,7 @@ TODO
 Meddiff/
 	LICENSE
 	README.md
-	documentation
+	documentation/
 	pages/
 	source/
 	templates/
