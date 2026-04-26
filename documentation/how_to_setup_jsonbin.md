@@ -338,10 +338,20 @@
 2. Input your credentials and login.
 3. Select **API KEYS** on the left side menu.
 4. Press **Create Access Key**
-5. In the **Name** field input `hugging_face`.
+5. In the **Name** field input a name of your choice.
 6. Select the `Read` and `Update` options in the **Bins** list.
 7. Press **Save Access Key**.
 8. Copy the token that has been created for later use.
 9. Done.
 
+
+## Setup the Streamlit .toml file
+
+1. Make sure you have followed the [Installation](../README.md#Installation) instructions correctly.
+2. Open the `Meddiff/source/.streamlit/secrets.toml` file with a text editor.
+3. Copy the **token** you created above to the two `api_key` occurences (within single quotes).
+4. Copy the **Bin ID** of the `jsonbin_1` bin to the `bin_id` field under the `[jsonbin_1]` tag (within single quotes).
+5. Do the same for `jsonbin_2`.
+6. Save the file.
+7. Done.
 
