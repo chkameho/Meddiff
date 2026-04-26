@@ -7,23 +7,19 @@ from jsonbin import save_key, load_key, del_erste_Zählung_
 import streamlit_authenticator as stauth
 import requests
 import json
-################################################################################################################################################################
-#secrets
-#Jsonbin_1
+
+
+# Loading the JSONBin secrets for data storage
 jsonbin_secrets_1 = st.secrets["jsonbin_1"]
 api_key_1 = jsonbin_secrets_1["api_key"]
 bin_id_1 = jsonbin_secrets_1["bin_id"]
 
-#Jsonbin_2
 jsonbin_secrets_2 = st.secrets["jsonbin_2"]
 api_key_2 = jsonbin_secrets_2["api_key"]
 bin_id_2 = jsonbin_secrets_2["bin_id"]
 
-#huggning_face
-hugging_face=st.secrets["hugging_face"]
-token = hugging_face["token"]
 
-#####user login###################################################################################################################################################
+# Loading authenticator parameters
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
@@ -34,11 +30,12 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days'],
 )
 
-try: 
+# Rendering login widget
+try:
     username = authenticator.login('main','Login')
-
 except Exception as e:
     st.error(e)
+
 
 if st.session_state.get("authentication_status") == True:   # login successful
     authenticator.logout('Logout', 'main')   # show logout button
@@ -535,24 +532,8 @@ with tab3:
         st.write("Wenn eine Zelle nicht erkannt wird, kannst du das untenstehende System zur Klassifizierung der Leukozyten verwenden. Beachte, dass das API nur die reifen Formen der eosinophilen, neutrophilen, basophilen, lymphozytären und monozytären Reihe erkennt. Die Score-Werte näher an Eins deuten auf eine höhere Sicherheit der API-Antwort hin.")
         API_URL = "https://api-inference.huggingface.co/models/polejowska/swin-tiny-patch4-window7-224-lcbsi-wbc"
 
-        # Set your authorization header with your token
-        headers = {"Authorization": "Bearer " + token}
 
-        # Load the image
-        image_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
-        
-        if image_file is not None:
-            image_bytes = image_file.read()
-            # Send a POST request to the API with the image data and headers
-            response = requests.post(API_URL, headers=headers, data=image_bytes)
-            # Get the predicted class from the response
-            result = json.loads(response.content.decode())
-            if "error" in result:
-                st.error("Derzeit gibt es einen internen Serverfehler. Bitte versuchen Sie die Seite neu zu laden, um das Problem zu beheben. Beachten Sie jedoch, dass beim Neustart möglicherweise die Zählungen verloren gehen.")
-            else:
-                result = pd.DataFrame(result)
-                st.write(result)
-            st.image(image_file)
+        #TODO: Pending upload functionality
 
             
 
