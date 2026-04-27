@@ -2,10 +2,9 @@
 
 <div align="center">
 
-# Meddiff **TODO**
+# Meddiff 
 
-Helps with white blood cells counting in school.
-**TODO**
+Digital Hematology Cell Counter Application
 
 
 </div>
@@ -26,7 +25,7 @@ Helps with white blood cells counting in school.
 
 ## About
 
-TODO
+A Web app that digitalizes blood cell counting in schools, replacing pen & paper hematology lab work.
 
 [Back to top](#readme-top)
 
@@ -35,7 +34,7 @@ https://meddiff.streamlit.app/
 
 ## Goals
 
-**TODO**
+The main goal of this project is to digitalize the blood cell counting process in schools, instead of counting cells with pen & paper. Students use the application to record their counts directly and produce a clean digital results that are easy to submit, review and compare.
 
 [Back to top](#readme-top)
 
