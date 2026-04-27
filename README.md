@@ -2,10 +2,10 @@
 
 <div align="center">
 
-# Meddiff **TODO**
+# Meddiff 
 
-Helps with white blood cells counting in school.
-**TODO**
+Digital Hematology Cell Differentiation
+
 
 
 </div>
@@ -26,14 +26,13 @@ Helps with white blood cells counting in school.
 
 ## About
 
-TODO
+A Web application for digital hematology cell differentiation powered by streamlit. The application helps students in the field of hematology to differentiate and count blood cells from a blood smears replacing the traditional pen & paper method. 
 
 [Back to top](#readme-top)
 
 ## Goals
 
-**TODO**
-
+The main goal of this project is to create a user friendly web application digitalize the blood cell counting and differentiation process. The application will be used by students in the field of hematology to practice their skills in differentiating and counting blood cells from blood smears. 
 [Back to top](#readme-top)
 
 ## Project Structure
@@ -89,7 +88,7 @@ cd source
 - **Ka Men Ho**
 	- GitHub: [@chkameho](https://github.com/chkameho)
 - **Sara Kasraian Fard**
-	- Github: [@????](https://github.com/????)
+	- Github: [@sarakasraian](https://github.com/sarakasraian)
 - **Spyridon Margomenos**
 	- Github: [@the-nerd-sloth](https://github.com/the-nerd-sloth)
 
