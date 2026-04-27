@@ -4,7 +4,7 @@
 
 # Meddiff 
 
-Digital Hematology Cell Counter Application
+**Digital Hematology Cell Counter Application**
 
 
 </div>
