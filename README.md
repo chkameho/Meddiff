@@ -86,8 +86,8 @@ conda activate meddiff
 pip install -r requirements.txt
 cd source
 mkdir .streamlit
-cp ../templates/secrets.toml .streamlit/
-cp ../templates/config.yaml .
+copy ..\templates\secrets.toml .streamlit\
+copy ..\templates\config.yaml
 ```
 
 
