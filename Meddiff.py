@@ -1,27 +1,21 @@
 import streamlit as st
 import pandas as pd
-import requests
-import json
 
 import datetime
-from utils.jsonbin import save_key, load_key, load_data
+from utils.jsonbin import save_key, load_key
 from utils.login import login
 from utils.hematology_differential import HematologyDifferential
-from utils.manipulate_session_state import transfer_count
+from utils.manipulate_session_state import copy_default_count_categories
 
-jsonbin_secrets_1 = st.secrets["jsonbin_1"]
-api_key_1 = jsonbin_secrets_1["api_key"]
-bin_id_1 = jsonbin_secrets_1["bin_id"]
-
-jsonbin_secrets_2 = st.secrets["jsonbin_2"]
-api_key_2 = jsonbin_secrets_2["api_key"]
-bin_id_2 = jsonbin_secrets_2["bin_id"]
+jsonbin_secrets = st.secrets["jsonbin"]
+api_key = jsonbin_secrets["api_key"]
+bin_id = jsonbin_secrets["bin_id"]
 
 login()
 
 st.title("manuelle Differenzierung (Blutbilder)")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Tastatur", "Beurteilung", "Resultat", " Zellen Identifizieren"])
+tab1, tab2, tab3 = st.tabs(["Tastatur", "Beurteilung", "Resultat"])
 
 first_count = HematologyDifferential("first_count")
 first_count.initialize_session_state()
@@ -32,6 +26,7 @@ second_count.initialize_session_state()
 with tab1:  
     st.header("Tastatur ⌨️")
     Identifikation = st.text_input("Identifikationsnummer")
+
     st.write("---")
     auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
     
@@ -64,7 +59,7 @@ with tab1:
                  
     with col2:
         if st.button("Erste Zählung Löschen", use_container_width = True): 
-            transfer_count(first_count.count_times, second_count.count_times)
+            copy_default_count_categories(first_count.count_times, second_count.count_times)
             second_count.reset_all_counts()
             st.rerun()
             
@@ -109,7 +104,7 @@ with tab3:
     if len(Erythrozyten_Beurteilung) == 0 and len(Leukozyten_Beurteilung) == 0 and len(Thrombozyten_Beurteilung) == 0:
         st.error("Noch keine Beurteilung vorhanden.")
     elif len(Erythrozyten_Beurteilung) != 0 and len(Leukozyten_Beurteilung) != 0 and len(Thrombozyten_Beurteilung) != 0:
-        #zeigt Beurteilung an. Und Überschrift mit dickere Schrift.
+        
         st.write("<p style='font-weight: bold;'>Erythrozyten Beurteilung: </p>",Erythrozyten_Beurteilung, unsafe_allow_html=True)
         st.write("---")
         st.write("<p style='font-weight: bold;'>Leukozyten Beurteilung: </p>", Leukozyten_Beurteilung, unsafe_allow_html=True)
@@ -119,20 +114,26 @@ with tab3:
     else:
         st.error("Beurteilung nicht vollständig ausgefüllt.")
     st.write("---")
-    
+
     
     if st.button("Speicherung"):
-        Patientenspeicherung = load_key(api_key_2,bin_id_2, st.session_state["username"])
-        if "Mittelwert" in df_result: 
+        Patientenspeicherung = load_key(api_key, bin_id, st.session_state["username"])
+        if Identifikation == "":
+            st.error("Die Identifikationsnummer ist leer")
+        elif (Erythrozyten_Beurteilung == "" ) or (Leukozyten_Beurteilung == "") or (Thrombozyten_Beurteilung == ""):
+            st.error("Beurteilung nicht vollständig oder nicht ausgefüllt.")
+        
+        elif "Mittelwert" in df_result: 
             neue_Patient = df_result.to_dict()
             neue_Patient["Specherzeit"]= datetime.datetime.now().strftime("%Y-%M-%d %H:%M:%S")
-            neue_Patient["Identifikationsnummer"] =Identifikation
+            neue_Patient["Identifikationsnummer"] = Identifikation
             neue_Patient["Erythrozyten Beurteilung"] = Erythrozyten_Beurteilung
             neue_Patient["Leukozyten Beurteilung"] = Leukozyten_Beurteilung
             neue_Patient["Thrombozyten Beurteilung"] = Thrombozyten_Beurteilung
             neue_Patient["Legende"] = A_B_C_D
             Patientenspeicherung.append(neue_Patient) 
-            save_key(api_key_2, bin_id_2, st.session_state["username"],Patientenspeicherung)
+
+            save_key(api_key, bin_id, st.session_state["username"], Patientenspeicherung)
             st.success("Erfolgreich gespeichert")
         elif first_count.get_total_leukocytes() != 100:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
