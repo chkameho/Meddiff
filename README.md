@@ -30,9 +30,6 @@ A Web app that digitalizes blood cell counting in schools, replacing pen & paper
 
 [Back to top](#readme-top)
 
-## Website
-https://meddiff.streamlit.app/
-
 ## Goals
 
 The main goal of this project is to digitalize the blood cell counting process in schools, instead of counting cells with pen & paper. Students use the application to record their counts directly and produce a clean digital results that are easy to submit, review and compare.
