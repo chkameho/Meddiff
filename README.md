@@ -2,11 +2,11 @@
 
 <div align="center">
 
-# Meddiff **TODO**
+# Meddiff 
 
-Helps with white blood cells counting in school.
-**TODO**
+![GitHub Repo Badge](https://img.shields.io/badge/github-repo-blue?logo=github)
 
+**Digital Hematology Cell Counter Application**
 
 </div>
 
@@ -26,13 +26,16 @@ Helps with white blood cells counting in school.
 
 ## About
 
-TODO
+A Web app that digitalizes blood cell counting in schools, replacing pen & paper hematology lab work.
 
 [Back to top](#readme-top)
 
+## Website
+https://meddiff.streamlit.app/
+
 ## Goals
 
-**TODO**
+The main goal of this project is to digitalize the blood cell counting process in schools, instead of counting cells with pen & paper. Students use the application to record their counts directly and produce a clean digital results that are easy to submit, review and compare.
 
 [Back to top](#readme-top)
 
@@ -41,12 +44,12 @@ TODO
 
 ```text
 Meddiff/
-	README.md
 	LICENSE
-	source/
-		python scripts
+	README.md
+	documentation/
 	pages/
-		???
+	source/
+	templates/
 ```
 
 [Back to top](#readme-top)
@@ -64,6 +67,7 @@ Meddiff/
 
 ### Installation
 
+linux
 ```sh
 git clone git@github.com:chkameho/Meddiff.git
 cd Meddiff
@@ -71,15 +75,36 @@ python -m venv meddiff
 source meddiff/bin/activate
 pip install -r requirements.txt
 cd source
+mkdir .streamlit
+cp ../templates/secrets.toml .streamlit/
+cp ../templates/config.yaml .
 ```
+
+windows
+```sh
+git https://github.com/chkameho/Meddiff.git
+cd Meddiff
+python -m venv meddiff
+conda activate meddiff
+pip install -r requirements.txt
+cd source
+mkdir .streamlit
+cp ../templates/secrets.toml .streamlit/
+cp ../templates/config.yaml .
+```
+
 
 [Back to top](#readme-top)
 
 ## Usage
 
-- Set up the credentials in streamlit:
-	- TODO
 - Follow the Installation instructions.
+- Set up the environment:
+	- [create a JSONBIN.io account](documentation/how_to_setup_jsonbin.md#register-an-account), if you do not have one.
+	- [create two Bins](documentation/how_to_setup_jsonbin.md#create-two-bins) and copy their **Bin ID**.
+	- [get the Master Key](documentation/how_to_setup_jsonbin.md#get-the-master-key).
+	- [setup Streamlit's .toml file](documentation/how_to_setup_jsonbin.md#setup-the-streamlit-.toml-file).
+- [Set up the user authentication](documentation/how_to_setup_user_auth.md).
 - Run the program: `streamlit run Meddiff.py`
 
 [Back to top](#readme-top)
@@ -89,14 +114,14 @@ cd source
 - **Ka Men Ho**
 	- GitHub: [@chkameho](https://github.com/chkameho)
 - **Sara Kasraian Fard**
-	- Github: [@????](https://github.com/????)
+	- Github: [@sarakasraian](https://github.com/sarakasraian)
 - **Spyridon Margomenos**
 	- Github: [@the-nerd-sloth](https://github.com/the-nerd-sloth)
 
 [Back to top](#readme-top)
 
 ## License
-Distributed under The Unlicense license.
-For more information see `LICENSE`.
+Distributed under the MIT License.  
+See `LICENSE` for more information.
 
 [Back to top](#readme-top)
