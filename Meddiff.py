@@ -24,7 +24,7 @@ hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
 #####user login###################################################################################################################################################
-with open('config.yaml') as file:
+with open('source/config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
