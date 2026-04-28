@@ -1,4 +1,6 @@
 import streamlit as st
+import copy
+
 
 def transfer_category_values(count_time_1, count_time_2, category):
     """
@@ -9,8 +11,8 @@ def transfer_category_values(count_time_1, count_time_2, category):
         count_time_2 (str): Key of the source session_state entry (the one providing the values).
         category (str): The category whose values should be transferred.
     """
-    for key in st.session_state[count_time_1][category]:
-        st.session_state[count_time_1][category] = st.session_state[count_time_2][category]
+    st.session_state[count_time_1][category] = copy.deepcopy(
+        st.session_state[count_time_2][category])
 
 
 def transfer_count(count_time_1,count_time_2):
