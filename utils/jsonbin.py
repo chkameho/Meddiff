@@ -30,19 +30,4 @@ def save_key(api_key, bin_id, key, data):
     res = requests.put(url, headers=headers, json=res).json()
     return res
 
-        
-def del_first_count(api_key , bin_id ,username):
-    # Laden der Daten
-    data = load_key(api_key, bin_id, username)
-    # Löschen der Daten
-    data = None
-    return save_key(api_key, bin_id, username, data)
-
-
-def load_data(api_key_1, bin_id_1,username):
-    load = load_key(api_key_1, bin_id_1, username)
-    #Falls keine Daten gespeichert wurde, wird die Daten als eine leere Liste definiert.
-    if load == None:
-        load=[]
-    return load
 
