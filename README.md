@@ -67,7 +67,7 @@ Meddiff/
 
 ### Installation
 
-linux
+**Linux**
 ```sh
 git clone git@github.com:chkameho/Meddiff.git
 cd Meddiff
@@ -80,7 +80,7 @@ cp ../templates/secrets.toml .streamlit/
 cp ../templates/config.yaml .
 ```
 
-windows
+**Windows**
 ```sh
 git https://github.com/chkameho/Meddiff.git
 cd Meddiff
