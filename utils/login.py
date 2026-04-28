@@ -28,5 +28,3 @@ def login():
     elif st.session_state.get("authentication_status") == None:
         st.warning('Please enter your username and password')
         st.stop()
-
-login()
