@@ -4,8 +4,9 @@
 
 # Meddiff 
 
-**Digital Hematology Cell Counter Application**
+![GitHub Repo Badge](https://img.shields.io/badge/github-repo-blue?logo=github)
 
+**Digital Hematology Cell Counter Application**
 
 </div>
 
@@ -66,6 +67,7 @@ Meddiff/
 
 ### Installation
 
+linux
 ```sh
 git clone git@github.com:chkameho/Meddiff.git
 cd Meddiff
@@ -77,6 +79,20 @@ mkdir .streamlit
 cp ../templates/secrets.toml .streamlit/
 cp ../templates/config.yaml .
 ```
+
+windows
+```sh
+git https://github.com/chkameho/Meddiff.git
+cd Meddiff
+python -m venv meddiff
+conda activate meddiff
+pip install -r requirements.txt
+cd source
+mkdir .streamlit
+cp ../templates/secrets.toml .streamlit/
+cp ../templates/config.yaml .
+```
+
 
 [Back to top](#readme-top)
 
@@ -105,7 +121,7 @@ cp ../templates/config.yaml .
 [Back to top](#readme-top)
 
 ## License
-Distributed under The Unlicense license.
-For more information see `LICENSE`.
+Distributed under the MIT License.  
+See `LICENSE` for more information.
 
 [Back to top](#readme-top)
