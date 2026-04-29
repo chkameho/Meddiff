@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
 import datetime
-from source.jsonbin import save_key, load_key, del_erste_Zählung_
+from jsonbin import save_key, load_key, del_erste_Zählung_
 import streamlit_authenticator as stauth
 import requests
 import json
@@ -24,7 +24,7 @@ hugging_face=st.secrets["hugging_face"]
 token = hugging_face["token"]
 
 #####user login###################################################################################################################################################
-with open('source/config.yaml') as file:
+with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
 authenticator = stauth.Authenticate(
