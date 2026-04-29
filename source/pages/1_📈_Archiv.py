@@ -2,44 +2,14 @@ import streamlit as st
 import pandas as pd
 import yaml
 from yaml.loader import SafeLoader
-from source.utils.jsonbin import load_key
+from utils.jsonbin import load_key
 import streamlit_authenticator as stauth
 import plotly.express as px
 import base64
 
-#####################secrets#####################################################
-#Jsonbin_2
-jsonbin_secrets = st.secrets["jsonbin_2"]
+jsonbin_secrets = st.secrets["jsonbin"]
 api_key = jsonbin_secrets["api_key"]
 bin_id = jsonbin_secrets["bin_id"]
-#####user login#################################################################
-with open('config.yaml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days'],
-)
-
-try: 
-    username = authenticator.login('main','Login')
-
-except Exception as e:
-    st.error(e)
-
-if st.session_state.get("authentication_status") == True:   # login successful
-    authenticator.logout('Logout', 'main')   # show logout button
-elif st.session_state.get("authentication_status") == False:
-    st.error('Username/password is incorrect')
-    st.stop()
-elif st.session_state.get("authentication_status") == None:
-    st.warning('Please enter your username and password')
-    st.stop()
-
-###############################################################################
-#Funktionen 
 
 def load_data():
     #Aus der Jsonbin loaden
@@ -58,7 +28,6 @@ def Identifikation_sortieren(Identifikationsnummer):
             None
     return lenght            
 
-##################################################################################
 
 st.title("Archiv")
 Datei = load_data()
@@ -86,31 +55,31 @@ else:
         st.markdown("**Legende:**")
         st.write(Liste_Legende[0])
 
-    # Extrahiere den Namen
+
     name = zugeschnittene_Patienten_Daten.index
 
-    # Erstelle ein Pie-Chart
+
     fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, title=f"Leukozytenverteilung")
 
-    # Zeige das Pie-Chart in Streamlit
+
     st.plotly_chart(fig)
     
-    #Zeigt die Bewertung der Zellen an
+
     Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
       
-    #Leukozyten Bewertung
+
     Liste_Leukozyten_Bewertung = list(Bewertungen["Leukozyten Beurteilung"])
     Leukozyten_Morphologie_Resultat = Liste_Leukozyten_Bewertung[0]
     if len(Leukozyten_Morphologie_Resultat) == 0:
         Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
 
-    #Erythrozyten Bewertung
+
     Liste_Erythrozyten_Bewertung = list(Bewertungen["Erythrozyten Beurteilung"])
     Erythrozyten_Morphologie_Resultat= Liste_Erythrozyten_Bewertung[0]
     if len(Erythrozyten_Morphologie_Resultat) == 0:
         Erythrozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
         
-    #Thrombozyten Bewertung
+
     Liste_Thrombozyten_Bewertung = list(Bewertungen["Thrombozyten Beurteilung"])
     Thrombozyten_Morphologie_Resultat= Liste_Thrombozyten_Bewertung[0]
     if len(Thrombozyten_Morphologie_Resultat) == 0:

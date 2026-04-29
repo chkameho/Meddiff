@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 
 import datetime
-from source.utils.jsonbin import save_key, load_key
-from source.utils.login import login
-from source.utils.hematology_differential import HematologyDifferential
-from source.utils.manipulate_session_state import copy_default_count_categories
+from utils.jsonbin import save_key, load_key
+from utils.login import login
+from utils.hematology_differential import HematologyDifferential
+from utils.manipulate_session_state import copy_default_count_categories
 
 jsonbin_secrets = st.secrets["jsonbin"]
 api_key = jsonbin_secrets["api_key"]
