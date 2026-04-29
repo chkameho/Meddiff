@@ -1,7 +1,9 @@
-/__pycache__
-/utils/__pycache__/
-/.streamlit
-/.devcontainer
-/.devcontainer/devcontainer.json
-/.vscode
-/Test.py
+# vscode
+source/__pycache__/
+source/utils/__pycache__/
+source/.devcontainer/
+source/.vscode/
+
+# sensitive data / configuration
+source/config.yaml
+source/.streamlit/
