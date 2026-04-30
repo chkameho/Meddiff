@@ -2,10 +2,11 @@ import streamlit as st
 import pandas as pd
 
 import datetime
-from utils.jsonbin import save_key, load_key
+from utils.jsonbin import save_key, load_data
 from utils.login import login
 from utils.hematology_differential import HematologyDifferential
 from utils.manipulate_session_state import copy_default_count_categories
+from utils.data_formatter import StorageFormatter
 
 jsonbin_secrets = st.secrets["jsonbin"]
 api_key = jsonbin_secrets["api_key"]
@@ -25,20 +26,20 @@ second_count.initialize_session_state()
 
 with tab1:  
     st.header("Tastatur ⌨️")
-    Identifikation = st.text_input("Identifikationsnummer")
+    id = st.text_input("Identifikationsnummer")
 
     st.write("---")
-    auf_oder_unter_zaehlen = st.radio("", ('addieren', 'subtrahieren'))
+    add_or_sub_count = st.radio("", ('addieren', 'subtrahieren'))
     
     if first_count.get_total_leukocytes() < 100:
-        first_count.render_differential_counter(auf_oder_unter_zaehlen)
+        first_count.render_differential_counter(add_or_sub_count)
 
         if first_count.get_total_leukocytes() == 100:
             st.success("Bei der aktuellen Zählung 100 Zellen ausgezählt.")
             st.rerun() 
 
     elif second_count.get_total_leukocytes() < 100:
-        second_count.render_differential_counter(auf_oder_unter_zaehlen)
+        second_count.render_differential_counter(add_or_sub_count)
 
     else:
         st.success("Du hast 200 Zellen ausgezählt")
@@ -74,16 +75,16 @@ with tab2:
     st.header("Beurteilung ✒️")
     st.caption("In den dafür vorgesehenen Feldern kannst du die Beurteilungen der Blutbilder eintragen. Achte darauf, dass die Mengenangaben sowohl in Worten als auch durch Kreuze angegeben werden können.")
     
-    Erythrozyten_Beurteilung = st.text_area("Erythrozyten Beurteilung")
-    Leukozyten_Beurteilung = st.text_area("Leukozyten Beurteilung")
-    Thrombozyten_Beurteilung = st.text_area("Thrombozyten Beurteilung")
+    ec_morph = st.text_area("Erythrozyten Beurteilung")
+    lc_morph = st.text_area("Leukozyten Beurteilung")
+    tc_morph = st.text_area("Thrombozyten Beurteilung")
     
     st.write("Im Tab 'Resultate' findest du eine Übersicht und Bewertung deiner eingetragenen Daten, wo du sie überprüfen und auswerten kannst.")
 
 with tab3:
     st.header('Resultate 📄') 
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
-    st.subheader(Identifikation)
+    st.subheader(id)
     st.subheader("Zählung")
 
     if first_count.get_total_leukocytes() != 100:
@@ -101,40 +102,38 @@ with tab3:
         st.table(df_result)
     st.subheader("Beurteilung")
     st.write('Änderungen können nur im Tab "Beurteilung" durchgeführt werden.')
-    if len(Erythrozyten_Beurteilung) == 0 and len(Leukozyten_Beurteilung) == 0 and len(Thrombozyten_Beurteilung) == 0:
+    
+    if ec_morph == "" and lc_morph == "" and tc_morph == "":
         st.error("Noch keine Beurteilung vorhanden.")
-    elif len(Erythrozyten_Beurteilung) != 0 and len(Leukozyten_Beurteilung) != 0 and len(Thrombozyten_Beurteilung) != 0:
-        
-        st.write("<p style='font-weight: bold;'>Erythrozyten Beurteilung: </p>",Erythrozyten_Beurteilung, unsafe_allow_html=True)
+    elif len(ec_morph) != 0 and len(lc_morph) != 0 and len(tc_morph) != 0:
+        st.write("<p style='font-weight: bold;'>Erythrozyten Beurteilung: </p>",ec_morph, unsafe_allow_html=True)
         st.write("---")
-        st.write("<p style='font-weight: bold;'>Leukozyten Beurteilung: </p>", Leukozyten_Beurteilung, unsafe_allow_html=True)
+        st.write("<p style='font-weight: bold;'>Leukozyten Beurteilung: </p>", lc_morph, unsafe_allow_html=True)
         st.write("---")
-        st.write("<p style='font-weight: bold;'>Thrombozyten Beurteilung: </p>", Thrombozyten_Beurteilung, unsafe_allow_html=True)
-
+        st.write("<p style='font-weight: bold;'>Thrombozyten Beurteilung: </p>", tc_morph, unsafe_allow_html=True)
     else:
         st.error("Beurteilung nicht vollständig ausgefüllt.")
+        
     st.write("---")
-
     
     if st.button("Speicherung"):
-        Patientenspeicherung = load_key(api_key, bin_id, st.session_state["username"])
-        if Identifikation == "":
+        saved_data = load_data(api_key, bin_id, st.session_state["username"])
+        if id == "":
             st.error("Die Identifikationsnummer ist leer")
-        elif (Erythrozyten_Beurteilung == "" ) or (Leukozyten_Beurteilung == "") or (Thrombozyten_Beurteilung == ""):
+            
+        elif (ec_morph == "" ) or (lc_morph == "") or (tc_morph == ""):
             st.error("Beurteilung nicht vollständig oder nicht ausgefüllt.")
         
         elif "Mittelwert" in df_result: 
-            neue_Patient = df_result.to_dict()
-            neue_Patient["Specherzeit"]= datetime.datetime.now().strftime("%Y-%M-%d %H:%M:%S")
-            neue_Patient["Identifikationsnummer"] = Identifikation
-            neue_Patient["Erythrozyten Beurteilung"] = Erythrozyten_Beurteilung
-            neue_Patient["Leukozyten Beurteilung"] = Leukozyten_Beurteilung
-            neue_Patient["Thrombozyten Beurteilung"] = Thrombozyten_Beurteilung
-            neue_Patient["Legende"] = A_B_C_D
-            Patientenspeicherung.append(neue_Patient) 
+            if id not in saved_data.keys():
+                formatter = StorageFormatter(id = id, df_count = df_result, ec_morph = ec_morph, lc_morph = lc_morph, tc_morph = tc_morph, legend = A_B_C_D)
+                new_entry = formatter.to_dict()
+                saved_data.update(new_entry)
+                save_key(api_key, bin_id, st.session_state["username"], saved_data)
+                st.success("Erfolgreich gespeichert")
+            else: 
+                st.error("Speicherung fehlgeschlagen. Die Identifikationsnummer ist bereits vergeben.") 
 
-            save_key(api_key, bin_id, st.session_state["username"], Patientenspeicherung)
-            st.success("Erfolgreich gespeichert")
         elif first_count.get_total_leukocytes() != 100:
             st.error("Die Speicherung kann erst nach mindestens 100 Zellen zählen stattfinden.")
 
