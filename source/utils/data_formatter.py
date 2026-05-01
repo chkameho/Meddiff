@@ -1,5 +1,6 @@
 import pandas as pd
 from datetime import datetime, timezone
+import plotly.express as px
 
 class StorageFormatter:
     """
@@ -52,10 +53,10 @@ class StorageFormatter:
 
         Returns:
             dict: Metadata containing:
-                - "Speicherzeit" (str): Current UTC timestamp in ISO format.
+                - "save_time" (str): Current UTC timestamp in ISO format.
                 - "Legend" (str): Description or legend associated with the dataset.
         """
-        return {"Speicherzeit" : datetime.now(timezone.utc).isoformat(), "Legend": self.legend}
+        return {"save_time" : datetime.now(timezone.utc).isoformat(), "legend": self.legend}
     
     def  _build_data(self):
         """
@@ -84,12 +85,110 @@ class StorageFormatter:
             dict: Final structured dictionary in the format:
                 {
                     <id>: {
-                        "data": {...},
+                        "raw_data": {...},
                         "meta_info": {...}
                     }
                 }
         """       
-        return {self.id : {"data": self. _build_data(), "meta_info": self._build_meta_info()}}
-    
+        return {self.id : {"raw_data": self. _build_data(), "meta_info": self._build_meta_info()}}
+
 class DisplayFormatter:
-    pass
+    """Organizes stored data and presents it in various formats."""
+    
+    def __init__(self, user_data):
+        """
+        Initialize the DisplayFormatter.
+
+        Args:
+            user_data (dict): A dictionary containing:
+                
+                - "raw_data" (dict): Processed data, expected to include a
+                  "count" key with table-like structure:
+                      * "index" (list): Row labels
+                      * "columns" (list): Column names
+                      * "data" (list of lists): Row-wise data
+                
+                - "meta_info" (dict): Additional metadata related to the data.
+
+        Example:
+            {
+                "raw_data": {
+                    "count": {
+                        "index": [0, 1],
+                        "columns": ["A", "B"],
+                        "data": [
+                            [1, 2],
+                            [3, 4]
+                        ]
+                    }
+                },
+                "meta_info": {
+                    "source": "generated"
+                }
+            }
+        """
+        self.raw_data = user_data["raw_data"]
+        self.meta_info = user_data["meta_info"]
+    
+    def get_count_data(self):
+        """
+        Retrieve count data components from raw_data.
+
+        Returns:
+            tuple: (index, columns, data)
+        """
+        count_data = self.raw_data["count"]
+        
+        return (count_data["index"], count_data["columns"], count_data["data"])
+    
+    def get_morph_data(self):
+        """
+        Retrieve morphological data components from raw_data.
+
+        Returns:
+            dict: ("Erythrozyten Beurteilung, "Leukozyten Beurteilung", "Thrombozyten Beurteilung")
+        """
+        
+        return self.raw_data["morph"]
+    
+    def get_meta_info(self):
+        """
+        Retrieve morphological data components from raw_data.
+
+        Returns:
+            tuple: (legend, save_time)
+        """ 
+        legend = self.meta_info["legend"]
+        save_time = self.meta_info["save_time"]
+        
+        if legend == "":
+            legend = "Keine Angaben"
+        
+        return (legend, save_time)
+        
+    def to_dataframe(self):
+        """
+        Convert the stored count data into a pandas DataFrame.
+
+        Returns:
+            pandas.DataFrame: A DataFrame constructed from the "count"
+            data inside `raw_data`, using its index, columns, and values.
+        """
+        index, columns, data = self.get_count_data()
+        return pd.DataFrame(data = data, columns = columns, index = index)
+    
+    def to_pie_plot(self, values_col="Mittelwert", title="Mittelwert der Leukozytenverteilung"):
+        """
+        Create a pie chart from the stored data.
+
+        Args:
+            values_col (str): Column to use for slice sizes.
+            title (str): Title of the chart.
+
+        Returns:
+            plotly.graph_objects.Figure: A Plotly pie chart.
+        """
+        df = self.to_dataframe()
+        return px.pie(df, values = values_col, names = df.index.tolist(), title = title)
+    
+        
