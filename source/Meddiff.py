@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 
 import datetime
-from utils.jsonbin import save_key, load_data
-from utils.login import login
+from utils.jsonbin_client import save_key, load_data
+from utils.authentication import login
 from utils.hematology_differential import HematologyDifferential
 from utils.manipulate_session_state import copy_default_count_categories
 from utils.data_formatter import StorageFormatter
