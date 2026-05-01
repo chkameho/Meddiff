@@ -46,6 +46,8 @@ Meddiff/
 	documentation/
 	pages/
 	source/
+		utils/
+		pages/
 	templates/
 ```
 
@@ -57,10 +59,10 @@ Meddiff/
 
 - git
 - python 3.10+
-- streamlit
-- pandas
-- streamlit_authenticator
-- plotly
+- streamlit 1.54
+- pandas 2.3.3
+- streamlit_authenticator 0.4.2
+- plotly 6.7.0
 
 ### Installation
 
@@ -86,8 +88,8 @@ conda activate meddiff
 pip install -r requirements.txt
 cd source
 mkdir .streamlit
-cp ../templates/secrets.toml .streamlit/
-cp ../templates/config.yaml .
+copy ..\templates\secrets.toml .streamlit\
+copy ..\templates\config.yaml .
 ```
 
 
