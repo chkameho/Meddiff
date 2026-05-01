@@ -1,105 +1,45 @@
 import streamlit as st
 import pandas as pd
-import yaml
-from yaml.loader import SafeLoader
-from utils.jsonbin import load_key
-import streamlit_authenticator as stauth
-import plotly.express as px
+from utils.jsonbin_client import load_data
+from utils.data_formatter import DisplayFormatter
 import base64
 
 jsonbin_secrets = st.secrets["jsonbin"]
 api_key = jsonbin_secrets["api_key"]
-bin_id = jsonbin_secrets["bin_id"]
-
-def load_data():
-    #Aus der Jsonbin loaden
-    load =load_key(api_key, bin_id, st.session_state.username)
-    if load == None:
-        load=[]
-    return load
-
-def Identifikation_sortieren(Identifikationsnummer):
-    # Dublikate der Identifikationnummer wird gelöscht.
-    lenght = []
-    for key in Identifikationsnummer:
-        if key not in lenght:
-            lenght.append(key)
-        else:
-            None
-    return lenght            
-
+bin_id = jsonbin_secrets["bin_id"]        
 
 st.title("Archiv")
-Datei = load_data()
-DataFrame= pd.DataFrame(Datei)
-if len(Datei) == 0:
+dict_data = load_data(api_key, bin_id, st.session_state.username)
+
+if len(dict_data) == 0:
     st.warning("Keine Daten vorhanden")
+    
 else:
-    Identifikationsnummer=DataFrame["Identifikationsnummer"]
-    Identifikationsnummer=Identifikation_sortieren(Identifikationsnummer)
-    Patienten_Identifikation_Auswahl=st.selectbox("Selektiere die Identifikationsnummer",(Identifikationsnummer))
-    gewählte_Patienten_Daten=DataFrame[DataFrame["Identifikationsnummer"]== Patienten_Identifikation_Auswahl]
-    if len(gewählte_Patienten_Daten)>1:
-        Speicherzeit=gewählte_Patienten_Daten["Speicherzeit"]
-        Nach_Speicherzeit_selektieren=st.selectbox("Selektiere die Identifikationsnummer",(Speicherzeit))
-        gewählte_Patienten_Daten=DataFrame[DataFrame["Speicherzeit"]== Nach_Speicherzeit_selektieren]
-    Leukozyten_Wert = st.number_input("Leukozyten mit dem Einheit G/L")
-    gewählte_Patienten_Daten_gedreht= gewählte_Patienten_Daten.T
-    zugeschnittene_Patienten_Daten = gewählte_Patienten_Daten_gedreht.iloc[:16]
-    zugeschnittene_Patienten_Daten.columns = ["Einheit: %"]
-    if Leukozyten_Wert != 0:
-         zugeschnittene_Patienten_Daten["Einheit: G/L"]= (Leukozyten_Wert / 100.00) * zugeschnittene_Patienten_Daten["Einheit: %"]
-    st.table(zugeschnittene_Patienten_Daten)
-    Liste_Legende = list(gewählte_Patienten_Daten["Legende"])
-    if len(Liste_Legende[0]) != 0:
-        st.markdown("**Legende:**")
-        st.write(Liste_Legende[0])
-
-
-    name = zugeschnittene_Patienten_Daten.index
-
-
-    fig = px.pie(zugeschnittene_Patienten_Daten, values='Einheit: %', names=name, title=f"Leukozytenverteilung")
-
-
-    st.plotly_chart(fig)
+    id = st.selectbox("Selektiere die Identifikationsnummer",(dict_data.keys()))
+    dict_select_data = dict_data[id]
+    formatter = DisplayFormatter(dict_select_data)
+    df_count = formatter.to_dataframe()
+    st.table(df_count)   
+    legend, save_time = formatter.get_meta_info()
+    st.write(f"""Legende: {legend}""")
     
-
-    Bewertungen = gewählte_Patienten_Daten_gedreht.iloc[18:21].T
+    st.plotly_chart(formatter.to_pie_plot())
+    
+    dict_morph = formatter.get_morph_data()
       
-
-    Liste_Leukozyten_Bewertung = list(Bewertungen["Leukozyten Beurteilung"])
-    Leukozyten_Morphologie_Resultat = Liste_Leukozyten_Bewertung[0]
-    if len(Leukozyten_Morphologie_Resultat) == 0:
-        Leukozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
-
-
-    Liste_Erythrozyten_Bewertung = list(Bewertungen["Erythrozyten Beurteilung"])
-    Erythrozyten_Morphologie_Resultat= Liste_Erythrozyten_Bewertung[0]
-    if len(Erythrozyten_Morphologie_Resultat) == 0:
-        Erythrozyten_Morphologie_Resultat = "keine Beurteilung angegeben"
-        
-
-    Liste_Thrombozyten_Bewertung = list(Bewertungen["Thrombozyten Beurteilung"])
-    Thrombozyten_Morphologie_Resultat= Liste_Thrombozyten_Bewertung[0]
-    if len(Thrombozyten_Morphologie_Resultat) == 0:
-        Thrombozyten_Morphologie_Resultat = "keine Beurteilung angegeben"    
-    
     st.write("---")
     st.markdown("**Erythrozyten Beurteilung:**")
-    st.write(Erythrozyten_Morphologie_Resultat)
+    st.write(dict_morph["Erythrozyten Beurteilung"] )
     st.write("---")
     st.markdown("**Leukozyten Beurteilung:**")
-    st.write(Leukozyten_Morphologie_Resultat)
+    st.write(dict_morph["Leukozyten Beurteilung"])
     st.write("---")
     st.markdown("**Thrombozyten Beurteilung:**")
-    st.write(Thrombozyten_Morphologie_Resultat)
+    st.write(dict_morph["Thrombozyten Beurteilung"])
     st.write("---")
  
-
-
     # Add a download button
-    csv = gewählte_Patienten_Daten.to_csv(index=False) # Convert the DataFrame to CSV
+    csv = df_count.to_csv(index=False) # Convert the DataFrame to CSV
     b64 = base64.b64encode(csv.encode()).decode() # Encode to base64
     href = f'<a href="data:file/csv;base64,{b64}" download="my_file.csv">Download CSV file</a>'
     st.markdown(href, unsafe_allow_html=True)
