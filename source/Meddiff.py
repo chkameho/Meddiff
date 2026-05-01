@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-
-import datetime
 from utils.jsonbin_client import save_key, load_data
 from utils.authentication import login
 from utils.hematology_differential import HematologyDifferential
