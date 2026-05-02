@@ -1,0 +1,37 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ===== Testing & coverage =====
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.tox/
+
+# ===== Virtual environments =====
+meddiff/
+venv/
+.venv/
+env/
+
+# ===== Streamlit secrets (preventive) =====
+source/.streamlit/secrets.toml
+source/config.yaml
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+
+# ===== OS junk =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Build artifacts =====
+*.egg-info/
+build/
+dist/
