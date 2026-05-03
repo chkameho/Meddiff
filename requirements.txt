@@ -2,3 +2,6 @@ streamlit==1.54.0
 pandas==2.3.3
 streamlit-authenticator==0.4.2
 plotly==6.7.0
+pytest
+pytest-cov
+pytest-mock
