@@ -59,6 +59,8 @@ Meddiff/
 	documentation/
 	pages/
 	source/
+		utils/
+		pages/
 	templates/
 ```
 
@@ -70,10 +72,10 @@ These instructions will get you a copy of Meddiff running on your local machine.
 
 - git
 - python 3.10+
-- streamlit
-- pandas
-- streamlit_authenticator
-- plotly
+- streamlit 1.54
+- pandas 2.3.3
+- streamlit_authenticator 0.4.2
+- plotly 6.7.0
 
 ### Installation
 
@@ -100,7 +102,7 @@ pip install -r requirements.txt
 cd source
 mkdir .streamlit
 copy ..\templates\secrets.toml .streamlit\
-copy ..\templates\config.yaml
+copy ..\templates\config.yaml .
 ```
 
 
