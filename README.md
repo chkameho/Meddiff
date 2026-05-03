@@ -5,6 +5,16 @@
 # Meddiff 
 
 ![GitHub Repo Badge](https://img.shields.io/badge/github-repo-blue?logo=github)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Pandas](https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Plotly](https://img.shields.io/badge/Plotly-3F4F75?logo=plotly&logoColor=white)](https://plotly.com/python/)
+[![Code style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-2ea44f.svg)](https://peps.python.org/pep-0008/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/chkameho/Meddiff/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/chkameho/Meddiff)](https://github.com/chkameho/Meddiff/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/chkameho/Meddiff)](https://github.com/chkameho/Meddiff/commits/main)
+[![Status: WIP](https://img.shields.io/badge/status-active%20development-orange.svg)](#roadmap)
 
 **Digital Hematology Cell Counter Application**
 
@@ -12,21 +22,24 @@
 
 ## Table of Contents
 
-- [Meddiff](#optimisation-and-bio-inspired-algorithms)
+- [Meddiff]
 	- [Table of Contents](#table-of-contents)
 	- [About](#about)
+	- [Goals](#goals)
 	- [Project Structure](#project-structure)
 	- [Getting Started](#getting-started)
 		- [Prerequisites](#prerequisites)
 		- [Installation](#installation)
 	- [Usage](#usage)
 	- [Roadmap](#roadmap)
-		- [Authors](#authors)
+	- [Authors](#authors)
 	- [License](#license)
 
 ## About
 
 A Web app that digitalizes blood cell counting in schools, replacing pen & paper hematology lab work.
+**Meddiff** is a web application powered by [Streamlit](https://streamlit.io/) that digitalizes the manual pen and paper blood cell counting for students in school hematology labs.
+
 
 [Back to top](#readme-top)
 
@@ -54,7 +67,7 @@ Meddiff/
 [Back to top](#readme-top)
 
 ## Getting Started
-
+These instructions will get you a copy of Meddiff running on your local machine.
 ### Prerequisites
 
 - git
@@ -66,7 +79,7 @@ Meddiff/
 
 ### Installation
 
-linux
+**Linux**
 ```sh
 git clone git@github.com:chkameho/Meddiff.git
 cd Meddiff
@@ -79,7 +92,7 @@ cp ../templates/secrets.toml .streamlit/
 cp ../templates/config.yaml .
 ```
 
-windows
+**Windows (PowerShell)**
 ```sh
 git https://github.com/chkameho/Meddiff.git
 cd Meddiff
