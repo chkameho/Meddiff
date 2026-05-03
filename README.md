@@ -37,7 +37,6 @@
 
 ## About
 
-A Web app that digitalizes blood cell counting in schools, replacing pen & paper hematology lab work.
 **Meddiff** is a web application powered by [Streamlit](https://streamlit.io/) that digitalizes the manual pen and paper blood cell counting for students in school hematology labs.
 
 
