@@ -22,6 +22,7 @@ first_count.initialize_session_state()
 second_count = HematologyDifferential("second_count")
 second_count.initialize_session_state()
 
+# Local Website Tab 1: Virtual counting pad for leukocytes
 with tab1:  
     st.header("Tastatur ⌨️")
     id = st.text_input("Identifikationsnummer")
@@ -69,6 +70,7 @@ with tab1:
     df_all_counts = pd.DataFrame([first_count.get_combined_counts(), second_count.get_combined_counts()], index =["Erste Zählung", "Zweite Zählung"]).T
     st.table(df_all_counts)
 
+# Local Website Tab 2: Enter morphological describtion of the blood smear
 with tab2:
     st.header("Beurteilung ✒️")
     st.caption("In den dafür vorgesehenen Feldern kannst du die Beurteilungen der Blutbilder eintragen. Achte darauf, dass die Mengenangaben sowohl in Worten als auch durch Kreuze angegeben werden können.")
@@ -79,6 +81,8 @@ with tab2:
     
     st.write("Im Tab 'Resultate' findest du eine Übersicht und Bewertung deiner eingetragenen Daten, wo du sie überprüfen und auswerten kannst.")
 
+
+# Local Website Tab 3: Save counts and morphological descriptions to JSONBin.
 with tab3:
     st.header('Resultate 📄') 
     st.write("In diesem Tab hast du die Möglichkeit, die Zählungen zu löschen oder zu speichern. Die Zählung kann hier manuell vorgenommen werden.")
