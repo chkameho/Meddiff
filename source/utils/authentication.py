@@ -4,6 +4,20 @@ import yaml
 import streamlit as st
 
 def login():
+    """
+    Handles user authentication using Streamlit and a configuration file.
+
+    This function:
+    - Loads authentication credentials and settings from a YAML config file.
+    - Initializes the Streamlit-Authenticator object.
+    - Prompts the user to log in via the Streamlit UI.
+    - Manages authentication state (success, failure, or no input).
+    - Displays appropriate messages and controls access based on login status.
+    - Shows a logout button when authentication is successful.
+
+    Raises:
+        Displays Streamlit error messages if authentication fails or an exception occurs.
+    """
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
 
