@@ -44,7 +44,7 @@
 
 ## Goals
 
-The main goal of this project is to digitalize the blood cell counting process in schools, instead of counting cells with pen & paper. Students use the application to record their counts directly and produce a clean digital results that are easy to submit, review and compare..
+The main goal of this project is to digitalize the blood cell counting process in schools, instead of counting cells with pen & paper. Students use the application to record their counts directly and produce a clean digital results that are easy to submit, review and compare.
 
 [Back to top](#readme-top)
 
