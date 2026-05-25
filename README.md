@@ -53,14 +53,17 @@ The main goal of this project is to digitalize the blood cell counting process i
 
 ```text
 Meddiff/
+	.github/workflows/
 	LICENSE
 	README.md
 	documentation/
-	pages/
 	source/
 		utils/
 		pages/
 	templates/
+	test/
+	.gitignore
+	requirements.txt
 ```
 
 [Back to top](#readme-top)
@@ -93,7 +96,7 @@ cp ../templates/config.yaml .
 
 **Windows (PowerShell)**
 ```sh
-git https://github.com/chkameho/Meddiff.git
+git clone https://github.com/chkameho/Meddiff.git
 cd Meddiff
 python -m venv meddiff
 conda activate meddiff
@@ -112,7 +115,7 @@ copy ..\templates\config.yaml .
 - Follow the Installation instructions.
 - Set up the environment:
 	- [create a JSONBIN.io account](documentation/how_to_setup_jsonbin.md#register-an-account), if you do not have one.
-	- [create two Bins](documentation/how_to_setup_jsonbin.md#create-two-bins) and copy their **Bin ID**.
+	- [create a Bin](documentation/how_to_setup_jsonbin.md#create-two-bins) and copy their **Bin ID**.
 	- [get the Master Key](documentation/how_to_setup_jsonbin.md#get-the-master-key).
 	- [setup Streamlit's .toml file](documentation/how_to_setup_jsonbin.md#setup-the-streamlit-.toml-file).
 - [Set up the user authentication](documentation/how_to_setup_user_auth.md).
